@@ -70,7 +70,11 @@ const Footer = () => {
             <ul className="flex flex-col gap-3">
               {links.map(link => (
                 <li key={link.name}>
-                  <Link to={link.path} className="text-sm text-gray-400 hover:text-white transition-colors duration-300 font-sans">
+                  <Link
+                    to={link.path}
+                    data-cursor="nav"
+                    className="text-sm text-gray-400 hover:text-cyan-300 transition-colors duration-200 font-sans inline-block"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -87,7 +91,8 @@ const Footer = () => {
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary active:text-white active:border-primary transition-all duration-300 touch-manipulation"
+                  data-cursor="button"
+                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-purple-500 hover:shadow-[0_0_12px_rgba(168,85,247,0.35)] hover:scale-105 active:scale-95 active:text-white active:border-primary transition-all duration-200 touch-manipulation"
                 >
                   <social.icon size={16} />
                 </a>

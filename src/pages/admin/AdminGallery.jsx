@@ -125,15 +125,15 @@ const AdminGallery = () => {
   return (
     <div>
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
-          <span className="text-xs font-mono uppercase tracking-widest text-primary block mb-2">Management Suite</span>
+          <span className="text-xs font-mono uppercase tracking-widest text-primary block mb-1">Management Suite</span>
           <h1 className="text-3xl md:text-4xl font-display font-black text-white uppercase tracking-tight">Gallery</h1>
-          <p className="text-gray-400 text-sm mt-1">Manage photo memories from hackathons, workshops, and team sprints</p>
+          <p className="text-gray-400 text-xs sm:text-sm mt-1">Manage photo memories from hackathons, workshops, and team sprints</p>
         </div>
         <button
           onClick={handleOpenCreate}
-          className="flex items-center gap-2 bg-primary hover:bg-blue-600 text-white font-mono text-xs uppercase tracking-wider px-5 py-3 rounded-lg transition-colors cursor-pointer shadow-lg shadow-primary/20"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary hover:bg-blue-600 active:scale-95 text-white font-mono text-xs uppercase tracking-wider px-5 py-3 rounded-lg transition-all cursor-pointer shadow-lg shadow-primary/20"
         >
           <Plus size={16} /> Add Photo
         </button>
@@ -161,7 +161,7 @@ const AdminGallery = () => {
         <select
           value={categoryFilter}
           onChange={(e) => { setCategoryFilter(e.target.value); setCurrentPage(1); }}
-          className="bg-background border border-white/10 rounded-lg px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-white focus:outline-none focus:border-primary cursor-pointer"
+          className="w-full sm:w-auto bg-background border border-white/10 rounded-lg px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-white focus:outline-none focus:border-primary cursor-pointer"
         >
           {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
         </select>

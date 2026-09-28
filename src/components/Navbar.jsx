@@ -93,25 +93,30 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-6 lg:gap-9">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`relative text-xs font-mono uppercase tracking-widest transition-colors duration-300 hover:text-white py-1 flex items-center ${
-                  location.pathname === link.path ? 'text-white font-bold' : 'text-gray-400'
-                }`}
-              >
-                {link.name}
-                <span
-                  className={`absolute -bottom-1 left-0 h-[2px] bg-primary transition-all duration-300 origin-left ${
-                    location.pathname === link.path ? 'w-full scale-x-100 opacity-100' : 'w-full scale-x-0 opacity-0'
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path;
+              return (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  data-cursor="nav"
+                  className={`group/nav relative text-xs font-mono uppercase tracking-widest py-1 flex items-center transition-all duration-300 hover:text-cyan-300 hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] hover:-translate-y-0.5 ${
+                    isActive ? 'text-white font-bold' : 'text-gray-400'
                   }`}
-                />
-              </Link>
-            ))}
+                >
+                  <span>{link.name}</span>
+                  <span
+                    className={`absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r from-purple-500 to-cyan-400 rounded-full transition-all duration-300 origin-left ${
+                      isActive ? 'scale-x-100 opacity-100 shadow-[0_0_8px_#38bdf8]' : 'scale-x-0 opacity-0 group-hover/nav:scale-x-100 group-hover/nav:opacity-100'
+                    }`}
+                  />
+                </Link>
+              );
+            })}
             <Link
               to="/join"
-              className="ml-2 px-4 py-2 bg-white text-black text-xs font-mono font-bold uppercase tracking-widest rounded-full hover:bg-primary hover:text-white active:bg-primary active:text-white transition-all duration-300 shadow-sm"
+              data-cursor="button"
+              className="ml-2 px-5 py-2.5 bg-white text-black text-xs font-mono font-bold uppercase tracking-widest rounded-full hover:bg-gradient-to-r hover:from-purple-600 hover:to-primary hover:text-white hover:shadow-[0_0_20px_rgba(124,58,237,0.45)] hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 shadow-sm"
             >
               Join Us
             </Link>

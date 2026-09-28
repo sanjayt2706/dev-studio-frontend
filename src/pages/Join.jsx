@@ -289,11 +289,12 @@ const Join = () => {
                       <button
                         type="button"
                         key={domain.id}
+                        data-cursor="button"
                         onClick={() => handleDomainToggle(domain.id)}
-                        className={`text-left p-4 rounded-lg border transition-all duration-300 flex items-start gap-3 touch-manipulation ${
+                        className={`text-left p-4 rounded-lg border transition-all duration-300 flex items-start gap-3 touch-manipulation cursor-pointer active:scale-[0.98] ${
                           isSelected
-                            ? 'bg-primary/10 border-primary text-white'
-                            : 'bg-background/80 border-white/5 text-gray-400 hover:border-white/20 hover:text-white active:border-white/20 active:text-white'
+                            ? 'bg-primary/10 border-primary text-white shadow-[0_0_15px_rgba(59,130,246,0.2)]'
+                            : 'bg-background/80 border-white/10 text-gray-400 hover:border-purple-500/40 hover:text-white active:border-white/20 active:text-white'
                         }`}
                       >
                         <div className={`p-2 rounded-md ${isSelected ? 'bg-primary text-white' : 'bg-white/5 text-gray-400'}`}>
@@ -364,14 +365,15 @@ const Join = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full group inline-flex items-center justify-center gap-3 bg-white text-black font-mono text-xs font-bold uppercase tracking-widest py-5 rounded-full hover:bg-primary hover:text-white active:bg-primary active:text-white transition-all duration-300 disabled:opacity-50 cursor-pointer touch-manipulation"
+                data-cursor="button"
+                className="w-full group inline-flex items-center justify-center gap-3 bg-white text-black font-mono text-xs font-bold uppercase tracking-widest py-5 rounded-full hover:bg-gradient-to-r hover:from-purple-600 hover:to-primary hover:text-white hover:shadow-[0_0_25px_rgba(124,58,237,0.4)] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 cursor-pointer touch-manipulation"
               >
                 {submitting ? (
                   <span>Processing Application...</span>
                 ) : (
                   <>
                     <span>Submit Application</span>
-                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-200" />
                   </>
                 )}
               </button>

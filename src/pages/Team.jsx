@@ -109,9 +109,10 @@ const Team = () => {
   const renderCoreCard = (member) => (
     <div
       key={member.id || member._id}
-      className="group relative bg-surface border border-white/10 rounded-sm p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-start hover:border-primary/40 transition-all duration-500 shadow-xl overflow-hidden"
+      data-cursor="card"
+      className="group relative bg-surface border border-white/10 rounded-sm p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-start hover:border-primary/50 hover:shadow-[0_10px_35px_rgba(124,58,237,0.18)] hover:-translate-y-1 transition-all duration-500 shadow-xl overflow-hidden"
     >
-      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none group-hover:bg-primary/20 transition-all"></div>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none group-hover:bg-primary/25 transition-all"></div>
 
       {/* Portrait */}
       <div className="w-full md:w-48 lg:w-56 aspect-[3/4] shrink-0 rounded-sm overflow-hidden bg-background relative border border-white/5">
@@ -120,7 +121,7 @@ const Team = () => {
           alt={member.name}
           type="member"
           className="w-full h-full"
-          imgClassName="grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+          imgClassName="opacity-95 contrast-[1.06] saturate-[1.08] group-hover:opacity-100 group-hover:saturate-[1.25] group-hover:contrast-[1.12] group-hover:brightness-105 group-hover:scale-105 transition-all duration-500"
         />
         <div className="absolute top-2 left-2 bg-primary/90 text-white font-mono text-[9px] uppercase px-2 py-0.5 rounded tracking-widest backdrop-blur-md">
           {member.team || 'Core'}
@@ -134,7 +135,7 @@ const Team = () => {
             {member.role}
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-white/20"></span>
-          <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
+          <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">
             {member.year} {member.branch ? `· ${member.branch}` : ''}
           </span>
         </div>
@@ -143,7 +144,7 @@ const Team = () => {
           {member.name}
         </h3>
 
-        <p className="text-gray-400 font-sans text-sm leading-relaxed mb-6 line-clamp-3">
+        <p className="text-gray-300 font-sans text-sm leading-relaxed mb-6 line-clamp-3">
           {member.bio || member.shortBio || 'Driving the club vision, engineering standards, and technical initiatives.'}
         </p>
 
@@ -153,7 +154,7 @@ const Team = () => {
             {member.skills.map((skill, idx) => (
               <span
                 key={idx}
-                className="text-[10px] font-mono tracking-wider px-2.5 py-1 bg-white/5 text-gray-300 rounded border border-white/5"
+                className="text-[11px] font-mono tracking-wider px-2.5 py-1 bg-white/5 text-gray-300 rounded border border-white/5"
               >
                 {skill}
               </span>
@@ -194,7 +195,8 @@ const Team = () => {
   const renderLeadCard = (member) => (
     <div
       key={member.id || member._id}
-      className="group bg-surface border border-white/5 rounded-sm p-5 md:p-6 flex flex-col hover:border-white/20 transition-all duration-300"
+      data-cursor="card"
+      className="group bg-surface border border-white/5 rounded-sm p-5 md:p-6 flex flex-col hover:border-primary/40 hover:shadow-[0_10px_30px_rgba(124,58,237,0.15)] hover:-translate-y-1 transition-all duration-300"
     >
       <div className="aspect-[4/5] w-full rounded-sm overflow-hidden bg-background mb-4 relative border border-white/5">
         <SmartImage
@@ -202,21 +204,21 @@ const Team = () => {
           alt={member.name}
           type="member"
           className="w-full h-full"
-          imgClassName="grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+          imgClassName="opacity-95 contrast-[1.06] saturate-[1.08] group-hover:opacity-100 group-hover:saturate-[1.25] group-hover:contrast-[1.12] group-hover:brightness-105 group-hover:scale-105 transition-all duration-500"
         />
         <div className="absolute bottom-2 left-2 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded text-[10px] font-mono uppercase text-gray-300 tracking-wider">
           {member.team}
         </div>
       </div>
 
-      <span className="text-[10px] font-mono tracking-widest uppercase text-primary mb-1">
+      <span className="text-xs font-mono tracking-widest uppercase text-primary mb-1 font-semibold">
         {member.role}
       </span>
-      <h4 className="text-lg md:text-xl font-display font-bold text-white uppercase tracking-tight mb-2 group-hover:text-primary transition-colors">
+      <h4 className="text-xl md:text-2xl font-display font-bold text-white uppercase tracking-tight mb-2 group-hover:text-primary transition-colors">
         {member.name}
       </h4>
 
-      <p className="text-gray-400 text-xs font-sans leading-relaxed mb-4 line-clamp-2">
+      <p className="text-gray-300 text-xs sm:text-sm font-sans leading-relaxed mb-4 line-clamp-2">
         {member.bio || member.shortBio || `${member.year} · ${member.branch}`}
       </p>
 
@@ -224,12 +226,12 @@ const Team = () => {
       {Array.isArray(member.skills) && member.skills.length > 0 && (
         <div className="flex flex-wrap gap-1 mt-auto pt-3 border-t border-white/5">
           {member.skills.slice(0, 3).map((skill, idx) => (
-            <span key={idx} className="text-[9px] font-mono px-2 py-0.5 bg-white/5 text-gray-400 rounded">
+            <span key={idx} className="text-[10px] font-mono px-2 py-0.5 bg-white/5 text-gray-300 rounded">
               {skill}
             </span>
           ))}
           {member.skills.length > 3 && (
-            <span className="text-[9px] font-mono px-1.5 py-0.5 bg-white/5 text-gray-500 rounded">
+            <span className="text-[10px] font-mono px-1.5 py-0.5 bg-white/5 text-gray-500 rounded">
               +{member.skills.length - 3}
             </span>
           )}
@@ -242,7 +244,8 @@ const Team = () => {
   const renderMemberCard = (member) => (
     <div
       key={member.id || member._id}
-      className="group bg-surface/60 border border-white/5 rounded-sm p-4 flex flex-col hover:border-white/15 transition-all"
+      data-cursor="card"
+      className="group bg-surface/60 border border-white/5 rounded-sm p-4 flex flex-col hover:border-primary/40 hover:shadow-lg transition-all"
     >
       <div className="aspect-square w-full rounded-sm overflow-hidden bg-background mb-3 relative">
         <SmartImage
@@ -250,17 +253,17 @@ const Team = () => {
           alt={member.name}
           type="member"
           className="w-full h-full"
-          imgClassName="grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+          imgClassName="opacity-90 contrast-[1.04] saturate-[1.06] group-hover:opacity-100 group-hover:saturate-[1.2] group-hover:brightness-105 group-hover:scale-105 transition-all duration-300"
         />
       </div>
 
-      <h5 className="font-display font-bold text-sm text-white uppercase tracking-tight truncate group-hover:text-primary transition-colors">
+      <h5 className="font-display font-bold text-sm sm:text-base text-white uppercase tracking-tight truncate group-hover:text-primary transition-colors">
         {member.name}
       </h5>
 
       <div className="flex justify-between items-center text-[10px] font-mono text-gray-400 mt-1">
         <span>{member.team}</span>
-        <span className="text-gray-600">{member.year}</span>
+        <span className="text-gray-500">{member.year}</span>
       </div>
     </div>
   );

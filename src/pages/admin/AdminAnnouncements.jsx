@@ -162,15 +162,15 @@ const AdminAnnouncements = () => {
   return (
     <div>
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
-          <span className="text-xs font-mono uppercase tracking-widest text-primary block mb-2">Management Suite</span>
+          <span className="text-xs font-mono uppercase tracking-widest text-primary block mb-1">Management Suite</span>
           <h1 className="text-3xl md:text-4xl font-display font-black text-white uppercase tracking-tight">Announcements</h1>
-          <p className="text-gray-400 text-sm mt-1">Broadcast official news, hackathon announcements, and community updates</p>
+          <p className="text-gray-400 text-xs sm:text-sm mt-1">Broadcast official news, hackathon announcements, and community updates</p>
         </div>
         <button
           onClick={handleOpenCreate}
-          className="flex items-center gap-2 bg-primary hover:bg-blue-600 text-white font-mono text-xs uppercase tracking-wider px-5 py-3 rounded-lg transition-colors cursor-pointer shadow-lg shadow-primary/20"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary hover:bg-blue-600 active:scale-95 text-white font-mono text-xs uppercase tracking-wider px-5 py-3 rounded-lg transition-all cursor-pointer shadow-lg shadow-primary/20"
         >
           <Plus size={16} /> New Announcement
         </button>
@@ -198,14 +198,14 @@ const AdminAnnouncements = () => {
         <select
           value={categoryFilter}
           onChange={(e) => { setCategoryFilter(e.target.value); setCurrentPage(1); }}
-          className="bg-background border border-white/10 rounded-lg px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-white focus:outline-none focus:border-primary cursor-pointer"
+          className="w-full sm:w-auto bg-background border border-white/10 rounded-lg px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-white focus:outline-none focus:border-primary cursor-pointer"
         >
           {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
       </div>
 
-      {/* Table */}
-      <div className="bg-background border border-white/10 rounded-xl overflow-hidden shadow-xl">
+      {/* Desktop Table (Visible on md and up) */}
+      <div className="hidden md:block bg-background border border-white/10 rounded-xl overflow-hidden shadow-xl mb-4">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -279,32 +279,93 @@ const AdminAnnouncements = () => {
             </tbody>
           </table>
         </div>
+      </div>
 
-        {/* Pagination Bar */}
-        {totalPages > 1 && (
-          <div className="p-4 border-t border-white/5 bg-surface/50 flex justify-between items-center text-xs font-mono">
-            <span className="text-gray-500">
-              Page {currentPage} of {totalPages} ({filteredAnnouncements.length} total)
-            </span>
-            <div className="flex gap-2">
-              <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
-              >
-                Previous
-              </button>
-              <button
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
-              >
-                Next
-              </button>
-            </div>
+      {/* Mobile Card List (Visible below md) */}
+      <div className="block md:hidden space-y-3 mb-6">
+        {loading ? (
+          <div className="space-y-3">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="bg-surface border border-white/5 rounded-xl p-4 animate-pulse h-28" />
+            ))}
           </div>
+        ) : paginatedAnnouncements.length === 0 ? (
+          <div className="bg-background border border-white/10 rounded-xl p-8 text-center text-gray-500">
+            <p className="font-mono text-xs uppercase tracking-widest mb-1">No announcements found</p>
+            <p className="text-xs text-gray-600">Create an announcement to keep members updated.</p>
+          </div>
+        ) : (
+          paginatedAnnouncements.map((a) => (
+            <div
+              key={a._id || a.id}
+              className="bg-surface/90 border border-white/10 rounded-xl p-4 flex flex-col gap-3 shadow-lg"
+            >
+              <div className="flex items-start gap-2 justify-between">
+                <div className="flex items-center gap-2 min-w-0">
+                  {a.pinned && (
+                    <span className="text-yellow-400 shrink-0" title="Pinned">
+                      <Pin size={14} />
+                    </span>
+                  )}
+                  <h4 className="font-bold text-white text-sm truncate">{a.title}</h4>
+                </div>
+                <span className={`shrink-0 text-[9px] font-mono uppercase px-2 py-0.5 rounded-full ${
+                  a.active !== false ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-gray-500/10 text-gray-400'
+                }`}>
+                  {a.active !== false ? 'Live' : 'Draft'}
+                </span>
+              </div>
+
+              <p className="text-xs text-gray-300 line-clamp-2 leading-relaxed">{a.content}</p>
+
+              <div className="flex items-center justify-between text-[11px] font-mono text-gray-400 pt-2 border-t border-white/5">
+                <span className="text-primary uppercase">{a.category}</span>
+                <span>{formatDate(a.publishDate || a.publishedAt)}</span>
+              </div>
+
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-white/5">
+                <button
+                  onClick={() => handleOpenEdit(a)}
+                  className="px-3 py-1.5 text-xs text-blue-400 hover:text-white bg-blue-500/10 hover:bg-blue-500/20 rounded-lg flex items-center gap-1.5 font-mono cursor-pointer"
+                >
+                  <Edit2 size={13} /> Edit
+                </button>
+                <button
+                  onClick={() => handleRequestDelete(a._id || a.id, a.title)}
+                  className="px-3 py-1.5 text-xs text-red-400 hover:text-white bg-red-500/10 hover:bg-red-500/20 rounded-lg flex items-center gap-1.5 font-mono cursor-pointer"
+                >
+                  <Trash2 size={13} /> Delete
+                </button>
+              </div>
+            </div>
+          ))
         )}
       </div>
+
+      {/* Pagination Bar */}
+      {totalPages > 1 && (
+        <div className="p-4 border border-white/10 rounded-xl bg-surface/50 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs font-mono mb-8">
+          <span className="text-gray-400">
+            Page {currentPage} of {totalPages} ({filteredAnnouncements.length} total)
+          </span>
+          <div className="flex gap-2">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
+            >
+              Previous
+            </button>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Modal */}
       {isModalOpen && (

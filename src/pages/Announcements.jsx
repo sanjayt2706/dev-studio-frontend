@@ -62,20 +62,22 @@ const Announcements = () => {
     return (
       <div
         key={announcement.id || announcement._id}
-        className={`group border rounded-sm p-5 md:p-8 transition-all duration-300 flex flex-col ${
+        data-cursor="card"
+        className={`group border rounded-sm p-5 md:p-8 hover:-translate-y-1 transition-all duration-500 flex flex-col ${
           isPinned
-            ? 'border-primary/40 bg-primary/5 hover:border-primary/60 md:col-span-2'
-            : 'border-white/5 bg-surface/50 hover:border-white/15'
+            ? 'border-primary/50 bg-primary/10 hover:border-primary hover:shadow-[0_12px_35px_rgba(124,58,237,0.22)] md:col-span-2'
+            : 'border-white/10 bg-surface/60 hover:border-primary/40 hover:shadow-[0_10px_30px_rgba(124,58,237,0.14)]'
         }`}
       >
         <div className={`flex flex-col ${imgSrc ? 'md:flex-row gap-6 items-start' : 'gap-4'} flex-1`}>
           {imgSrc && (
-            <div className="w-full md:w-56 aspect-video shrink-0 rounded overflow-hidden bg-background border border-white/5">
+            <div className="w-full md:w-64 aspect-video shrink-0 rounded-sm overflow-hidden bg-background border border-white/5">
               <SmartImage
                 src={imgSrc}
                 alt={announcement.title}
                 type="announcement"
                 className="w-full h-full"
+                imgClassName="opacity-95 contrast-[1.06] saturate-[1.08] group-hover:opacity-100 group-hover:saturate-[1.25] group-hover:contrast-[1.12] transition-transform duration-700 group-hover:scale-105"
               />
             </div>
           )}
@@ -86,19 +88,19 @@ const Announcements = () => {
                 {announcement.category || 'Announcement'}
               </span>
               {isPinned && (
-                <span className="flex items-center gap-1 text-xs font-mono tracking-widest uppercase text-yellow-500 font-semibold">
+                <span className="flex items-center gap-1 text-xs font-mono tracking-widest uppercase text-yellow-400 font-bold">
                   <Pin size={12} /> Pinned
                 </span>
               )}
             </div>
 
-            <h3 className={`font-display font-bold text-white mb-3 uppercase tracking-tight group-hover:text-primary transition-colors ${
-              isPinned ? 'text-2xl md:text-3xl' : 'text-xl'
+            <h3 className={`font-display font-black text-white mb-3 uppercase tracking-tight group-hover:text-primary transition-colors ${
+              isPinned ? 'text-2xl md:text-3xl' : 'text-xl sm:text-2xl'
             }`}>
               {announcement.title}
             </h3>
 
-            <p className="text-gray-400 font-sans leading-relaxed text-sm mb-6 whitespace-pre-line">
+            <p className="text-gray-300 font-sans leading-relaxed text-sm mb-6 whitespace-pre-line">
               {announcement.content}
             </p>
 

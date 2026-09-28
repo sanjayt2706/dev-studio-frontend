@@ -104,7 +104,8 @@ const Gallery = () => {
             {filteredItems.map((item, idx) => (
               <div
                 key={item.id || item._id || idx}
-                className="group relative bg-surface border border-white/5 rounded-sm overflow-hidden hover:border-white/20 transition-all duration-300"
+                data-cursor="image"
+                className="group relative bg-surface border border-white/10 rounded-sm overflow-hidden hover:border-primary/50 hover:shadow-[0_10px_30px_rgba(124,58,237,0.18)] hover:-translate-y-1 transition-all duration-500"
               >
                 <div className="aspect-[4/3] w-full overflow-hidden bg-background relative">
                   <SmartImage
@@ -112,17 +113,17 @@ const Gallery = () => {
                     alt={item.title || 'Dev Studio gallery photo'}
                     type="gallery"
                     className="w-full h-full"
-                    imgClassName="transition-transform duration-700 group-hover:scale-105"
+                    imgClassName="opacity-95 contrast-[1.06] saturate-[1.08] group-hover:opacity-100 group-hover:saturate-[1.25] group-hover:contrast-[1.12] transition-transform duration-700 group-hover:scale-105"
                   />
                   {item.category && (
-                    <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-white font-mono text-[9px] uppercase tracking-widest px-2.5 py-1 rounded">
+                    <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-md text-primary font-mono text-[9px] uppercase tracking-widest px-2.5 py-1 rounded border border-primary/20">
                       {item.category}
                     </div>
                   )}
                 </div>
                 {item.title && (
-                  <div className="p-4 bg-surface/80 border-t border-white/5">
-                    <h3 className="font-display font-bold text-sm text-white uppercase tracking-tight group-hover:text-primary transition-colors">
+                  <div className="p-4 bg-surface/90 border-t border-white/5">
+                    <h3 className="font-display font-black text-sm text-white uppercase tracking-tight group-hover:text-primary transition-colors">
                       {item.title}
                     </h3>
                   </div>

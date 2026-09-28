@@ -101,7 +101,8 @@ const JoinUs = () => {
         <div ref={btnRef} className="opacity-0">
           <Link
             to="/join"
-            className="group inline-flex items-center justify-center bg-black border border-white/20 text-white font-mono text-xs px-10 sm:px-12 py-5 rounded-full uppercase tracking-[0.2em] hover:bg-white hover:!text-black active:bg-white active:!text-black transition-all duration-300 relative overflow-hidden shadow-2xl touch-manipulation"
+            data-cursor="button"
+            className="group inline-flex items-center justify-center bg-black border border-white/20 text-white font-mono text-xs px-10 sm:px-12 py-5 rounded-full uppercase tracking-[0.2em] hover:bg-white hover:!text-black hover:scale-105 active:scale-95 transition-all duration-300 relative overflow-hidden shadow-2xl touch-manipulation cursor-pointer"
           >
             <span className="relative z-10 font-bold">Apply Now</span>
             <span className="ml-3 group-hover:translate-x-2 transition-transform duration-300 relative z-10 font-bold">&rarr;</span>

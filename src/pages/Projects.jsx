@@ -110,19 +110,20 @@ const Projects = () => {
               return (
                 <div
                   key={project.id || project._id || idx}
-                  className="group flex flex-col bg-surface/30 border border-white/5 rounded-sm p-5 md:p-8 hover:border-white/15 active:border-white/15 transition-all duration-300"
+                  data-cursor="card"
+                  className="group flex flex-col bg-surface/40 border border-white/10 rounded-sm p-4 sm:p-6 md:p-8 hover:border-primary/50 hover:shadow-[0_12px_40px_rgba(124,58,237,0.18)] hover:-translate-y-1 active:border-primary/40 transition-all duration-500 overflow-hidden"
                 >
                   {/* Media */}
-                  <div className="aspect-[16/9] w-full rounded-sm overflow-hidden mb-6 relative">
+                  <div className="aspect-[16/9] w-full rounded-sm overflow-hidden mb-6 relative border border-white/5">
                     <SmartImage
                       src={project.coverImage}
                       alt={project.title}
                       type="project"
                       className="w-full h-full"
-                      imgClassName="transition-transform duration-700 group-hover:scale-105"
+                      imgClassName="opacity-95 contrast-[1.06] saturate-[1.08] group-hover:opacity-100 group-hover:saturate-[1.25] group-hover:contrast-[1.12] transition-transform duration-700 group-hover:scale-105"
                     >
                       {project.badge && (
-                        <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-white font-mono text-[9px] uppercase tracking-widest px-2.5 py-1 rounded">
+                        <div className="absolute top-3 left-3 bg-black/75 backdrop-blur-md text-primary font-mono text-[9px] uppercase tracking-widest px-2.5 py-1 rounded border border-primary/20">
                           {project.badge}
                         </div>
                       )}
@@ -135,23 +136,23 @@ const Projects = () => {
                       {project.category}
                     </span>
                     <span className="w-1 h-1 rounded-full bg-white/20"></span>
-                    <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
+                    <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">
                       {project.year}
                     </span>
                   </div>
 
                   {/* Title & Subtitle */}
-                  <h3 className="text-2xl md:text-3xl font-display font-bold text-white group-hover:text-primary transition-colors duration-300 mb-2">
+                  <h3 className="text-2xl sm:text-3xl font-display font-black text-white group-hover:text-primary transition-colors duration-300 mb-2">
                     {project.title}
                   </h3>
                   {project.subtitle && (
-                    <p className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-4">
+                    <p className="text-xs font-mono uppercase tracking-wider text-primary/80 mb-3">
                       {project.subtitle}
                     </p>
                   )}
 
                   {/* Description */}
-                  <p className="text-gray-400 mb-6 font-sans leading-relaxed text-sm">
+                  <p className="text-gray-300 mb-6 font-sans leading-relaxed text-sm">
                     {project.description}
                   </p>
 

@@ -3,6 +3,11 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-background: #0a0a0a;
+  --color-surface: #121212;
+  --color-primary: #3b82f6;
+  --color-text: #f8fafc;
+  --color-muted: #94a3b8;
 }
 
 @layer base {
@@ -242,3 +247,40 @@
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   SUPPRESS INJECTED NETLIFY BADGE
+   ========================================================================== */
+[data-netlify-badge],
+.netlify-badge,
+#netlify-badge,
+.netlify-badge-wrapper,
+a[href*="netlify.com"][style*="fixed"],
+a[href*="netlify.com"][style*="absolute"],
+div[class*="netlify-badge"],
+div:has(> a[href*="netlify.com"]),
+div[style*="z-index"][style*="position: fixed"]:has(a[href*="netlify.com"]),
+div[class*="netlify"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  clip-path: inset(100%) !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Global button focus & interaction states */
+button:focus-visible, a:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.8) !important;
+  outline-offset: 2px !important;
+}
+
+/* Touch feedback for mobile */
+@media (hover: none) and (pointer: coarse) {
+  button:active, a:active, [role="button"]:active {
+    transform: scale(0.97) !important;
+    transition: transform 0.1s ease !important;
+  }
+}
+

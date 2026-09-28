@@ -75,7 +75,8 @@ const Events = () => {
     return (
       <div
         key={event.id || event._id}
-        className={`group bg-surface/40 border border-white/5 rounded-sm p-5 md:p-8 hover:border-white/15 active:border-white/15 transition-all duration-300 flex flex-col ${
+        data-cursor="card"
+        className={`group bg-surface/50 border border-white/10 rounded-sm p-5 md:p-8 hover:border-primary/50 hover:shadow-[0_12px_35px_rgba(124,58,237,0.18)] hover:-translate-y-1 active:border-primary/40 transition-all duration-500 flex flex-col ${
           isFeatured ? 'md:col-span-2 md:grid md:grid-cols-2 md:gap-10 md:items-center' : ''
         }`}
       >
@@ -88,7 +89,7 @@ const Events = () => {
             alt={event.title}
             type="event"
             className="w-full h-full"
-            imgClassName="transition-transform duration-700 group-hover:scale-105"
+            imgClassName="opacity-95 contrast-[1.06] saturate-[1.08] group-hover:opacity-100 group-hover:saturate-[1.25] group-hover:contrast-[1.12] transition-transform duration-700 group-hover:scale-105"
           >
             {isFeatured && (
               <div className="absolute top-3 left-3 bg-primary text-white font-mono text-[9px] uppercase tracking-widest px-3 py-1 rounded shadow-md">
@@ -107,20 +108,20 @@ const Events = () => {
             {event.organizer && (
               <>
                 <span className="w-1 h-1 rounded-full bg-white/20"></span>
-                <span className="text-xs font-mono text-gray-500 uppercase tracking-wider truncate">
+                <span className="text-xs font-mono text-gray-400 uppercase tracking-wider truncate">
                   {event.organizer}
                 </span>
               </>
             )}
           </div>
 
-          <h3 className={`font-display font-bold text-white mb-3 uppercase tracking-tight group-hover:text-primary transition-colors ${
-            isFeatured ? 'text-3xl md:text-5xl' : 'text-2xl'
+          <h3 className={`font-display font-black text-white mb-3 uppercase tracking-tight group-hover:text-primary transition-colors ${
+            isFeatured ? 'text-3xl md:text-5xl' : 'text-2xl sm:text-3xl'
           }`}>
             {event.title}
           </h3>
 
-          <p className="text-gray-400 font-sans leading-relaxed mb-6 text-sm">
+          <p className="text-gray-300 font-sans leading-relaxed mb-6 text-sm">
             {event.description}
           </p>
 

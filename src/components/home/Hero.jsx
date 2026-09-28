@@ -345,7 +345,8 @@ const Hero = () => {
             <div ref={ctaRef} className="flex items-center gap-3 sm:gap-4">
               <Link
                 to="/join"
-                className="group relative inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white text-black font-mono text-xs uppercase tracking-[0.18em] font-bold hover:bg-primary hover:text-white active:bg-primary active:text-white transition-all duration-300 shadow-xl shadow-black/60 touch-manipulation"
+                data-cursor="button"
+                className="group relative inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white text-black font-mono text-xs uppercase tracking-[0.18em] font-bold hover:bg-gradient-to-r hover:from-purple-600 hover:to-primary hover:text-white hover:shadow-[0_0_25px_rgba(124,58,237,0.5)] hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 shadow-xl shadow-black/60 touch-manipulation"
               >
                 <span>Join Studio</span>
                 <span className="w-5 h-5 rounded-full bg-black/10 group-hover:bg-white/20 flex items-center justify-center transition-colors">
@@ -355,7 +356,8 @@ const Hero = () => {
 
               <Link
                 to="/work"
-                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-white/20 hover:border-white/50 active:border-white/50 text-white font-mono text-xs uppercase tracking-[0.18em] transition-colors bg-black/40 backdrop-blur-md touch-manipulation"
+                data-cursor="button"
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-white/20 hover:border-cyan-400/80 hover:text-cyan-200 hover:shadow-[0_0_20px_rgba(56,189,248,0.35)] hover:scale-[1.03] active:scale-[0.97] text-white font-mono text-xs uppercase tracking-[0.18em] transition-all duration-300 bg-black/40 backdrop-blur-md touch-manipulation"
               >
                 <span>Explore Work</span>
               </Link>

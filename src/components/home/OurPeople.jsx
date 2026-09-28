@@ -122,7 +122,9 @@ const OurPeople = () => {
               }`}
             >
               {/* Photo container */}
-              <div className={`relative overflow-hidden rounded-sm bg-surface ${
+              <div
+                data-cursor="card"
+                className={`relative overflow-hidden rounded-sm bg-surface border border-white/5 group-hover:border-primary/50 group-hover:shadow-[0_10px_35px_rgba(124,58,237,0.22)] transition-all duration-500 ${
                 i === 0 ? 'aspect-[3/4]' : 'aspect-square'
               }`}>
                 <SmartImage
@@ -130,24 +132,24 @@ const OurPeople = () => {
                   alt={member.name}
                   type="member"
                   className="w-full h-full"
-                  imgClassName="grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 scale-105 group-hover:scale-100"
+                  imgClassName="opacity-95 contrast-[1.08] saturate-[1.1] group-hover:opacity-100 group-hover:saturate-[1.28] group-hover:brightness-105 group-hover:scale-105 transition-all duration-500"
                 />
 
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none"></div>
 
                 {/* Name/Role */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">
-                  <h4 className="text-lg md:text-xl font-display font-bold text-white uppercase tracking-tight">{member.name}</h4>
-                  <div className="flex items-center gap-3 mt-1">
-                    <span className="text-[10px] font-mono tracking-[0.2em] text-primary uppercase font-bold">{member.role}</span>
+                  <h4 className="text-xl md:text-2xl font-display font-bold text-white uppercase tracking-tight group-hover:text-primary transition-colors">{member.name}</h4>
+                  <div className="flex items-center gap-3 mt-1.5">
+                    <span className="text-[11px] font-mono tracking-[0.2em] text-primary uppercase font-bold">{member.role}</span>
                     <span className="w-4 h-px bg-white/30"></span>
-                    <span className="text-[10px] font-mono tracking-[0.2em] text-gray-300 uppercase">{member.team}</span>
+                    <span className="text-[11px] font-mono tracking-[0.2em] text-gray-300 uppercase">{member.team}</span>
                   </div>
                 </div>
 
                 {/* Corner accent */}
-                <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-primary opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-primary opacity-60 group-hover:opacity-100 group-hover:shadow-[0_0_8px_#3b82f6] transition-all duration-300"></div>
               </div>
             </div>
           ))}

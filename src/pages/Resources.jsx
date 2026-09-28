@@ -103,9 +103,10 @@ const Resources = () => {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`font-mono text-xs tracking-wider uppercase px-4 py-2.5 rounded transition-all whitespace-nowrap cursor-pointer touch-manipulation ${
+                data-cursor="button"
+                className={`font-mono text-xs tracking-wider uppercase px-4 py-2.5 rounded transition-all whitespace-nowrap cursor-pointer touch-manipulation active:scale-95 ${
                   selectedCategory === cat
-                    ? 'bg-primary text-white font-bold'
+                    ? 'bg-primary text-white font-bold shadow-[0_0_12px_rgba(59,130,246,0.35)]'
                     : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 active:text-white active:bg-white/10'
                 }`}
               >
@@ -132,7 +133,8 @@ const Resources = () => {
             {filteredResources.map((resource, idx) => (
               <div
                 key={resource.id || resource._id || idx}
-                className="group relative bg-surface border border-white/5 rounded-sm p-6 md:p-8 flex flex-col justify-between hover:border-white/20 transition-all duration-300"
+                data-cursor="card"
+                className="group relative bg-surface border border-white/10 rounded-sm p-6 md:p-8 flex flex-col justify-between hover:border-purple-500/40 hover:shadow-[0_8px_30px_rgba(124,58,237,0.14)] hover:-translate-y-1 transition-all duration-300"
               >
                 <div>
                   <div className="flex justify-between items-start gap-4 mb-4">
@@ -164,7 +166,8 @@ const Resources = () => {
                         href={resource.externalUrl.startsWith('http') ? resource.externalUrl : `https://${resource.externalUrl}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-primary hover:underline cursor-pointer"
+                        data-cursor="button"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-primary hover:text-cyan-300 transition-colors cursor-pointer"
                       >
                         <span>Access</span>
                         <ExternalLink size={12} />
@@ -175,7 +178,8 @@ const Resources = () => {
                         href={resource.downloadableFileUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="p-1.5 text-gray-400 hover:text-white"
+                        data-cursor="button"
+                        className="p-1.5 text-gray-400 hover:text-white transition-colors"
                         title="Download Asset"
                       >
                         <Download size={14} />

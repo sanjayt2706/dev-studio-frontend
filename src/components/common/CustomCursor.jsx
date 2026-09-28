@@ -70,42 +70,70 @@ export const CustomCursor = () => {
       const target = e.target;
       if (!target) return;
 
+      const isNav = Boolean(target.closest('nav a, [data-cursor="nav"]'));
       const isButton = Boolean(
-        target.closest('button, [role="button"], input[type="submit"], input[type="button"], .btn')
+        target.closest('button, [role="button"], [data-cursor="button"], input[type="submit"], input[type="button"], .btn')
       );
-      const isLink = Boolean(target.closest('a, [role="link"]') && !isButton);
+      const isCard = Boolean(target.closest('[data-cursor="card"]'));
       const isImage = Boolean(
-        target.closest(
-          'img, picture, [data-cursor="image"], .aspect-video, .aspect-\\[16\\/9\\], .aspect-\\[4\\/3\\], .aspect-\\[3\\/4\\], .aspect-square'
-        )
+        target.closest('img, picture, [data-cursor="image"]')
       );
+      const isGeneralLink = Boolean(target.closest('a, [role="link"]') && !isButton && !isNav);
 
-      if (isImage) {
-        currentMode = 'image';
-        targetScale = 2.4;
-        targetRingScale = 1.7;
-        if (labelEl) labelEl.style.opacity = '1';
+      if (isNav) {
+        currentMode = 'nav';
+        targetScale = 1.35;
+        targetRingScale = 1.5;
+        if (labelEl) labelEl.style.opacity = '0';
+        ringEl.style.borderColor = 'rgba(56, 189, 248, 0.7)';
+        ringEl.style.boxShadow = '0 0 16px rgba(168, 85, 247, 0.6)';
+      } else if (isCard) {
+        currentMode = 'card';
+        targetScale = 2.3;
+        targetRingScale = 1.75;
+        if (labelEl) {
+          labelEl.innerText = 'VIEW';
+          labelEl.style.opacity = '1';
+        }
+        ringEl.style.borderColor = 'rgba(168, 85, 247, 0.7)';
+        ringEl.style.boxShadow = '0 0 20px rgba(124, 58, 237, 0.4)';
       } else if (isButton) {
         currentMode = 'button';
         targetScale = 1.65;
         targetRingScale = 1.45;
         if (labelEl) labelEl.style.opacity = '0';
-      } else if (isLink) {
+        ringEl.style.borderColor = 'rgba(59, 130, 246, 0.8)';
+        ringEl.style.boxShadow = '0 0 18px rgba(59, 130, 246, 0.5)';
+      } else if (isImage) {
+        currentMode = 'image';
+        targetScale = 2.2;
+        targetRingScale = 1.65;
+        if (labelEl) {
+          labelEl.innerText = 'OPEN';
+          labelEl.style.opacity = '1';
+        }
+        ringEl.style.borderColor = 'rgba(168, 85, 247, 0.6)';
+        ringEl.style.boxShadow = '0 0 16px rgba(168, 85, 247, 0.4)';
+      } else if (isGeneralLink) {
         currentMode = 'link';
         targetScale = 1.35;
         targetRingScale = 1.25;
         if (labelEl) labelEl.style.opacity = '0';
+        ringEl.style.borderColor = 'rgba(168, 85, 247, 0.5)';
+        ringEl.style.boxShadow = '0 0 12px rgba(168, 85, 247, 0.3)';
       } else {
         currentMode = 'normal';
         targetScale = isMouseDown ? 0.8 : 1.0;
         targetRingScale = isMouseDown ? 0.85 : 1.0;
         if (labelEl) labelEl.style.opacity = '0';
+        ringEl.style.borderColor = 'rgba(168, 85, 247, 0.35)';
+        ringEl.style.boxShadow = '0 0 12px rgba(124, 58, 237, 0.25)';
       }
     };
 
     const onMouseDown = () => {
       isMouseDown = true;
-      targetScale = currentMode === 'image' ? 2.1 : currentMode === 'button' ? 1.4 : 0.8;
+      targetScale = currentMode === 'card' || currentMode === 'image' ? 2.0 : currentMode === 'button' ? 1.4 : 0.8;
       targetRingScale = 0.85;
 
       // Trigger electric purple ripple effect
@@ -121,12 +149,18 @@ export const CustomCursor = () => {
 
     const onMouseUp = () => {
       isMouseDown = false;
-      if (currentMode === 'image') {
-        targetScale = 2.4;
-        targetRingScale = 1.7;
+      if (currentMode === 'card') {
+        targetScale = 2.3;
+        targetRingScale = 1.75;
+      } else if (currentMode === 'image') {
+        targetScale = 2.2;
+        targetRingScale = 1.65;
       } else if (currentMode === 'button') {
         targetScale = 1.65;
         targetRingScale = 1.45;
+      } else if (currentMode === 'nav') {
+        targetScale = 1.35;
+        targetRingScale = 1.5;
       } else if (currentMode === 'link') {
         targetScale = 1.35;
         targetRingScale = 1.25;

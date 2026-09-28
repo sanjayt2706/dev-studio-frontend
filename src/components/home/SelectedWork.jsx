@@ -92,7 +92,7 @@ const SelectedWork = () => {
     <section ref={containerRef} className="relative w-full bg-[#090A0F] border-t border-white/5">
       <div
         ref={pinTargetRef}
-        className="relative w-full h-screen max-h-screen overflow-hidden flex flex-col justify-between pt-6 sm:pt-8 pb-4 md:pb-6"
+        className="relative w-full min-h-0 md:h-screen md:max-h-screen overflow-hidden flex flex-col justify-start md:justify-between py-10 md:py-0 md:pt-6 sm:md:pt-8 md:pb-6"
       >
         {/* Ambient background glows */}
         <div className="absolute top-1/4 right-0 w-[450px] h-[450px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
@@ -113,7 +113,7 @@ const SelectedWork = () => {
         </div>
 
         {/* Top Header - Compact and positioned without huge empty gap */}
-        <div className="px-6 md:px-14 w-full max-w-[1500px] mx-auto z-10">
+        <div className="px-4 sm:px-6 md:px-14 w-full max-w-[1500px] mx-auto z-10 mb-6 md:mb-0">
           <div ref={headerRef} className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-white/10">
             <div>
               <div className="flex items-center gap-3 mb-1.5">
@@ -137,11 +137,11 @@ const SelectedWork = () => {
               </div>
               <Link
                 to="/work"
-                className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
+                className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-white/70 hover:text-white transition-all duration-300"
               >
                 <span>Full Archive</span>
-                <span className="w-7 h-7 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/20 transition-all duration-300">
-                  <ArrowUpRight size={13} className="text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <span className="w-7 h-7 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/20 group-hover:shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-all duration-300">
+                  <ArrowUpRight size={13} className="text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </span>
               </Link>
             </div>
@@ -152,25 +152,26 @@ const SelectedWork = () => {
         <div className="w-full my-auto py-2 overflow-hidden z-10">
           <div
             ref={trackRef}
-            className="flex gap-6 md:gap-8 pl-6 md:pl-14 pr-10 md:pr-[25vw] items-center overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory md:snap-none"
+            className="flex gap-4 sm:gap-6 md:gap-8 pl-4 sm:pl-6 md:pl-14 pr-6 sm:pr-10 md:pr-[25vw] items-center overflow-x-auto md:overflow-visible scrollbar-none snap-x snap-mandatory md:snap-none"
             style={{ width: 'max-content' }}
           >
             {featured.map((project, i) => (
               <div
                 key={project.id}
-                className="group flex-shrink-0 snap-center w-[85vw] sm:w-[620px] md:w-[720px] lg:w-[800px] h-[58vh] max-h-[410px] min-h-[330px] rounded-2xl bg-[#0F111A]/95 border border-white/10 hover:border-primary/50 transition-all duration-500 p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/80 relative overflow-hidden backdrop-blur-md"
+                data-cursor="card"
+                className="group flex-shrink-0 snap-center w-[92vw] sm:w-[620px] md:w-[720px] lg:w-[800px] h-auto min-h-0 md:h-[58vh] md:max-h-[410px] md:min-h-[330px] rounded-2xl bg-[#0F111A]/95 border border-white/10 hover:border-primary/50 transition-all duration-500 p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/80 relative overflow-hidden backdrop-blur-md"
               >
                 {/* Subtle top card glow */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Left Column: Visual Vector Mockup Preview */}
-                <div className="w-full sm:w-[48%] h-44 sm:h-full relative rounded-xl overflow-hidden bg-black/60 border border-white/10 group-hover:border-white/20 transition-all duration-500 flex-shrink-0">
+                <div className="w-full sm:w-[48%] h-48 sm:h-full relative rounded-xl overflow-hidden bg-black/60 border border-white/10 group-hover:border-white/20 transition-all duration-500 flex-shrink-0">
                   <SmartImage
                     src={project.coverImage}
                     alt={project.title}
                     type="project"
                     className="w-full h-full"
-                    imgClassName="object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                    imgClassName="object-top opacity-95 contrast-[1.06] saturate-[1.08] group-hover:opacity-100 group-hover:saturate-[1.25] group-hover:contrast-[1.12] transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                   {/* Tech badge on preview image */}
                   <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/80 backdrop-blur-md border border-white/10 text-[9px] font-mono text-white/90 z-10">

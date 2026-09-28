@@ -153,15 +153,15 @@ const AdminResources = () => {
   return (
     <div>
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
-          <span className="text-xs font-mono uppercase tracking-widest text-primary block mb-2">Management Suite</span>
+          <span className="text-xs font-mono uppercase tracking-widest text-primary block mb-1">Management Suite</span>
           <h1 className="text-3xl md:text-4xl font-display font-black text-white uppercase tracking-tight">Resources</h1>
-          <p className="text-gray-400 text-sm mt-1">Curate roadmaps, technical guides, cheat sheets, and toolkits</p>
+          <p className="text-gray-400 text-xs sm:text-sm mt-1">Curate roadmaps, technical guides, cheat sheets, and toolkits</p>
         </div>
         <button
           onClick={handleOpenCreate}
-          className="flex items-center gap-2 bg-primary hover:bg-blue-600 text-white font-mono text-xs uppercase tracking-wider px-5 py-3 rounded-lg transition-colors cursor-pointer shadow-lg shadow-primary/20"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary hover:bg-blue-600 active:scale-95 text-white font-mono text-xs uppercase tracking-wider px-5 py-3 rounded-lg transition-all cursor-pointer shadow-lg shadow-primary/20"
         >
           <Plus size={16} /> Add Resource
         </button>
@@ -189,14 +189,14 @@ const AdminResources = () => {
         <select
           value={categoryFilter}
           onChange={(e) => { setCategoryFilter(e.target.value); setCurrentPage(1); }}
-          className="bg-background border border-white/10 rounded-lg px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-white focus:outline-none focus:border-primary cursor-pointer"
+          className="w-full sm:w-auto bg-background border border-white/10 rounded-lg px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-white focus:outline-none focus:border-primary cursor-pointer"
         >
           {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
       </div>
 
-      {/* Table */}
-      <div className="bg-background border border-white/10 rounded-xl overflow-hidden shadow-xl">
+      {/* Desktop Table (Visible on md and up) */}
+      <div className="hidden md:block bg-background border border-white/10 rounded-xl overflow-hidden shadow-xl mb-4">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -279,32 +279,108 @@ const AdminResources = () => {
             </tbody>
           </table>
         </div>
+      </div>
 
-        {/* Pagination Bar */}
-        {totalPages > 1 && (
-          <div className="p-4 border-t border-white/5 bg-surface/50 flex justify-between items-center text-xs font-mono">
-            <span className="text-gray-500">
-              Page {currentPage} of {totalPages} ({filteredResources.length} total)
-            </span>
-            <div className="flex gap-2">
-              <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
-              >
-                Previous
-              </button>
-              <button
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
-              >
-                Next
-              </button>
-            </div>
+      {/* Mobile Card List (Visible below md) */}
+      <div className="block md:hidden space-y-3 mb-6">
+        {loading ? (
+          <div className="space-y-3">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="bg-surface border border-white/5 rounded-xl p-4 animate-pulse h-28" />
+            ))}
           </div>
+        ) : paginatedResources.length === 0 ? (
+          <div className="bg-background border border-white/10 rounded-xl p-8 text-center text-gray-500">
+            <p className="font-mono text-xs uppercase tracking-widest mb-1">No resources found</p>
+            <p className="text-xs text-gray-600">Add a resource link or guide for members.</p>
+          </div>
+        ) : (
+          paginatedResources.map((res) => (
+            <div
+              key={res._id || res.id}
+              className="bg-surface/90 border border-white/10 rounded-xl p-4 flex flex-col gap-3 shadow-lg"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2">
+                  <h4 className="font-bold text-white text-sm truncate">{res.title}</h4>
+                  <span className="shrink-0 text-[10px] font-mono uppercase tracking-wider text-primary">
+                    {res.category}
+                  </span>
+                </div>
+                <p className="text-xs text-gray-400 line-clamp-2 mt-1">{res.description}</p>
+                {res.author && (
+                  <p className="text-[11px] font-mono text-gray-500 mt-1">By {res.author}</p>
+                )}
+              </div>
+
+              <div className="flex items-center justify-between pt-2 border-t border-white/5">
+                <div className="flex gap-2">
+                  {res.externalUrl && (
+                    <a
+                      href={res.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2.5 py-1.5 text-xs text-gray-300 hover:text-white bg-white/5 rounded-lg flex items-center gap-1 font-mono"
+                    >
+                      <ExternalLink size={13} /> Link
+                    </a>
+                  )}
+                  {res.downloadableFileUrl && (
+                    <a
+                      href={res.downloadableFileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2.5 py-1.5 text-xs text-gray-300 hover:text-white bg-white/5 rounded-lg flex items-center gap-1 font-mono"
+                    >
+                      <Download size={13} /> File
+                    </a>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => handleOpenEdit(res)}
+                    className="px-3 py-1.5 text-xs text-blue-400 hover:text-white bg-blue-500/10 hover:bg-blue-500/20 rounded-lg flex items-center gap-1.5 font-mono cursor-pointer"
+                  >
+                    <Edit2 size={13} /> Edit
+                  </button>
+                  <button
+                    onClick={() => handleRequestDelete(res._id || res.id, res.title)}
+                    className="px-3 py-1.5 text-xs text-red-400 hover:text-white bg-red-500/10 hover:bg-red-500/20 rounded-lg flex items-center gap-1.5 font-mono cursor-pointer"
+                  >
+                    <Trash2 size={13} /> Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))
         )}
       </div>
+
+      {/* Pagination Bar */}
+      {totalPages > 1 && (
+        <div className="p-4 border border-white/10 rounded-xl bg-surface/50 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs font-mono mb-8">
+          <span className="text-gray-400">
+            Page {currentPage} of {totalPages} ({filteredResources.length} total)
+          </span>
+          <div className="flex gap-2">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
+            >
+              Previous
+            </button>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Modal */}
       {isModalOpen && (

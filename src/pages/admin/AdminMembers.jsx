@@ -155,15 +155,15 @@ const AdminMembers = () => {
   return (
     <div>
       {/* Top Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <div>
-          <span className="text-xs font-mono uppercase tracking-widest text-primary block mb-2">Management Suite</span>
+          <span className="text-xs font-mono uppercase tracking-widest text-primary block mb-1">Management Suite</span>
           <h1 className="text-3xl md:text-4xl font-display font-black text-white uppercase tracking-tight">Members</h1>
-          <p className="text-gray-400 text-sm mt-1">Directory of club leaders, core team, and active collective members</p>
+          <p className="text-gray-400 text-xs sm:text-sm mt-1">Directory of club leaders, core team, and active collective members</p>
         </div>
         <button
           onClick={handleOpenCreate}
-          className="flex items-center gap-2 bg-primary hover:bg-blue-600 text-white font-mono text-xs uppercase tracking-wider px-5 py-3 rounded-lg transition-colors cursor-pointer shadow-lg shadow-primary/20"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary hover:bg-blue-600 active:scale-95 text-white font-mono text-xs uppercase tracking-wider px-5 py-3 rounded-lg transition-all cursor-pointer shadow-lg shadow-primary/20"
         >
           <Plus size={16} /> Add Member
         </button>
@@ -192,15 +192,15 @@ const AdminMembers = () => {
         <select
           value={teamFilter}
           onChange={(e) => { setTeamFilter(e.target.value); setCurrentPage(1); }}
-          className="bg-background border border-white/10 rounded-lg px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-white focus:outline-none focus:border-primary cursor-pointer"
+          className="w-full sm:w-auto bg-background border border-white/10 rounded-lg px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-white focus:outline-none focus:border-primary cursor-pointer"
         >
           <option value="All">All Teams</option>
           {TEAMS.map((t) => <option key={t} value={t}>{t}</option>)}
         </select>
       </div>
 
-      {/* Table */}
-      <div className="bg-background border border-white/10 rounded-xl overflow-hidden shadow-xl">
+      {/* Desktop Table (Visible on md and up) */}
+      <div className="hidden md:block bg-background border border-white/10 rounded-xl overflow-hidden shadow-xl mb-4">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -281,32 +281,101 @@ const AdminMembers = () => {
             </tbody>
           </table>
         </div>
+      </div>
 
-        {/* Pagination Bar */}
-        {totalPages > 1 && (
-          <div className="p-4 border-t border-white/5 bg-surface/50 flex justify-between items-center text-xs font-mono">
-            <span className="text-gray-500">
-              Page {currentPage} of {totalPages} ({filteredMembers.length} total)
-            </span>
-            <div className="flex gap-2">
-              <button
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
-              >
-                Previous
-              </button>
-              <button
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
-              >
-                Next
-              </button>
-            </div>
+      {/* Mobile Card List (Visible below md) */}
+      <div className="block md:hidden space-y-3 mb-6">
+        {loading ? (
+          <div className="space-y-3">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="bg-surface border border-white/5 rounded-xl p-4 animate-pulse h-28" />
+            ))}
           </div>
+        ) : paginatedMembers.length === 0 ? (
+          <div className="bg-background border border-white/10 rounded-xl p-8 text-center text-gray-500">
+            <p className="font-mono text-xs uppercase tracking-widest mb-1">No members found</p>
+            <p className="text-xs text-gray-600">Add a new member or adjust your filter.</p>
+          </div>
+        ) : (
+          paginatedMembers.map((member) => (
+            <div
+              key={member._id || member.id}
+              className="bg-surface/90 border border-white/10 rounded-xl p-4 flex flex-col gap-3 shadow-lg"
+            >
+              <div className="flex items-start gap-3">
+                <SmartImage
+                  src={member.profileImage || member.image}
+                  alt={member.name}
+                  type="member"
+                  className="w-14 h-14 rounded-xl shrink-0 border border-white/10"
+                />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
+                    <h4 className="font-bold text-white text-sm truncate">{member.name}</h4>
+                    <span className={`shrink-0 inline-flex items-center text-[9px] font-mono uppercase px-2 py-0.5 rounded-full ${
+                      member.isActive !== false ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-gray-500/10 text-gray-400'
+                    }`}>
+                      {member.isActive !== false ? 'Active' : 'Inactive'}
+                    </span>
+                  </div>
+                  <p className="text-xs font-mono text-primary uppercase mt-0.5">{member.role}</p>
+                  <p className="text-[11px] text-gray-400 mt-1 font-mono">{member.team} · {member.year} {member.branch ? `(${member.branch})` : ''}</p>
+                </div>
+              </div>
+
+              {member.skills && member.skills.length > 0 && (
+                <div className="flex flex-wrap gap-1 pt-2 border-t border-white/5">
+                  {(Array.isArray(member.skills) ? member.skills : []).slice(0, 3).map((s, i) => (
+                    <span key={i} className="text-[9px] font-mono px-2 py-0.5 bg-white/5 text-gray-400 rounded">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-white/5">
+                <button
+                  onClick={() => handleOpenEdit(member)}
+                  className="px-3 py-1.5 text-xs text-blue-400 hover:text-white bg-blue-500/10 hover:bg-blue-500/20 rounded-lg flex items-center gap-1.5 font-mono cursor-pointer"
+                >
+                  <Edit2 size={13} /> Edit
+                </button>
+                <button
+                  onClick={() => handleRequestDelete(member._id || member.id, member.name)}
+                  className="px-3 py-1.5 text-xs text-red-400 hover:text-white bg-red-500/10 hover:bg-red-500/20 rounded-lg flex items-center gap-1.5 font-mono cursor-pointer"
+                >
+                  <Trash2 size={13} /> Delete
+                </button>
+              </div>
+            </div>
+          ))
         )}
       </div>
+
+      {/* Pagination Bar */}
+      {totalPages > 1 && (
+        <div className="p-4 border border-white/10 rounded-xl bg-surface/50 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs font-mono mb-8">
+          <span className="text-gray-400">
+            Page {currentPage} of {totalPages} ({filteredMembers.length} total)
+          </span>
+          <div className="flex gap-2">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
+            >
+              Previous
+            </button>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              className="px-3 py-1.5 bg-background border border-white/10 rounded text-gray-400 hover:text-white disabled:opacity-40 cursor-pointer"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Member Modal (Create & Edit) */}
       {isModalOpen && (
