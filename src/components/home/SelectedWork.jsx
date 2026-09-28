@@ -126,7 +126,7 @@ const SelectedWork = () => {
                 </span>
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-editorial font-bold tracking-tight text-white uppercase leading-none">
-                WHAT WE BUILD<span className="text-primary">.</span>
+                WHAT WE <span className="stroke-text">BUILD</span><span className="text-primary">.</span>
               </h2>
             </div>
 
@@ -159,13 +159,13 @@ const SelectedWork = () => {
               <div
                 key={project.id}
                 data-cursor="card"
-                className="group flex-shrink-0 snap-center w-[92vw] sm:w-[620px] md:w-[720px] lg:w-[800px] h-auto min-h-0 md:h-[58vh] md:max-h-[410px] md:min-h-[330px] rounded-2xl bg-[#0F111A]/95 border border-white/10 hover:border-primary/50 transition-all duration-500 p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/80 relative overflow-hidden backdrop-blur-md"
+                className="group flex-shrink-0 snap-center w-[92vw] sm:w-[620px] md:w-[720px] lg:w-[800px] h-auto min-h-0 md:h-[58vh] md:max-h-[410px] md:min-h-[330px] rounded-2xl bg-[#0D0F18]/95 border border-white/10 hover:border-purple-500/50 hover:shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_35px_rgba(124,58,237,0.18)] transition-all duration-500 p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/80 relative overflow-hidden backdrop-blur-xl"
               >
                 {/* Subtle top card glow */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Left Column: Visual Vector Mockup Preview */}
-                <div className="w-full sm:w-[48%] h-48 sm:h-full relative rounded-xl overflow-hidden bg-black/60 border border-white/10 group-hover:border-white/20 transition-all duration-500 flex-shrink-0">
+                <div className="w-full sm:w-[48%] h-48 sm:h-full relative rounded-xl overflow-hidden bg-black/60 border border-white/10 group-hover:border-purple-400/30 transition-all duration-500 flex-shrink-0">
                   <SmartImage
                     src={project.coverImage}
                     alt={project.title}

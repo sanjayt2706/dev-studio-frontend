@@ -91,8 +91,8 @@ const Hero = () => {
       // Layer 1: Campus image cinematic zoom
       if (imageRef.current) {
         scrollTl.to(imageRef.current, {
-          scale: 1.10,
-          y: '2%',
+          scale: 1.15,
+          y: '3%',
           ease: 'none',
           duration: 1,
         }, 0);
@@ -101,8 +101,9 @@ const Hero = () => {
       // Layer 3: Sky arc and grid parallax
       if (arcRef.current) {
         scrollTl.to(arcRef.current, {
-          y: '-25%',
-          scale: 1.04,
+          y: '-30%',
+          rotation: 12,
+          scale: 1.08,
           opacity: 0.15,
           ease: 'none',
           duration: 1,
@@ -111,8 +112,8 @@ const Hero = () => {
 
       if (gridRef.current) {
         scrollTl.to(gridRef.current, {
-          y: '-12%',
-          opacity: 0.1,
+          y: '-15%',
+          opacity: 0.08,
           ease: 'none',
           duration: 1,
         }, 0);
@@ -121,51 +122,57 @@ const Hero = () => {
       // Layer 4: Tech markers parallax
       if (techMarkersRef.current) {
         scrollTl.to(techMarkersRef.current, {
-          y: '-20%',
-          opacity: 0.2,
+          y: '-25%',
+          opacity: 0.15,
           ease: 'none',
           duration: 0.8,
         }, 0.1);
       }
 
-      // Layer 5: Words staggered parallax
+      // Layer 5: Refokus Multi-Axis Kinetic Typography Drift
       if (word1Ref.current) {
         scrollTl.to(word1Ref.current, {
-          y: '-80px',
+          x: '-120px',
+          y: '-50px',
+          scale: 0.94,
           ease: 'none',
           duration: 1,
         }, 0);
         scrollTl.to(word1Ref.current, {
           opacity: 0,
-          duration: 0.35,
+          duration: 0.25,
           ease: 'power2.in',
-        }, 0.65);
+        }, 0.75);
       }
 
       if (word2Ref.current) {
         scrollTl.to(word2Ref.current, {
-          y: '-60px',
+          x: '135px',
+          y: '-30px',
+          scale: 1.05,
           ease: 'none',
           duration: 1,
         }, 0);
         scrollTl.to(word2Ref.current, {
           opacity: 0,
-          duration: 0.35,
+          duration: 0.25,
           ease: 'power2.in',
-        }, 0.68);
+        }, 0.75);
       }
 
       if (word3Ref.current) {
         scrollTl.to(word3Ref.current, {
-          y: '-40px',
+          x: '-85px',
+          y: '-15px',
+          scale: 0.96,
           ease: 'none',
           duration: 1,
         }, 0);
         scrollTl.to(word3Ref.current, {
           opacity: 0,
-          duration: 0.35,
+          duration: 0.25,
           ease: 'power2.in',
-        }, 0.72);
+        }, 0.75);
       }
 
       // Layer 6: Eyebrow and metadata float up and fade
@@ -337,7 +344,7 @@ const Hero = () => {
               <span ref={word1Ref} className="block will-change-transform text-white">
                 BUILD<span className="text-primary">.</span>
               </span>
-              <span ref={word2Ref} className="block will-change-transform text-white pl-3 sm:pl-8 md:pl-12">
+              <span ref={word2Ref} className="block will-change-transform stroke-text pl-3 sm:pl-8 md:pl-12">
                 CREATE<span className="text-purple-400">.</span>
               </span>
               <span ref={word3Ref} className="block will-change-transform text-white pl-6 sm:pl-16 md:pl-24">

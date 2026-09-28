@@ -213,14 +213,22 @@
   }
 }
 
-/* Custom Optical Color-Accent Lens Cursor */
-.custom-cursor-lens {
-  backdrop-filter: contrast(1.4) brightness(1.2) saturate(2.2);
-  -webkit-backdrop-filter: contrast(1.4) brightness(1.2) saturate(2.2);
+/* Outlined / Stroked Editorial Typography (Refokus Style) */
+.stroke-text {
+  color: transparent !important;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.88);
+  text-stroke: 1.5px rgba(255, 255, 255, 0.88);
+  transition: -webkit-text-stroke 0.3s ease;
+}
+.stroke-text:hover {
+  -webkit-text-stroke: 1.5px #c084fc;
+  text-stroke: 1.5px #c084fc;
 }
 
-.custom-cursor-dodge {
-  mix-blend-mode: color-dodge;
+/* Refokus True Inverted Cursor (mix-blend-mode: difference) */
+.refokus-cursor {
+  mix-blend-mode: difference !important;
+  background-color: #ffffff !important;
 }
 
 @keyframes cursorRipple {

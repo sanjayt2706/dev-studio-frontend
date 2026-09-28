@@ -99,7 +99,7 @@ const OurPeople = () => {
             <div>
               <span className="text-xs font-mono tracking-[0.25em] text-primary uppercase mb-6 block">[ 03 / People ]</span>
               <h2 className="text-5xl md:text-7xl lg:text-[6vw] font-display font-black tracking-[-0.04em] text-white uppercase leading-[0.9]">
-                The<br/>Minds
+                The<br/><span className="stroke-text">Minds</span>
               </h2>
             </div>
             <p className="max-w-md text-gray-400 font-sans text-base leading-relaxed">

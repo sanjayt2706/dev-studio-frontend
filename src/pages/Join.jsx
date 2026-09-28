@@ -42,6 +42,7 @@ const Join = () => {
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [applicationId, setApplicationId] = useState('');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -99,12 +100,28 @@ const Join = () => {
     }
 
     setSubmitting(true);
-    // Simulate submission or dispatch event
+    const refNum = `DS-${Math.floor(100000 + Math.random() * 900000)}`;
+    setApplicationId(refNum);
+
+    // Persist to local client storage so no submission is ever lost
+    try {
+      const stored = JSON.parse(localStorage.getItem('devstudio_applications') || '[]');
+      const newEntry = {
+        id: refNum,
+        ...formData,
+        submittedAt: new Date().toISOString(),
+        status: 'PENDING_REVIEW'
+      };
+      localStorage.setItem('devstudio_applications', JSON.stringify([newEntry, ...stored]));
+    } catch (err) {
+      console.warn('Unable to persist application:', err);
+    }
+
     setTimeout(() => {
       setSubmitting(false);
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1200);
+    }, 900);
   };
 
   return (
@@ -133,7 +150,7 @@ const Join = () => {
               Thank you, <span className="text-white font-semibold">{formData.name}</span>. Your application for Dev Studio membership has been recorded. Our core committee reviews submissions weekly and will reach out to you via <span className="text-primary">{formData.email}</span>.
             </p>
             <div className="p-4 bg-background/60 rounded-lg border border-white/5 text-xs font-mono text-gray-400 mb-8">
-              Application Reference: DS-{Math.floor(100000 + Math.random() * 900000)}
+              Application Reference: <span className="text-primary font-bold">{applicationId || 'DS-749820'}</span>
             </div>
             <button
               onClick={() => {
