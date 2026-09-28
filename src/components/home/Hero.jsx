@@ -333,7 +333,7 @@ const Hero = () => {
 
           {/* Central Display Headline: BUILD. CREATE. SHARE. */}
           <div className="my-auto py-2">
-            <h1 className="flex flex-col font-editorial font-black tracking-tight text-white uppercase leading-[0.88] select-none text-[15vw] sm:text-[13vw] md:text-[9.5vw] lg:text-[8vw] drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)]">
+            <h1 className="flex flex-col font-editorial font-bold tracking-tight text-white uppercase leading-[0.88] select-none text-[15vw] sm:text-[13vw] md:text-[9.5vw] lg:text-[8vw] drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)]">
               <span ref={word1Ref} className="block will-change-transform text-white">
                 BUILD<span className="text-primary">.</span>
               </span>
