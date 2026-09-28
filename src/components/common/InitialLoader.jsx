@@ -1,17 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
-// Module-level flag: ensures it runs on initial launch / full page reload,
-// but never re-triggers during client-side SPA navigation between pages.
-let hasInitialLoaderPlayed = false;
-
 /**
  * InitialLoader - Award-winning full-screen cinematic intro
- * Runs on website launch / full refresh.
- * Never runs again during in-app navigation or API calls.
+ * Runs smoothly on website launch & page refresh.
  */
 export const InitialLoader = ({ onComplete }) => {
-  const [shouldRender, setShouldRender] = useState(() => !hasInitialLoaderPlayed);
+  const [shouldRender, setShouldRender] = useState(true);
   const [progress, setProgress] = useState(0);
 
   const containerRef = useRef(null);
