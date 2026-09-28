@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { ArrowRight, CheckCircle2, Sparkles, Terminal, Code2, Cpu, Smartphone, Palette, Shield } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Sparkles, Terminal, Code2, Cpu, Smartphone, Palette, Shield, AlertCircle } from 'lucide-react';
 import { gsap } from 'gsap';
 import audioManager from '../audio/AudioManager';
+import clubService from '../services/clubService';
 
 const DOMAINS = [
   { id: 'web', name: 'Web Development', icon: Code2, desc: 'Frontend, backend, real-time distributed web systems' },
@@ -101,29 +102,53 @@ const Join = () => {
     }
 
     setSubmitting(true);
-    const refNum = `DS-${Math.floor(100000 + Math.random() * 900000)}`;
-    setApplicationId(refNum);
+    setErrors(prev => ({ ...prev, submit: null }));
 
-    // Persist to local client storage so no submission is ever lost
     try {
-      const stored = JSON.parse(localStorage.getItem('devstudio_applications') || '[]');
-      const newEntry = {
-        id: refNum,
-        ...formData,
-        submittedAt: new Date().toISOString(),
-        status: 'PENDING_REVIEW'
+      const payload = {
+        fullName: formData.name.trim(),
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        year: formData.year,
+        branch: formData.branch,
+        domains: formData.domains,
+        skills: formData.domains,
+        github: formData.github.trim(),
+        linkedin: formData.linkedin.trim(),
+        portfolio: formData.portfolio.trim(),
+        motivation: formData.motivation.trim(),
       };
-      localStorage.setItem('devstudio_applications', JSON.stringify([newEntry, ...stored]));
-    } catch (err) {
-      console.warn('Unable to persist application:', err);
-    }
 
-    setTimeout(() => {
+      const res = await clubService.submitApplication(payload);
+      const serverRef = res?.referenceNumber || res?.data?.referenceNumber;
+
+      if (!serverRef) {
+        throw new Error('Server did not return a valid application reference number.');
+      }
+
+      setApplicationId(serverRef);
+
+      // Temporary local recovery cache for browser convenience
+      try {
+        localStorage.setItem('devstudio_last_application_ref', serverRef);
+      } catch (cacheErr) {
+        // Safe ignore
+      }
+
       setSubmitting(false);
       setSubmitted(true);
       audioManager.play('success');
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 900);
+    } catch (err) {
+      console.error('Failed to submit application to backend:', err);
+      const errorMsg =
+        err?.response?.data?.message ||
+        err?.message ||
+        'Unable to submit application to the server. Please check your connection and try again.';
+      setErrors(prev => ({ ...prev, submit: errorMsg }));
+      setSubmitting(false);
+      window.scrollTo({ top: formRef.current?.offsetTop - 100, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -214,6 +239,12 @@ const Join = () => {
 
             {/* Application Form */}
             <form onSubmit={handleSubmit} className="lg:col-span-8 flex flex-col gap-8 md:gap-10 bg-surface border border-white/5 rounded-xl p-6 md:p-12">
+              {errors.submit && (
+                <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-mono flex items-center gap-3">
+                  <AlertCircle size={16} className="text-red-400 flex-shrink-0" />
+                  <span>{errors.submit}</span>
+                </div>
+              )}
               <div>
                 <h2 className="text-2xl md:text-3xl font-display font-bold text-white uppercase tracking-tight mb-2">
                   Candidate Profile

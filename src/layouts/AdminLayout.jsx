@@ -12,7 +12,8 @@ import {
   ExternalLink,
   Menu,
   X,
-  ShieldCheck
+  ShieldCheck,
+  FileText
 } from 'lucide-react';
 import authService from '../services/auth';
 import { PLACEHOLDERS } from '../utils/images';
@@ -44,6 +45,7 @@ const AdminLayout = () => {
 
   const navItems = [
     { label: 'Dashboard', path: '/admin', icon: LayoutDashboard, exact: true },
+    { label: 'Applications', path: '/admin/applications', icon: FileText },
     { label: 'Members', path: '/admin/members', icon: Users },
     { label: 'Projects', path: '/admin/projects', icon: FolderKanban },
     { label: 'Announcements', path: '/admin/announcements', icon: Megaphone },

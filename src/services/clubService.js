@@ -258,6 +258,28 @@ export const clubService = {
     const res = await api.delete(`/gallery/${id}`);
     return res.data;
   },
+
+  // Applications (Public submissions & Protected Admin reviews)
+  submitApplication: async (data) => {
+    const res = await api.post('/applications', data);
+    return res.data;
+  },
+  getApplications: async (params = {}) => {
+    const res = await api.get('/applications', { params });
+    return res.data;
+  },
+  getApplicationById: async (id) => {
+    const res = await api.get(`/applications/${id}`);
+    return res.data;
+  },
+  updateApplicationStatus: async (id, status, reviewNotes = '') => {
+    const res = await api.put(`/applications/${id}/status`, { status, reviewNotes });
+    return res.data;
+  },
+  deleteApplication: async (id) => {
+    const res = await api.delete(`/applications/${id}`);
+    return res.data;
+  },
 };
 
 export default clubService;

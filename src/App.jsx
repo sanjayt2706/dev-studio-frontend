@@ -31,6 +31,7 @@ import AdminAnnouncements from './pages/admin/AdminAnnouncements';
 import AdminEvents from './pages/admin/AdminEvents';
 import AdminResources from './pages/admin/AdminResources';
 import AdminGallery from './pages/admin/AdminGallery';
+import AdminApplications from './pages/admin/AdminApplications';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -121,6 +122,7 @@ function App() {
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
+            <Route path="applications" element={<AdminApplications />} />
             <Route path="members" element={<AdminMembers />} />
             <Route path="projects" element={<AdminProjects />} />
             <Route path="announcements" element={<AdminAnnouncements />} />
