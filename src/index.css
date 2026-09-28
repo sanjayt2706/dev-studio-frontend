@@ -248,20 +248,20 @@
   will-change: transform;
 }
 
-/* Hide default cursor on desktop when Refokus cursor is active */
-@media (hover: hover) and (pointer: fine) {
-  html, body, a, button, [role="button"], .cursor-pointer {
-    cursor: none !important;
-  }
-  input, textarea, select {
-    cursor: text !important;
-  }
+/* Hide default cursor only when custom cursor is confirmed active and moving */
+html.has-custom-cursor,
+html.has-custom-cursor body,
+html.has-custom-cursor a,
+html.has-custom-cursor button,
+html.has-custom-cursor [role="button"],
+html.has-custom-cursor .cursor-pointer {
+  cursor: none !important;
 }
 
-@media not all and (hover: hover) and (pointer: fine) {
-  .refokus-cursor {
-    display: none !important;
-  }
+html.has-custom-cursor input,
+html.has-custom-cursor textarea,
+html.has-custom-cursor select {
+  cursor: text !important;
 }
 
 @keyframes cursorRipple {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 const BASE_SIZE = 20; // 20px base diameter matching 2021.refokus.com reference
@@ -7,36 +7,30 @@ const BASE_SIZE = 20; // 20px base diameter matching 2021.refokus.com reference
  * CustomCursor - Authentic Refokus 2021 Inverted Difference Cursor
  *
  * Implements the exact technique seen on https://2021.refokus.com/:
- * - Directly mounted to document.body with createPortal (zero parent stacking context isolation).
+ * - Directly mounted to document.body via createPortal (no wrapper stacking context).
  * - Pure white circular lens with mix-blend-mode: difference.
  * - Outside the circle: website content remains normal (white text / dark background).
  * - Inside the circle: text and outline strokes invert to jet black on white.
  * - Outlined colors (e.g. purple/cyan) invert to high-contrast neon complements.
  * - Sleek, precise scale transitions (20px base, ~30px for nav links, ~44px for big editorial headlines).
  * - Smooth lerp interpolation via requestAnimationFrame (zero React state updates on mousemove).
- * - Automatically hidden on form inputs (restoring text cursor) and on mobile/touch screens.
+ * - Hides default cursor dynamically via html.has-custom-cursor once mouse moves.
  */
 export const CustomCursor = () => {
   const cursorRef = useRef(null);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // If user interacts via touch, hide custom cursor and restore standard UI
+    const onTouchStart = () => {
+      document.documentElement.classList.remove('has-custom-cursor');
+      if (cursorRef.current) {
+        cursorRef.current.style.display = 'none';
+      }
+    };
+    window.addEventListener('touchstart', onTouchStart, { passive: true, once: true });
 
-    // Only desktop devices with fine hover pointer
-    const isFinePointer =
-      typeof window !== 'undefined' &&
-      window.matchMedia &&
-      window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-    if (!isFinePointer) return;
-
-    const cursorEl = cursorRef.current;
-    if (!cursorEl) return;
-
-    // Movement & lerp physics (zero React state updates on mousemove)
-    const mouse = { x: -100, y: -100 };
-    const cursorPos = { x: -100, y: -100 };
+    const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const cursorPos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
     let currentScale = 1;
     let targetScale = 1;
 
@@ -50,9 +44,12 @@ export const CustomCursor = () => {
 
       if (!isVisible) {
         isVisible = true;
-        cursorEl.style.opacity = '1';
+        document.documentElement.classList.add('has-custom-cursor');
         cursorPos.x = mouse.x;
         cursorPos.y = mouse.y;
+        if (cursorRef.current) {
+          cursorRef.current.style.opacity = '1';
+        }
       }
 
       // Check target element underneath cursor
@@ -69,24 +66,17 @@ export const CustomCursor = () => {
       const isHeading = Boolean(target.closest('h1, [data-cursor="text"], .font-editorial, .stroke-text'));
 
       if (isInput) {
-        // Form input: shrink away so native text beam cursor is crisp
         targetScale = 0;
       } else if (isNav) {
-        // Nav link (e.g. WORK, TEAM, ABOUT): 30px lens creates clean letter inversion
-        targetScale = 1.5;
+        targetScale = 1.5; // ~30px: sharp inverted lens over WORK, TEAM, etc.
       } else if (isButton) {
-        // Button pill (e.g. JOIN US): 34px lens
-        targetScale = 1.7;
+        targetScale = 1.7; // ~34px
       } else if (isHeading) {
-        // Large editorial headlines (BUILD. CREATE. SHARE.): 44px lens
-        targetScale = 2.2;
-      } else if (isCard) {
-        // Project / team cards
-        targetScale = 1.8;
-      } else if (isImage) {
-        targetScale = 1.8;
+        targetScale = 2.2; // ~44px: magnifying lens over BUILD, CREATE, SHARE
+      } else if (isCard || isImage) {
+        targetScale = 1.8; // ~36px
       } else {
-        targetScale = isMouseDown ? 0.8 : 1.0;
+        targetScale = isMouseDown ? 0.8 : 1.0; // 20px base dot
       }
     };
 
@@ -101,12 +91,12 @@ export const CustomCursor = () => {
 
     const onMouseLeave = () => {
       isVisible = false;
-      if (cursorEl) cursorEl.style.opacity = '0';
+      if (cursorRef.current) cursorRef.current.style.opacity = '0';
     };
 
     const onMouseEnter = () => {
       isVisible = true;
-      if (cursorEl) cursorEl.style.opacity = '1';
+      if (cursorRef.current) cursorRef.current.style.opacity = '1';
     };
 
     window.addEventListener('mousemove', onMouseMove, { passive: true });
@@ -117,10 +107,10 @@ export const CustomCursor = () => {
 
     // Render loop
     const render = () => {
-      if (isVisible && cursorEl) {
-        // Smooth responsive interpolation
-        cursorPos.x += (mouse.x - cursorPos.x) * 0.3;
-        cursorPos.y += (mouse.y - cursorPos.y) * 0.3;
+      const cursorEl = cursorRef.current;
+      if (cursorEl && isVisible) {
+        cursorPos.x += (mouse.x - cursorPos.x) * 0.32;
+        cursorPos.y += (mouse.y - cursorPos.y) * 0.32;
 
         currentScale += (targetScale - currentScale) * 0.22;
 
@@ -137,15 +127,17 @@ export const CustomCursor = () => {
 
     return () => {
       cancelAnimationFrame(rafId);
+      window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mouseup', onMouseUp);
       document.removeEventListener('mouseleave', onMouseLeave);
       document.removeEventListener('mouseenter', onMouseEnter);
+      document.documentElement.classList.remove('has-custom-cursor');
     };
   }, []);
 
-  if (!mounted || typeof document === 'undefined') return null;
+  if (typeof document === 'undefined') return null;
 
   return createPortal(
     <div
