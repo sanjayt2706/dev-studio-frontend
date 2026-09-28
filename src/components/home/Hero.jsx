@@ -282,7 +282,7 @@ const Hero = () => {
         {/* =========================================================================
             LAYER 5 & 6: EDITORIAL TYPOGRAPHY & INTERACTIVE CALLS
             ========================================================================= */}
-        <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto px-6 md:px-14 flex flex-col justify-between pt-24 sm:pt-26 pb-8 md:pb-10">
+        <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 md:px-14 flex flex-col justify-between pt-20 sm:pt-24 md:pt-26 pb-6 sm:pb-8 md:pb-10">
           {/* Top Eyebrow Row */}
           <div className="flex justify-between items-start w-full">
             <div ref={eyebrowRef} className="flex flex-col gap-1">
@@ -345,7 +345,7 @@ const Hero = () => {
             <div ref={ctaRef} className="flex items-center gap-3 sm:gap-4">
               <Link
                 to="/join"
-                className="group relative inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white text-black font-mono text-xs uppercase tracking-[0.18em] font-bold hover:bg-primary hover:text-white transition-all duration-300 shadow-xl shadow-black/60"
+                className="group relative inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white text-black font-mono text-xs uppercase tracking-[0.18em] font-bold hover:bg-primary hover:text-white active:bg-primary active:text-white transition-all duration-300 shadow-xl shadow-black/60 touch-manipulation"
               >
                 <span>Join Studio</span>
                 <span className="w-5 h-5 rounded-full bg-black/10 group-hover:bg-white/20 flex items-center justify-center transition-colors">
@@ -355,7 +355,7 @@ const Hero = () => {
 
               <Link
                 to="/work"
-                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-white/20 hover:border-white/50 text-white font-mono text-xs uppercase tracking-[0.18em] transition-colors bg-black/40 backdrop-blur-md"
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-white/20 hover:border-white/50 active:border-white/50 text-white font-mono text-xs uppercase tracking-[0.18em] transition-colors bg-black/40 backdrop-blur-md touch-manipulation"
               >
                 <span>Explore Work</span>
               </Link>

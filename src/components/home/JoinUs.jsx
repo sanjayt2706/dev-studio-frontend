@@ -57,7 +57,7 @@ const JoinUs = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center px-6 bg-primary overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 bg-primary overflow-hidden"
     >
       {/* Decorative grid pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
@@ -101,7 +101,7 @@ const JoinUs = () => {
         <div ref={btnRef} className="opacity-0">
           <Link
             to="/join"
-            className="group inline-flex items-center justify-center bg-black border border-white/20 text-white font-mono text-xs px-12 py-5 rounded-full uppercase tracking-[0.2em] hover:bg-white hover:!text-black transition-all duration-300 relative overflow-hidden shadow-2xl"
+            className="group inline-flex items-center justify-center bg-black border border-white/20 text-white font-mono text-xs px-10 sm:px-12 py-5 rounded-full uppercase tracking-[0.2em] hover:bg-white hover:!text-black active:bg-white active:!text-black transition-all duration-300 relative overflow-hidden shadow-2xl touch-manipulation"
           >
             <span className="relative z-10 font-bold">Apply Now</span>
             <span className="ml-3 group-hover:translate-x-2 transition-transform duration-300 relative z-10 font-bold">&rarr;</span>

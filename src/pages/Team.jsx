@@ -266,21 +266,21 @@ const Team = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background pt-32 pb-32 px-6">
+    <div className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-32 px-4 sm:px-6">
       <div className="max-w-[1400px] mx-auto">
         {/* Header */}
         <div ref={headerRef} className="mb-20">
           <span className="text-xs font-mono tracking-widest text-primary uppercase mb-6 block">[ 03 / PEOPLE ]</span>
-          <h1 className="text-6xl md:text-8xl lg:text-[10vw] font-display font-black tracking-tighter text-white uppercase leading-[0.85] mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-[10vw] font-display font-black tracking-tighter text-white uppercase leading-[0.85] mb-6 md:mb-8">
             The<br/>Collective
           </h1>
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl font-sans leading-relaxed">
+          <p className="text-base md:text-xl text-gray-400 max-w-2xl font-sans leading-relaxed">
             {members.length} members strong. Developers, designers, and innovators driving Dev Studio forward.
           </p>
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col md:flex-row gap-3 mb-16 bg-surface/50 backdrop-blur-sm p-2 rounded-lg border border-white/5">
+        <div className="flex flex-col gap-3 mb-12 md:mb-16 bg-surface/50 backdrop-blur-sm p-2 rounded-lg border border-white/5">
           <div className="flex-1 relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
             <input
@@ -291,20 +291,22 @@ const Team = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <select
-            className="bg-background border border-white/10 rounded-sm px-5 py-3.5 text-white focus:outline-none font-mono text-xs tracking-widest uppercase cursor-pointer"
-            value={teamFilter}
-            onChange={(e) => setTeamFilter(e.target.value)}
-          >
-            {teams.map(t => <option key={t} value={t}>{t === 'All' ? 'ALL TEAMS' : t.toUpperCase()}</option>)}
-          </select>
-          <select
-            className="bg-background border border-white/10 rounded-sm px-5 py-3.5 text-white focus:outline-none font-mono text-xs tracking-widest uppercase cursor-pointer"
-            value={yearFilter}
-            onChange={(e) => setYearFilter(e.target.value)}
-          >
-            {years.map(y => <option key={y} value={y}>{y === 'All' ? 'ALL YEARS' : y.toUpperCase()}</option>)}
-          </select>
+          <div className="flex gap-2">
+            <select
+              className="flex-1 bg-background border border-white/10 rounded-sm px-3 py-3 text-white focus:outline-none font-mono text-xs tracking-widest uppercase cursor-pointer touch-manipulation"
+              value={teamFilter}
+              onChange={(e) => setTeamFilter(e.target.value)}
+            >
+              {teams.map(t => <option key={t} value={t}>{t === 'All' ? 'ALL TEAMS' : t.toUpperCase()}</option>)}
+            </select>
+            <select
+              className="flex-1 bg-background border border-white/10 rounded-sm px-3 py-3 text-white focus:outline-none font-mono text-xs tracking-widest uppercase cursor-pointer touch-manipulation"
+              value={yearFilter}
+              onChange={(e) => setYearFilter(e.target.value)}
+            >
+              {years.map(y => <option key={y} value={y}>{y === 'All' ? 'ALL YEARS' : y.toUpperCase()}</option>)}
+            </select>
+          </div>
         </div>
 
         {/* Status Feedback */}

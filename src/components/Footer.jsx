@@ -52,8 +52,8 @@ const Footer = () => {
   return (
     <footer className="bg-surface border-t border-white/5">
       {/* Main Footer */}
-      <div className="max-w-[1400px] mx-auto px-6 pt-20 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pt-12 md:pt-20 pb-8 md:pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-12 md:mb-16">
           {/* Brand */}
           <div className="md:col-span-5">
             <h2 className="text-4xl md:text-5xl font-display font-black tracking-tighter text-white uppercase mb-6">
@@ -87,7 +87,7 @@ const Footer = () => {
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary transition-all duration-300"
+                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary active:text-white active:border-primary transition-all duration-300 touch-manipulation"
                 >
                   <social.icon size={16} />
                 </a>

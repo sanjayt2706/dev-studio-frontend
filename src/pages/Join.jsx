@@ -108,15 +108,15 @@ const Join = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pt-32 pb-32 px-6">
+    <div className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-32 px-4 sm:px-6">
       <div className="max-w-[1200px] mx-auto">
         {/* Header */}
         <div ref={headerRef} className="mb-20">
           <span className="text-xs font-mono tracking-widest text-primary uppercase mb-6 block">[ 06 / ADMISSIONS ]</span>
-          <h1 className="text-6xl md:text-8xl lg:text-[10vw] font-display font-black tracking-tighter text-white uppercase leading-[0.85] mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-[10vw] font-display font-black tracking-tighter text-white uppercase leading-[0.85] mb-6 md:mb-8">
             Join The<br/>Collective
           </h1>
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl font-sans leading-relaxed">
+          <p className="text-base md:text-xl text-gray-400 max-w-2xl font-sans leading-relaxed">
             We are looking for self-driven makers, inquisitive thinkers, and craft-oriented builders. No prior professional pedigree required — only passion, commitment, and desire to engineer the future.
           </p>
         </div>
@@ -194,7 +194,7 @@ const Join = () => {
             </div>
 
             {/* Application Form */}
-            <form onSubmit={handleSubmit} className="lg:col-span-8 flex flex-col gap-10 bg-surface border border-white/5 rounded-xl p-8 md:p-12">
+            <form onSubmit={handleSubmit} className="lg:col-span-8 flex flex-col gap-8 md:gap-10 bg-surface border border-white/5 rounded-xl p-6 md:p-12">
               <div>
                 <h2 className="text-2xl md:text-3xl font-display font-bold text-white uppercase tracking-tight mb-2">
                   Candidate Profile
@@ -290,10 +290,10 @@ const Join = () => {
                         type="button"
                         key={domain.id}
                         onClick={() => handleDomainToggle(domain.id)}
-                        className={`text-left p-4 rounded-lg border transition-all duration-300 flex items-start gap-3 ${
+                        className={`text-left p-4 rounded-lg border transition-all duration-300 flex items-start gap-3 touch-manipulation ${
                           isSelected
                             ? 'bg-primary/10 border-primary text-white'
-                            : 'bg-background/80 border-white/5 text-gray-400 hover:border-white/20 hover:text-white'
+                            : 'bg-background/80 border-white/5 text-gray-400 hover:border-white/20 hover:text-white active:border-white/20 active:text-white'
                         }`}
                       >
                         <div className={`p-2 rounded-md ${isSelected ? 'bg-primary text-white' : 'bg-white/5 text-gray-400'}`}>
@@ -364,7 +364,7 @@ const Join = () => {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full group inline-flex items-center justify-center gap-3 bg-white text-black font-mono text-xs font-bold uppercase tracking-widest py-5 rounded-full hover:bg-primary hover:text-white transition-all duration-300 disabled:opacity-50 cursor-pointer"
+                className="w-full group inline-flex items-center justify-center gap-3 bg-white text-black font-mono text-xs font-bold uppercase tracking-widest py-5 rounded-full hover:bg-primary hover:text-white active:bg-primary active:text-white transition-all duration-300 disabled:opacity-50 cursor-pointer touch-manipulation"
               >
                 {submitting ? (
                   <span>Processing Application...</span>

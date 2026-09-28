@@ -75,7 +75,7 @@ const Events = () => {
     return (
       <div
         key={event.id || event._id}
-        className={`group bg-surface/40 border border-white/5 rounded-sm p-6 md:p-8 hover:border-white/15 transition-all duration-300 flex flex-col ${
+        className={`group bg-surface/40 border border-white/5 rounded-sm p-5 md:p-8 hover:border-white/15 active:border-white/15 transition-all duration-300 flex flex-col ${
           isFeatured ? 'md:col-span-2 md:grid md:grid-cols-2 md:gap-10 md:items-center' : ''
         }`}
       >
@@ -166,15 +166,15 @@ const Events = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pt-32 pb-32 px-6">
+    <div className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-32 px-4 sm:px-6">
       <div className="max-w-[1400px] mx-auto">
         {/* Header */}
         <div ref={headerRef} className="mb-20">
           <span className="text-xs font-mono tracking-widest text-primary uppercase mb-6 block">[ 04 / EXPERIENCES ]</span>
-          <h1 className="text-6xl md:text-8xl lg:text-[10vw] font-display font-black tracking-tighter text-white uppercase leading-[0.85] mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-[10vw] font-display font-black tracking-tighter text-white uppercase leading-[0.85] mb-6 md:mb-8">
             Events
           </h1>
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl font-sans leading-relaxed">
+          <p className="text-base md:text-xl text-gray-400 max-w-2xl font-sans leading-relaxed">
             Hackathons, workshops, bootcamps, and competitions. Where learning happens through building.
           </p>
         </div>

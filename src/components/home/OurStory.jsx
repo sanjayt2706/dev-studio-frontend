@@ -65,7 +65,7 @@ const OurStory = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center px-6 md:px-12 bg-background">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center px-4 sm:px-6 md:px-12 bg-background">
       {/* Background accent */}
       <div className="absolute top-0 left-0 w-full h-px bg-white/5"></div>
 

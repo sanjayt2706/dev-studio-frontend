@@ -72,15 +72,15 @@ const Resources = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pt-32 pb-32 px-6">
+    <div className="min-h-screen bg-background pt-24 sm:pt-28 md:pt-32 pb-20 md:pb-32 px-4 sm:px-6">
       <div className="max-w-[1400px] mx-auto">
         {/* Header */}
         <div ref={headerRef} className="mb-20">
           <span className="text-xs font-mono tracking-widest text-primary uppercase mb-6 block">[ 05 / KNOWLEDGE BASE ]</span>
-          <h1 className="text-6xl md:text-8xl lg:text-[10vw] font-display font-black tracking-tighter text-white uppercase leading-[0.85] mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-[10vw] font-display font-black tracking-tighter text-white uppercase leading-[0.85] mb-6 md:mb-8">
             The<br/>Library
           </h1>
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl font-sans leading-relaxed">
+          <p className="text-base md:text-xl text-gray-400 max-w-2xl font-sans leading-relaxed">
             Curated roadmaps, engineering handbooks, guides, and tooling documentation written by club leads and domain experts.
           </p>
         </div>
@@ -98,15 +98,15 @@ const Resources = () => {
             />
           </div>
 
-          <div className="flex gap-2 overflow-x-auto py-1 max-w-full">
+          <div className="flex gap-2 overflow-x-auto py-1 scrollbar-none">
             {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`font-mono text-xs tracking-wider uppercase px-4 py-2.5 rounded transition-all whitespace-nowrap cursor-pointer ${
+                className={`font-mono text-xs tracking-wider uppercase px-4 py-2.5 rounded transition-all whitespace-nowrap cursor-pointer touch-manipulation ${
                   selectedCategory === cat
                     ? 'bg-primary text-white font-bold'
-                    : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'
+                    : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 active:text-white active:bg-white/10'
                 }`}
               >
                 {cat}

@@ -206,7 +206,7 @@ export const CustomCursor = () => {
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 pointer-events-none z-[999998] overflow-hidden"
+      className="custom-cursor-container fixed inset-0 pointer-events-none z-[999998] overflow-hidden"
     >
       {/* -------------------------------------------------------------------
           1. Dynamic Color-Sampling Lens (mix-blend-mode: difference)
