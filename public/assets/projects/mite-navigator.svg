@@ -1,0 +1,105 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="750" fill="#080912"/>
+  <defs>
+    <radialGradient id="mn-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#080912" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="600" cy="375" r="450" fill="url(#mn-glow)"/>
+
+  <!-- Technical Window Frame -->
+  <rect x="80" y="60" width="1040" height="630" rx="12" fill="#0E101B" stroke="rgba(139,92,246,0.25)" stroke-width="1.5"/>
+  
+  <!-- Header -->
+  <rect x="80" y="60" width="1040" height="48" rx="12" fill="#131626"/>
+  <circle cx="115" cy="84" r="6" fill="#EF4444" opacity="0.8"/>
+  <circle cx="135" cy="84" r="6" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="155" cy="84" r="6" fill="#10B981" opacity="0.8"/>
+  <text x="600" y="89" font-family="'JetBrains Mono', monospace" font-size="12" fill="#C4B5FD" text-anchor="middle" letter-spacing="2">MITE_NAVIGATOR // AR_SPATIAL_WAYFINDING_ENGINE</text>
+  <rect x="990" y="75" width="110" height="20" rx="4" fill="rgba(139,92,246,0.2)"/>
+  <text x="1045" y="89" font-family="'JetBrains Mono', monospace" font-size="10" fill="#A78BFA" text-anchor="middle" font-weight="700">WEBXR // 3D-MAP</text>
+
+  <!-- Left: 3D Campus Isometric AR Mesh -->
+  <rect x="110" y="130" width="640" height="520" rx="8" fill="#0A0B14" stroke="rgba(255,255,255,0.06)"/>
+  
+  <!-- Isometric Grid Lines -->
+  <g stroke="rgba(139,92,246,0.12)" stroke-width="1">
+    <line x1="200" y1="450" x2="600" y2="250"/>
+    <line x1="250" y1="500" x2="650" y2="300"/>
+    <line x1="300" y1="550" x2="700" y2="350"/>
+    <line x1="600" y1="450" x2="200" y2="250"/>
+    <line x1="650" y1="500" x2="250" y2="300"/>
+    <line x1="700" y1="550" x2="300" y2="350"/>
+  </g>
+
+  <!-- 3D Building Blocks (MITE Campus Schematic) -->
+  <!-- Main Academic Block -->
+  <polygon points="350,300 450,250 550,300 450,350" fill="#2E1065" stroke="#8B5CF6" stroke-width="2"/>
+  <polygon points="350,300 450,350 450,430 350,380" fill="#1E1B4B" stroke="#8B5CF6" stroke-width="1.5"/>
+  <polygon points="450,350 550,300 550,380 450,430" fill="#3B0764" stroke="#8B5CF6" stroke-width="1.5"/>
+  <text x="450" y="325" font-family="'JetBrains Mono', monospace" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="700">ACADEMIC BLOCK A</text>
+
+  <!-- Dev Studio Lab Building -->
+  <polygon points="220,380 290,340 360,380 290,420" fill="#1E1B4B" stroke="#38BDF8" stroke-width="2"/>
+  <polygon points="220,380 290,420 290,480 220,440" fill="#0C4A6E" stroke="#38BDF8" stroke-width="1.5"/>
+  <polygon points="290,420 360,380 360,440 290,480" fill="#075985" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="290" y="405" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38BDF8" text-anchor="middle" font-weight="700">DEV STUDIO LAB</text>
+
+  <!-- Library Block -->
+  <polygon points="500,380 570,340 640,380 570,420" fill="#1E1B4B" stroke="#10B981" stroke-width="2"/>
+  <polygon points="500,380 570,420 570,480 500,440" fill="#064E3B" stroke="#10B981" stroke-width="1.5"/>
+  <polygon points="570,420 640,380 640,440 570,480" fill="#047857" stroke="#10B981" stroke-width="1.5"/>
+  <text x="570" y="405" font-family="'JetBrains Mono', monospace" font-size="10" fill="#34D399" text-anchor="middle" font-weight="700">CENTRAL LIBRARY</text>
+
+  <!-- AR Waypoint Pins & Animated Path -->
+  <path d="M 290 420 Q 380 480 450 430 Q 520 480 570 420" stroke="#F59E0B" stroke-width="3" stroke-dasharray="6 4" fill="none"/>
+  
+  <!-- Waypoint Pin 1 -->
+  <circle cx="290" cy="420" r="8" fill="#F59E0B"/>
+  <circle cx="290" cy="420" r="18" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <rect x="230" y="495" width="120" height="24" rx="4" fill="#F59E0B"/>
+  <text x="290" y="511" font-family="'JetBrains Mono', monospace" font-size="9" fill="#000000" text-anchor="middle" font-weight="700">START: LAB 402</text>
+
+  <!-- Waypoint Pin 2 -->
+  <circle cx="570" cy="420" r="8" fill="#34D399"/>
+  <circle cx="570" cy="420" r="18" stroke="#34D399" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <rect x="510" y="495" width="120" height="24" rx="4" fill="#34D399"/>
+  <text x="570" y="511" font-family="'JetBrains Mono', monospace" font-size="9" fill="#000000" text-anchor="middle" font-weight="700">DEST: AUDITORIUM</text>
+
+  <text x="135" y="165" font-family="'JetBrains Mono', monospace" font-size="11" fill="#A78BFA">[SPATIAL MESH RESOLUTION: 0.05m]</text>
+
+  <!-- Right: Navigation Telemetry & Turn-by-Turn -->
+  <rect x="770" y="130" width="320" height="520" rx="8" fill="#0A0B14" stroke="rgba(255,255,255,0.06)"/>
+  <text x="795" y="165" font-family="'JetBrains Mono', monospace" font-size="11" fill="#C4B5FD" font-weight="700" letter-spacing="1">TURN-BY-TURN HUD</text>
+
+  <!-- Active Route Box -->
+  <rect x="795" y="185" width="270" height="110" rx="6" fill="#141724"/>
+  <text x="815" y="215" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.4)">REMAINING DISTANCE</text>
+  <text x="815" y="250" font-family="'Outfit', sans-serif" font-size="34" font-weight="900" fill="#38BDF8">140 m</text>
+  <text x="815" y="280" font-family="'JetBrains Mono', monospace" font-size="11" fill="#34D399">ETA: 1 min 45 sec • Floor 2</text>
+
+  <!-- Wayfinding Steps -->
+  <rect x="795" y="310" width="270" height="315" rx="6" fill="#141724"/>
+  <text x="815" y="340" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.4)">SPATIAL WAYPOINTS</text>
+
+  <g transform="translate(815, 360)">
+    <text x="0" y="20" font-family="'JetBrains Mono', monospace" font-size="11" fill="#FFFFFF">1. Exit Dev Studio Lab</text>
+    <text x="0" y="35" font-family="'JetBrains Mono', monospace" font-size="9" fill="rgba(255,255,255,0.4)">Turn left at Corridor B</text>
+
+    <text x="0" y="70" font-family="'JetBrains Mono', monospace" font-size="11" fill="#FFFFFF">2. Take Elevator to Floor 1</text>
+    <text x="0" y="85" font-family="'JetBrains Mono', monospace" font-size="9" fill="rgba(255,255,255,0.4)">South Academic Wing</text>
+
+    <text x="0" y="120" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38BDF8" font-weight="700">3. Cross Central Courtyard</text>
+    <text x="0" y="135" font-family="'JetBrains Mono', monospace" font-size="9" fill="#38BDF8">Follow AR green ground arrow</text>
+
+    <text x="0" y="170" font-family="'JetBrains Mono', monospace" font-size="11" fill="#FFFFFF">4. Enter Main Auditorium</text>
+    <text x="0" y="185" font-family="'JetBrains Mono', monospace" font-size="9" fill="rgba(255,255,255,0.4)">Door 4A • Reserved Seats</text>
+
+    <!-- Compass -->
+    <circle cx="135" cy="225" r="28" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <text x="135" y="207" font-family="'JetBrains Mono', monospace" font-size="10" fill="#EF4444" text-anchor="middle" font-weight="700">N</text>
+    <polygon points="135,210 138,225 132,225" fill="#EF4444"/>
+    <polygon points="135,240 138,225 132,225" fill="#FFFFFF"/>
+  </g>
+</svg>

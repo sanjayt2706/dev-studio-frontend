@@ -1,0 +1,131 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="750" fill="#090B12"/>
+  <defs>
+    <radialGradient id="nv-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#090B12" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="600" cy="375" r="450" fill="url(#nv-glow)"/>
+
+  <!-- Scanning Matrix Lines -->
+  <g stroke="rgba(16,185,129,0.08)" stroke-width="1">
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>
+
+  <!-- Technical Window Frame -->
+  <rect x="80" y="60" width="1040" height="630" rx="12" fill="#0D111A" stroke="rgba(16,185,129,0.25)" stroke-width="1.5"/>
+  
+  <!-- Header -->
+  <rect x="80" y="60" width="1040" height="48" rx="12" fill="#111724"/>
+  <circle cx="115" cy="84" r="6" fill="#EF4444" opacity="0.8"/>
+  <circle cx="135" cy="84" r="6" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="155" cy="84" r="6" fill="#10B981" opacity="0.8"/>
+  <text x="600" y="89" font-family="'JetBrains Mono', monospace" font-size="12" fill="#6EE7B7" text-anchor="middle" letter-spacing="2">NEUROVISION_AI // VISION_TRANSFORMER_INFERENCE_ENGINE</text>
+  <rect x="990" y="75" width="110" height="20" rx="4" fill="rgba(16,185,129,0.2)"/>
+  <text x="1045" y="89" font-family="'JetBrains Mono', monospace" font-size="10" fill="#34D399" text-anchor="middle" font-weight="700">MODEL: ViT-B/16</text>
+
+  <!-- Left: Visual Scanning Bounding Box Canvas -->
+  <rect x="110" y="130" width="580" height="520" rx="8" fill="#0A0E17" stroke="rgba(255,255,255,0.06)"/>
+  
+  <!-- Stylized Leaf Specimen -->
+  <path d="M400 170 C470 230 520 330 490 470 C460 610 320 630 270 570 C220 510 240 370 310 260 Z" fill="#064E3B" fill-opacity="0.5" stroke="#10B981" stroke-width="2"/>
+  <path d="M400 170 C380 320 360 460 300 590" stroke="#34D399" stroke-width="2" stroke-dasharray="3 3"/>
+  <path d="M380 300 C430 280 470 300 480 310" stroke="#34D399" stroke-width="1.5"/>
+  <path d="M370 380 C440 370 475 400 485 415" stroke="#34D399" stroke-width="1.5"/>
+  <path d="M340 460 C410 470 445 490 455 510" stroke="#34D399" stroke-width="1.5"/>
+  <path d="M375 250 C320 250 280 270 270 290" stroke="#34D399" stroke-width="1.5"/>
+  <path d="M360 340 C300 360 260 390 250 410" stroke="#34D399" stroke-width="1.5"/>
+
+  <!-- AI Bounding Box 1 (Pathology Detected) -->
+  <rect x="360" y="240" width="130" height="110" rx="4" fill="rgba(239,68,68,0.1)" stroke="#EF4444" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="360" y="222" width="125" height="18" fill="#EF4444"/>
+  <text x="365" y="235" font-family="'JetBrains Mono', monospace" font-size="9" fill="#FFFFFF" font-weight="700">CERCOSPORA: 98.4%</text>
+
+  <!-- AI Bounding Box 2 -->
+  <rect x="260" y="380" width="110" height="90" rx="4" fill="rgba(245,158,11,0.1)" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <rect x="260" y="364" width="100" height="16" fill="#F59E0B"/>
+  <text x="265" y="376" font-family="'JetBrains Mono', monospace" font-size="8" fill="#000000" font-weight="700">CHLOROSIS: 92.1%</text>
+
+  <!-- Crosshair Reticle -->
+  <circle cx="425" cy="295" r="24" stroke="#EF4444" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="425" y1="265" x2="425" y2="325" stroke="#EF4444" stroke-width="1"/>
+  <line x1="395" y1="295" x2="455" y2="295" stroke="#EF4444" stroke-width="1"/>
+  <text x="130" y="160" font-family="'JetBrains Mono', monospace" font-size="11" fill="#34D399">[LIVE INFERENCE FEED - FPS: 62.4]</text>
+
+  <!-- Right: Model Analytics & Confusion Matrix -->
+  <rect x="710" y="130" width="380" height="520" rx="8" fill="#0A0E17" stroke="rgba(255,255,255,0.06)"/>
+  
+  <text x="735" y="165" font-family="'JetBrains Mono', monospace" font-size="11" fill="#60A5FA" font-weight="700" letter-spacing="1">NEURAL DIAGNOSTIC METRICS</text>
+  
+  <!-- Metric Box 1 -->
+  <rect x="735" y="185" width="330" height="85" rx="6" fill="#121824" stroke="rgba(255,255,255,0.05)"/>
+  <text x="755" y="210" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.5)">MODEL ACCURACY (VALIDATION)</text>
+  <text x="755" y="245" font-family="'Outfit', sans-serif" font-size="32" font-weight="900" fill="#34D399">98.42%</text>
+  <text x="890" y="245" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.4)">F1: 0.981 // ROC: 0.994</text>
+
+  <!-- Metric Box 2 -->
+  <rect x="735" y="285" width="330" height="85" rx="6" fill="#121824" stroke="rgba(255,255,255,0.05)"/>
+  <text x="755" y="310" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.5)">INFERENCE LATENCY (ONNX RUNTIME)</text>
+  <text x="755" y="345" font-family="'Outfit', sans-serif" font-size="32" font-weight="900" fill="#60A5FA">14.8 ms</text>
+  <text x="890" y="345" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.4)">CUDA ACCELERATED</text>
+
+  <!-- Attention Heatmap Visualizer -->
+  <rect x="735" y="385" width="330" height="240" rx="6" fill="#121824" stroke="rgba(255,255,255,0.05)"/>
+  <text x="755" y="415" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.5)">TRANSFORMER SELF-ATTENTION WEIGHTS</text>
+  
+  <g transform="translate(755, 435)">
+    <!-- 8x6 Heatmap Grid -->
+    <rect x="0" y="0" width="35" height="20" fill="#047857"/>
+    <rect x="40" y="0" width="35" height="20" fill="#059669"/>
+    <rect x="80" y="0" width="35" height="20" fill="#10B981"/>
+    <rect x="120" y="0" width="35" height="20" fill="#34D399"/>
+    <rect x="160" y="0" width="35" height="20" fill="#10B981"/>
+    <rect x="200" y="0" width="35" height="20" fill="#059669"/>
+    <rect x="240" y="0" width="35" height="20" fill="#047857"/>
+    <rect x="280" y="0" width="35" height="20" fill="#064E3B"/>
+
+    <rect x="0" y="25" width="35" height="20" fill="#059669"/>
+    <rect x="40" y="25" width="35" height="20" fill="#10B981"/>
+    <rect x="80" y="25" width="35" height="20" fill="#F59E0B"/>
+    <rect x="120" y="25" width="35" height="20" fill="#EF4444"/>
+    <rect x="160" y="25" width="35" height="20" fill="#F59E0B"/>
+    <rect x="200" y="25" width="35" height="20" fill="#10B981"/>
+    <rect x="240" y="25" width="35" height="20" fill="#059669"/>
+    <rect x="280" y="25" width="35" height="20" fill="#047857"/>
+
+    <rect x="0" y="50" width="35" height="20" fill="#10B981"/>
+    <rect x="40" y="50" width="35" height="20" fill="#34D399"/>
+    <rect x="80" y="50" width="35" height="20" fill="#EF4444"/>
+    <rect x="120" y="50" width="35" height="20" fill="#DC2626"/>
+    <rect x="160" y="50" width="35" height="20" fill="#EF4444"/>
+    <rect x="200" y="50" width="35" height="20" fill="#34D399"/>
+    <rect x="240" y="50" width="35" height="20" fill="#10B981"/>
+    <rect x="280" y="50" width="35" height="20" fill="#059669"/>
+
+    <rect x="0" y="75" width="35" height="20" fill="#059669"/>
+    <rect x="40" y="75" width="35" height="20" fill="#10B981"/>
+    <rect x="80" y="75" width="35" height="20" fill="#34D399"/>
+    <rect x="120" y="75" width="35" height="20" fill="#F59E0B"/>
+    <rect x="160" y="75" width="35" height="20" fill="#34D399"/>
+    <rect x="200" y="75" width="35" height="20" fill="#10B981"/>
+    <rect x="240" y="75" width="35" height="20" fill="#059669"/>
+    <rect x="280" y="75" width="35" height="20" fill="#047857"/>
+
+    <rect x="0" y="100" width="35" height="20" fill="#047857"/>
+    <rect x="40" y="100" width="35" height="20" fill="#059669"/>
+    <rect x="80" y="100" width="35" height="20" fill="#047857"/>
+    <rect x="120" y="100" width="35" height="20" fill="#059669"/>
+    <rect x="160" y="100" width="35" height="20" fill="#047857"/>
+    <rect x="200" y="100" width="35" height="20" fill="#064E3B"/>
+    <rect x="240" y="100" width="35" height="20" fill="#064E3B"/>
+    <rect x="280" y="100" width="35" height="20" fill="#064E3B"/>
+  </g>
+  <text x="755" y="585" font-family="'JetBrains Mono', monospace" font-size="10" fill="#34D399">LAYER 12 // HEAD 8 FOCUS: LESION REGION</text>
+  <text x="755" y="605" font-family="'JetBrains Mono', monospace" font-size="9" fill="rgba(255,255,255,0.4)">TRAINED ON 50,000+ HIGH-RESOLUTION MULTISPECTRAL SAMPLES</text>
+</svg>

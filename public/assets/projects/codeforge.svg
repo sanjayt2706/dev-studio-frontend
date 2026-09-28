@@ -1,0 +1,88 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="750" fill="#0A0A0F"/>
+  <defs>
+    <radialGradient id="cf-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0A0A0F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="600" cy="375" r="450" fill="url(#cf-glow)"/>
+
+  <!-- Technical Window Frame -->
+  <rect x="80" y="60" width="1040" height="630" rx="12" fill="#0D0E15" stroke="rgba(245,158,11,0.25)" stroke-width="1.5"/>
+  
+  <!-- Window Header -->
+  <rect x="80" y="60" width="1040" height="48" rx="12" fill="#141520"/>
+  <circle cx="115" cy="84" r="6" fill="#EF4444" opacity="0.8"/>
+  <circle cx="135" cy="84" r="6" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="155" cy="84" r="6" fill="#10B981" opacity="0.8"/>
+  <text x="600" y="89" font-family="'JetBrains Mono', monospace" font-size="12" fill="#FBBF24" text-anchor="middle" letter-spacing="2">CODEFORGE_CLI // HIGH-PERFORMANCE BOILERPLATE SCAFFOLDING</text>
+  <rect x="995" y="75" width="105" height="20" rx="4" fill="rgba(245,158,11,0.2)"/>
+  <text x="1047" y="89" font-family="'JetBrains Mono', monospace" font-size="10" fill="#FBBF24" text-anchor="middle" font-weight="700">RUST // v1.8.0</text>
+
+  <!-- Left: Interactive Terminal Pane -->
+  <rect x="110" y="130" width="620" height="520" rx="8" fill="#08080C" stroke="rgba(255,255,255,0.06)"/>
+  
+  <!-- Terminal Prompt Content -->
+  <text x="135" y="170" font-family="'JetBrains Mono', monospace" font-size="13" fill="#6EE7B7">➜</text>
+  <text x="155" y="170" font-family="'JetBrains Mono', monospace" font-size="13" fill="#60A5FA">~/mite/dev-studio</text>
+  <text x="310" y="170" font-family="'JetBrains Mono', monospace" font-size="13" fill="#FBBF24">codeforge init my-production-stack</text>
+  
+  <text x="135" y="205" font-family="'JetBrains Mono', monospace" font-size="12" fill="#A78BFA">⚡ CodeForge Engine v1.8.0 (fastest AST generator)</text>
+  <text x="135" y="235" font-family="'JetBrains Mono', monospace" font-size="12" fill="#E2E8F0">? Choose target architecture: <tspan fill="#34D399" font-weight="700">Fullstack React + Vite + Rust Core</tspan></text>
+  <text x="135" y="265" font-family="'JetBrains Mono', monospace" font-size="12" fill="#E2E8F0">? Select design tokens &amp; styling: <tspan fill="#34D399" font-weight="700">Tailwind CSS + GSAP Choreography</tspan></text>
+  <text x="135" y="295" font-family="'JetBrains Mono', monospace" font-size="12" fill="#E2E8F0">? Configure state orchestration: <tspan fill="#34D399" font-weight="700">Zustand + TanStack Query</tspan></text>
+  
+  <text x="135" y="340" font-family="'JetBrains Mono', monospace" font-size="12" fill="#60A5FA">📦 Generating directory structure &amp; dependency matrix...</text>
+  
+  <text x="155" y="375" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34D399">✔ src/components/layout/Navbar.jsx [CREATED]</text>
+  <text x="155" y="405" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34D399">✔ src/motion/ScrollChoreography.js [CREATED]</text>
+  <text x="155" y="435" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34D399">✔ backend/crates/core-engine/src/main.rs [COMPILED]</text>
+  <text x="155" y="465" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34D399">✔ .github/workflows/deploy.yml [CONFIGURED]</text>
+
+  <rect x="135" y="495" width="570" height="75" rx="6" fill="#141724" stroke="rgba(52,211,153,0.3)"/>
+  <text x="155" y="525" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34D399" font-weight="700">✨ Scaffold completed in 184ms (12x faster than npx)</text>
+  <text x="155" y="550" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.6)">cd my-production-stack &amp;&amp; devstudio start</text>
+
+  <!-- Cursor -->
+  <text x="135" y="610" font-family="'JetBrains Mono', monospace" font-size="13" fill="#6EE7B7">➜</text>
+  <text x="155" y="610" font-family="'JetBrains Mono', monospace" font-size="13" fill="#60A5FA">~/mite/dev-studio</text>
+  <rect x="310" y="597" width="9" height="16" fill="#FBBF24"/>
+
+  <!-- Right: Dependency & Speed Benchmarks -->
+  <rect x="750" y="130" width="340" height="520" rx="8" fill="#08080C" stroke="rgba(255,255,255,0.06)"/>
+  
+  <text x="775" y="165" font-family="'JetBrains Mono', monospace" font-size="11" fill="#FBBF24" font-weight="700" letter-spacing="1">SCAFFOLD BENCHMARK</text>
+  
+  <rect x="775" y="185" width="290" height="110" rx="6" fill="#13141F"/>
+  <text x="795" y="215" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.4)">TIME TO INITIALIZE PROJECT</text>
+  <text x="795" y="250" font-family="'Outfit', sans-serif" font-size="34" font-weight="900" fill="#FBBF24">184 ms</text>
+  <text x="795" y="280" font-family="'JetBrains Mono', monospace" font-size="10" fill="#34D399">⚡ 0.18s vs 4.8s industry average</text>
+
+  <!-- Dependency Graph Mini Tree -->
+  <rect x="775" y="315" width="290" height="310" rx="6" fill="#13141F"/>
+  <text x="795" y="345" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.4)">AST SYNTAX TEMPLATE ENGINE</text>
+  
+  <g transform="translate(795, 365)">
+    <rect x="0" y="0" width="250" height="30" rx="4" fill="#1F2335"/>
+    <text x="15" y="20" font-family="'JetBrains Mono', monospace" font-size="10" fill="#93C5FD">● Templates Cached: 38</text>
+
+    <rect x="0" y="40" width="250" height="30" rx="4" fill="#1F2335"/>
+    <text x="15" y="60" font-family="'JetBrains Mono', monospace" font-size="10" fill="#93C5FD">● Git Auto-Init: True</text>
+
+    <rect x="0" y="80" width="250" height="30" rx="4" fill="#1F2335"/>
+    <text x="15" y="100" font-family="'JetBrains Mono', monospace" font-size="10" fill="#93C5FD">● Package Manager: pnpm / bun</text>
+
+    <rect x="0" y="120" width="250" height="30" rx="4" fill="#1F2335"/>
+    <text x="15" y="140" font-family="'JetBrains Mono', monospace" font-size="10" fill="#93C5FD">● Total Downloads: 12.4k</text>
+
+    <!-- Speed Bar Comparison -->
+    <text x="0" y="180" font-family="'JetBrains Mono', monospace" font-size="9" fill="rgba(255,255,255,0.4)">CODEFORGE CLI</text>
+    <rect x="0" y="188" width="250" height="8" rx="4" fill="#1E293B"/>
+    <rect x="0" y="188" width="40" height="8" rx="4" fill="#F59E0B"/>
+
+    <text x="0" y="215" font-family="'JetBrains Mono', monospace" font-size="9" fill="rgba(255,255,255,0.4)">CREATE-REACT-APP</text>
+    <rect x="0" y="223" width="250" height="8" rx="4" fill="#1E293B"/>
+    <rect x="0" y="223" width="240" height="8" rx="4" fill="#64748B"/>
+  </g>
+</svg>

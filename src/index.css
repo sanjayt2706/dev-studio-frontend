@@ -1,0 +1,230 @@
+@import "tailwindcss";
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  :root {
+    --background: #0a0a0a;
+    --surface: #121212;
+    --primary: #3b82f6;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+  }
+  
+  html {
+    background-color: var(--background);
+    color: var(--text);
+  }
+  
+  body {
+    @apply antialiased min-h-screen overflow-x-hidden font-sans;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: var(--font-display);
+  }
+  
+  ::selection {
+    background-color: var(--primary);
+    color: white;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Noise overlay */
+.noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Scroll pulse animation for hero indicator */
+@keyframes scrollPulse {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 0; }
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Tabular numbers for stats */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pinned section fix — ensure proper stacking */
+.pin-spacer {
+  z-index: auto !important;
+}
+
+/* ==========================================================================
+   CYBER / TECH LOADING & SKELETON ANIMATIONS
+   ========================================================================== */
+
+/* Shimmer gradient with electric purple cyber glow */
+@keyframes cyberShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.cyber-skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.03);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(124, 58, 237, 0.12) 35%,
+    rgba(168, 85, 247, 0.18) 50%,
+    rgba(124, 58, 237, 0.12) 65%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  background-size: 250% 100%;
+  animation: cyberShimmer 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Subtle scanline overlay on skeleton cards */
+.cyber-scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.25) 2px,
+    rgba(0, 0, 0, 0.25) 4px
+  );
+  opacity: 0.6;
+}
+
+/* Sweeping scanline for initial loader and cyber effects */
+@keyframes sweepScanline {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.animate-scanline {
+  animation: sweepScanline 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Subtle cyber pulsing glow */
+@keyframes cyberPulse {
+  0%, 100% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 4px rgba(124, 58, 237, 0.3));
+  }
+  50% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 16px rgba(124, 58, 237, 0.7));
+  }
+}
+
+.animate-cyber-pulse {
+  animation: cyberPulse 2s ease-in-out infinite;
+}
+
+/* Radar ping micro-indicator for buttons */
+@keyframes microPing {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+}
+
+.animate-micro-ping {
+  animation: microPing 1.2s ease-in-out infinite;
+}
+
+/* Respect prefers-reduced-motion across all custom animations and loaders */
+@media (prefers-reduced-motion: reduce) {
+  .cyber-skeleton {
+    animation: none !important;
+    background-image: none !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  .animate-scanline,
+  .animate-cyber-pulse,
+  .animate-micro-ping,
+  .animate-cursor-ripple {
+    animation: none !important;
+  }
+}
+
+/* Custom Color-Changing Cursor utilities */
+.custom-cursor-lens {
+  mix-blend-mode: difference;
+}
+
+@keyframes cursorRipple {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.animate-cursor-ripple {
+  animation: cursorRipple 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+

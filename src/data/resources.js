@@ -1,0 +1,97 @@
+/**
+ * Demo resource data — centralized and easy to replace.
+ * Structure mirrors the MongoDB Resource model.
+ */
+
+const resourcesData = [
+  {
+    id: 'res-001',
+    title: 'Modern Full-Stack Roadmap 2026',
+    description: 'A comprehensive curriculum covering React 19, TypeScript, Node.js microservices, Docker containerization, and modern deployment pipelines.',
+    category: 'Web Development',
+    thumbnail: null,
+    externalUrl: 'https://roadmap.sh/full-stack',
+    downloadableFileUrl: null,
+    author: 'Arjun Nair',
+    date: '2026-01-15',
+  },
+  {
+    id: 'res-002',
+    title: 'GSAP 3 & Creative Web Animations Handbook',
+    description: 'Master ScrollTrigger, FLIP animations, timeline orchestration, and 60fps micro-interactions for award-winning digital experiences.',
+    category: 'Design & Interaction',
+    thumbnail: null,
+    externalUrl: 'https://gsap.com/docs/v3/',
+    downloadableFileUrl: null,
+    author: 'Divya Shetty',
+    date: '2026-01-20',
+  },
+  {
+    id: 'res-003',
+    title: 'Docker & Kubernetes for College Projects',
+    description: 'Step-by-step guide to containerizing multi-tier applications, writing docker-compose specs, and deploying on lightweight cloud instances.',
+    category: 'DevOps & Cloud',
+    thumbnail: null,
+    externalUrl: 'https://docs.docker.com/get-started/',
+    downloadableFileUrl: null,
+    author: 'Vikram Hegde',
+    date: '2026-02-05',
+  },
+  {
+    id: 'res-004',
+    title: 'Computer Vision & Deep Learning Primer',
+    description: 'Hands-on notebook collection walking through CNNs, OpenCV image processing, and FastAPI model inference servers.',
+    category: 'AI & ML',
+    thumbnail: null,
+    externalUrl: 'https://pytorch.org/tutorials/',
+    downloadableFileUrl: null,
+    author: 'Rahul Patel',
+    date: '2026-02-12',
+  },
+  {
+    id: 'res-005',
+    title: 'Design Systems & Figma Component Architectures',
+    description: 'Principles of atomic design tokens, accessibility contrast standards, and creating scalable UI kits for developer handoff.',
+    category: 'Design & Interaction',
+    thumbnail: null,
+    externalUrl: 'https://www.figma.com/best-practices/design-systems-guide/',
+    downloadableFileUrl: null,
+    author: 'Ananya Bhat',
+    date: '2026-02-18',
+  },
+  {
+    id: 'res-006',
+    title: 'Cross-Platform Mobile with Flutter 3',
+    description: 'Architecting maintainable stateful applications with BLoC/Provider, native hardware plugins, and Firebase offline synchronization.',
+    category: 'Mobile Development',
+    thumbnail: null,
+    externalUrl: 'https://flutter.dev/docs',
+    downloadableFileUrl: null,
+    author: 'Nikhil Shenoy',
+    date: '2026-03-01',
+  },
+  {
+    id: 'res-007',
+    title: 'Competitive Programming & Algorithms Toolkit',
+    description: 'Curated list of graph algorithms, dynamic programming patterns, and template solutions for technical interview rounds.',
+    category: 'Algorithms',
+    thumbnail: null,
+    externalUrl: 'https://cp-algorithms.com/',
+    downloadableFileUrl: null,
+    author: 'Karthik Rao',
+    date: '2026-03-08',
+  },
+  {
+    id: 'res-008',
+    title: 'Open Source Contribution Starter Pack',
+    description: 'Learn Git rebase workflows, squash commits, writing clear pull request descriptions, and finding good first issues.',
+    category: 'Open Source',
+    thumbnail: null,
+    externalUrl: 'https://opensource.guide/how-to-contribute/',
+    downloadableFileUrl: null,
+    author: 'Ishita Reddy',
+    date: '2026-03-14',
+  }
+];
+
+export default resourcesData;

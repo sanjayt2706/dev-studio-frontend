@@ -1,0 +1,97 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="750" fill="#090B10"/>
+  <defs>
+    <radialGradient id="oc-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#EC4899" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#090B10" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="600" cy="375" r="450" fill="url(#oc-glow)"/>
+
+  <!-- Technical Window Frame -->
+  <rect x="80" y="60" width="1040" height="630" rx="12" fill="#0F111A" stroke="rgba(236,72,153,0.25)" stroke-width="1.5"/>
+  
+  <!-- Header -->
+  <rect x="80" y="60" width="1040" height="48" rx="12" fill="#151724"/>
+  <circle cx="115" cy="84" r="6" fill="#EF4444" opacity="0.8"/>
+  <circle cx="135" cy="84" r="6" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="155" cy="84" r="6" fill="#10B981" opacity="0.8"/>
+  <text x="600" y="89" font-family="'JetBrains Mono', monospace" font-size="12" fill="#F472B6" text-anchor="middle" letter-spacing="2">OPENCOLLAB // DISTRIBUTED_PEER_INCUBATOR_&amp;_PR_ORCHESTRATOR</text>
+  <rect x="990" y="75" width="110" height="20" rx="4" fill="rgba(236,72,153,0.2)"/>
+  <text x="1045" y="89" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F472B6" text-anchor="middle" font-weight="700">OPEN SOURCE</text>
+
+  <!-- Left: Issue & Pull Request Matrix -->
+  <rect x="110" y="130" width="620" height="520" rx="8" fill="#0C0E16" stroke="rgba(255,255,255,0.06)"/>
+  <text x="135" y="165" font-family="'JetBrains Mono', monospace" font-size="11" fill="#F472B6" font-weight="700">ACTIVE OPEN SOURCE SPRINT DISPATCH</text>
+  
+  <!-- PR Row 1 -->
+  <rect x="135" y="185" width="570" height="90" rx="6" fill="#141724" stroke="rgba(255,255,255,0.04)"/>
+  <circle cx="165" cy="225" r="14" fill="#22C55E" fill-opacity="0.2"/>
+  <path d="M160 225 L164 229 L171 220" stroke="#4ADE80" stroke-width="2"/>
+  <text x="195" y="215" font-family="'Outfit', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">feat: Zero-knowledge identity proofs for student elections</text>
+  <text x="195" y="235" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.4)">#412 • opened by @sanjay • approved by 3 core maintainers</text>
+  <rect x="195" y="245" width="70" height="18" rx="3" fill="rgba(59,130,246,0.15)"/>
+  <text x="230" y="258" font-family="'JetBrains Mono', monospace" font-size="9" fill="#60A5FA" text-anchor="middle">SOLANA</text>
+  <rect x="275" y="245" width="60" height="18" rx="3" fill="rgba(16,185,129,0.15)"/>
+  <text x="305" y="258" font-family="'JetBrains Mono', monospace" font-size="9" fill="#34D399" text-anchor="middle">RUST</text>
+
+  <!-- PR Row 2 -->
+  <rect x="135" y="290" width="570" height="90" rx="6" fill="#141724" stroke="rgba(255,255,255,0.04)"/>
+  <circle cx="165" cy="330" r="14" fill="#8B5CF6" fill-opacity="0.2"/>
+  <circle cx="165" cy="330" r="4" fill="#A78BFA"/>
+  <text x="195" y="320" font-family="'Outfit', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">perf: WebGPU rendering pipeline for campus 3D viewer</text>
+  <text x="195" y="340" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.4)">#409 • opened by @priya • benchmark: 120 FPS sustained</text>
+  <rect x="195" y="350" width="80" height="18" rx="3" fill="rgba(139,92,246,0.15)"/>
+  <text x="235" y="363" font-family="'JetBrains Mono', monospace" font-size="9" fill="#C4B5FD" text-anchor="middle">WEBGPU</text>
+  <rect x="285" y="350" width="85" height="18" rx="3" fill="rgba(236,72,153,0.15)"/>
+  <text x="327" y="363" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F472B6" text-anchor="middle">THREE.JS</text>
+
+  <!-- PR Row 3 -->
+  <rect x="135" y="395" width="570" height="90" rx="6" fill="#141724" stroke="rgba(255,255,255,0.04)"/>
+  <circle cx="165" cy="435" r="14" fill="#F59E0B" fill-opacity="0.2"/>
+  <text x="165" y="440" font-family="'JetBrains Mono', monospace" font-size="12" fill="#FBBF24" text-anchor="middle">!</text>
+  <text x="195" y="425" font-family="'Outfit', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">good first issue: Add dark mode contrast toggle to UI</text>
+  <text x="195" y="445" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.4)">#398 • mentor assigned: @rahul • junior friendly</text>
+  <rect x="195" y="455" width="105" height="18" rx="3" fill="rgba(245,158,11,0.15)"/>
+  <text x="247" y="468" font-family="'JetBrains Mono', monospace" font-size="9" fill="#FBBF24" text-anchor="middle">BEGINNER WELCOME</text>
+
+  <!-- Pipeline status bar -->
+  <rect x="135" y="505" width="570" height="120" rx="6" fill="#10131E"/>
+  <text x="155" y="535" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.4)">AUTOMATED CI / CD TESTING PIPELINE</text>
+  <text x="155" y="565" font-family="'JetBrains Mono', monospace" font-size="12" fill="#34D399">✔ 184 / 184 unit test suites passing</text>
+  <text x="155" y="590" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38BDF8">✔ Lighthouse score: 99 Performance // 100 Accessibility</text>
+  <text x="155" y="615" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(255,255,255,0.5)">Automated preview deploy live at branch-412.devstudio.mite.edu</text>
+
+  <!-- Right: Mentorship & Skills Match -->
+  <rect x="750" y="130" width="340" height="520" rx="8" fill="#0C0E16" stroke="rgba(255,255,255,0.06)"/>
+  <text x="775" y="165" font-family="'JetBrains Mono', monospace" font-size="11" fill="#F472B6" font-weight="700">PEER MENTORSHIP</text>
+
+  <rect x="775" y="185" width="290" height="120" rx="6" fill="#141724"/>
+  <text x="795" y="215" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.4)">MATCHED CONTRIBUTORS</text>
+  <text x="795" y="250" font-family="'Outfit', sans-serif" font-size="34" font-weight="900" fill="#F472B6">120+</text>
+  <text x="795" y="280" font-family="'JetBrains Mono', monospace" font-size="10" fill="#34D399">Students paired with senior mentors</text>
+
+  <!-- Skill Badges Matrix -->
+  <rect x="775" y="325" width="290" height="300" rx="6" fill="#141724"/>
+  <text x="795" y="355" font-family="'JetBrains Mono', monospace" font-size="10" fill="rgba(255,255,255,0.4)">COMMUNITY SKILL GRAPH</text>
+  
+  <g transform="translate(795, 380)">
+    <rect x="0" y="0" width="130" height="32" rx="4" fill="#1F2335"/>
+    <text x="15" y="20" font-family="'JetBrains Mono', monospace" font-size="10" fill="#F472B6">TypeScript (92%)</text>
+
+    <rect x="140" y="0" width="130" height="32" rx="4" fill="#1F2335"/>
+    <text x="155" y="20" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38BDF8">React 19 (88%)</text>
+
+    <rect x="0" y="42" width="130" height="32" rx="4" fill="#1F2335"/>
+    <text x="15" y="62" font-family="'JetBrains Mono', monospace" font-size="10" fill="#34D399">Node / Bun (84%)</text>
+
+    <rect x="140" y="42" width="130" height="32" rx="4" fill="#1F2335"/>
+    <text x="155" y="62" font-family="'JetBrains Mono', monospace" font-size="10" fill="#A78BFA">Rust Core (72%)</text>
+
+    <rect x="0" y="84" width="130" height="32" rx="4" fill="#1F2335"/>
+    <text x="15" y="104" font-family="'JetBrains Mono', monospace" font-size="10" fill="#FBBF24">Python AI (86%)</text>
+
+    <rect x="140" y="84" width="130" height="32" rx="4" fill="#1F2335"/>
+    <text x="155" y="104" font-family="'JetBrains Mono', monospace" font-size="10" fill="#60A5FA">Docker (79%)</text>
+  </g>
+</svg>
