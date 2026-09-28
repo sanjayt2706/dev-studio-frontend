@@ -68,8 +68,8 @@ const Navbar = () => {
           isVisible || mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
         } ${
           isScrolled || mobileMenuOpen
-            ? 'bg-[#090A0F]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-lg shadow-black/50'
-            : 'bg-transparent py-4 md:py-6'
+            ? 'bg-[#090A0F]/95 backdrop-blur-md border-b border-white/[0.03] py-3 shadow-xl shadow-black/70'
+            : 'bg-transparent py-4 md:py-6 border-b border-transparent'
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex justify-between items-center">

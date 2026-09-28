@@ -27,45 +27,55 @@ const Hero = () => {
       // 1. Initial entrance animation
       const entranceTl = gsap.timeline({ delay: 0.05 });
 
-      entranceTl.from(imageRef.current, {
-        scale: 1.05,
-        filter: 'brightness(0.9)',
-        duration: 1.2,
-        ease: 'power2.out',
-      });
+      if (imageRef.current) {
+        entranceTl.fromTo(
+          imageRef.current,
+          { scale: 1.05, filter: 'brightness(0.9)' },
+          { scale: 1, filter: 'brightness(1)', duration: 1.2, ease: 'power2.out', clearProps: 'scale,filter' }
+        );
+      }
 
-      entranceTl.from([eyebrowRef.current, metaRightRef.current], {
-        opacity: 0,
-        y: -10,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: 'power3.out',
-      }, '-=0.8');
+      const topMeta = [eyebrowRef.current, metaRightRef.current].filter(Boolean);
+      if (topMeta.length > 0) {
+        entranceTl.fromTo(
+          topMeta,
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power3.out' },
+          '-=0.8'
+        );
+      }
 
-      entranceTl.from([word1Ref.current, word2Ref.current, word3Ref.current], {
-        opacity: 0,
-        y: 45,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-      }, '-=0.7');
+      const words = [word1Ref.current, word2Ref.current, word3Ref.current].filter(Boolean);
+      if (words.length > 0) {
+        entranceTl.fromTo(
+          words,
+          { opacity: 0, y: 45 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' },
+          '-=0.7'
+        );
+      }
 
-      entranceTl.from([subtextRef.current, ctaRef.current, scrollIndicatorRef.current], {
-        opacity: 0,
-        y: 15,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power3.out',
-      }, '-=0.5');
+      const bottomMeta = [subtextRef.current, ctaRef.current, scrollIndicatorRef.current].filter(Boolean);
+      if (bottomMeta.length > 0) {
+        entranceTl.fromTo(
+          bottomMeta,
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
+          '-=0.5'
+        );
+      }
 
-      entranceTl.from([gridRef.current, arcRef.current, techMarkersRef.current], {
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.out',
-      }, '-=0.8');
+      const decor = [gridRef.current, arcRef.current, techMarkersRef.current].filter(Boolean);
+      if (decor.length > 0) {
+        entranceTl.fromTo(
+          decor,
+          { opacity: 0 },
+          { opacity: 1, duration: 1, ease: 'power2.out' },
+          '-=0.8'
+        );
+      }
 
-      // 2. Cinematic Scroll-Driven Parallax Scrub
-      // Pinned scrub timeline using the outer container as trigger and pinning the inner viewport
+      // 2. Cinematic Scroll-Driven Parallax Scrub (Restored from the beginning)
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -75,115 +85,132 @@ const Hero = () => {
           pinSpacing: true,
           scrub: 0.8,
           invalidateOnRefresh: true,
-        }
+        },
       });
 
       // Layer 1: Campus image cinematic zoom
-      scrollTl.to(imageRef.current, {
-        scale: 1.10,
-        y: '2%',
-        ease: 'none',
-        duration: 1,
-      }, 0);
+      if (imageRef.current) {
+        scrollTl.to(imageRef.current, {
+          scale: 1.10,
+          y: '2%',
+          ease: 'none',
+          duration: 1,
+        }, 0);
+      }
 
       // Layer 3: Sky arc and grid parallax
-      scrollTl.to(arcRef.current, {
-        y: '-25%',
-        scale: 1.04,
-        opacity: 0.15,
-        ease: 'none',
-        duration: 1,
-      }, 0);
+      if (arcRef.current) {
+        scrollTl.to(arcRef.current, {
+          y: '-25%',
+          scale: 1.04,
+          opacity: 0.15,
+          ease: 'none',
+          duration: 1,
+        }, 0);
+      }
 
-      scrollTl.to(gridRef.current, {
-        y: '-12%',
-        opacity: 0.1,
-        ease: 'none',
-        duration: 1,
-      }, 0);
+      if (gridRef.current) {
+        scrollTl.to(gridRef.current, {
+          y: '-12%',
+          opacity: 0.1,
+          ease: 'none',
+          duration: 1,
+        }, 0);
+      }
 
       // Layer 4: Tech markers parallax
-      scrollTl.to(techMarkersRef.current, {
-        y: '-20%',
-        opacity: 0.2,
-        ease: 'none',
-        duration: 0.8,
-      }, 0.1);
+      if (techMarkersRef.current) {
+        scrollTl.to(techMarkersRef.current, {
+          y: '-20%',
+          opacity: 0.2,
+          ease: 'none',
+          duration: 0.8,
+        }, 0.1);
+      }
 
       // Layer 5: Words staggered parallax
-      scrollTl.to(word1Ref.current, {
-        y: '-80px',
-        ease: 'none',
-        duration: 1,
-      }, 0);
-      scrollTl.to(word1Ref.current, {
-        opacity: 0,
-        duration: 0.35,
-        ease: 'power2.in',
-      }, 0.65);
+      if (word1Ref.current) {
+        scrollTl.to(word1Ref.current, {
+          y: '-80px',
+          ease: 'none',
+          duration: 1,
+        }, 0);
+        scrollTl.to(word1Ref.current, {
+          opacity: 0,
+          duration: 0.35,
+          ease: 'power2.in',
+        }, 0.65);
+      }
 
-      scrollTl.to(word2Ref.current, {
-        y: '-60px',
-        ease: 'none',
-        duration: 1,
-      }, 0);
-      scrollTl.to(word2Ref.current, {
-        opacity: 0,
-        duration: 0.35,
-        ease: 'power2.in',
-      }, 0.68);
+      if (word2Ref.current) {
+        scrollTl.to(word2Ref.current, {
+          y: '-60px',
+          ease: 'none',
+          duration: 1,
+        }, 0);
+        scrollTl.to(word2Ref.current, {
+          opacity: 0,
+          duration: 0.35,
+          ease: 'power2.in',
+        }, 0.68);
+      }
 
-      scrollTl.to(word3Ref.current, {
-        y: '-40px',
-        ease: 'none',
-        duration: 1,
-      }, 0);
-      scrollTl.to(word3Ref.current, {
-        opacity: 0,
-        duration: 0.35,
-        ease: 'power2.in',
-      }, 0.72);
+      if (word3Ref.current) {
+        scrollTl.to(word3Ref.current, {
+          y: '-40px',
+          ease: 'none',
+          duration: 1,
+        }, 0);
+        scrollTl.to(word3Ref.current, {
+          opacity: 0,
+          duration: 0.35,
+          ease: 'power2.in',
+        }, 0.72);
+      }
 
       // Layer 6: Eyebrow and metadata float up and fade
-      scrollTl.to([eyebrowRef.current, metaRightRef.current], {
-        y: '-40px',
-        opacity: 0,
-        duration: 0.4,
-        ease: 'none',
-      }, 0.2);
+      if (topMeta.length > 0) {
+        scrollTl.to(topMeta, {
+          y: '-40px',
+          opacity: 0,
+          duration: 0.4,
+          ease: 'none',
+        }, 0.2);
+      }
 
-      scrollTl.to([subtextRef.current, ctaRef.current], {
-        y: '-30px',
-        opacity: 0,
-        duration: 0.45,
-        ease: 'none',
-      }, 0.45);
+      if (subtextRef.current && ctaRef.current) {
+        scrollTl.to([subtextRef.current, ctaRef.current], {
+          y: '-30px',
+          opacity: 0,
+          duration: 0.45,
+          ease: 'none',
+        }, 0.45);
+      }
 
       // Scroll indicator fades out immediately on first scroll
-      scrollTl.to(scrollIndicatorRef.current, {
-        opacity: 0,
-        y: 15,
-        duration: 0.15,
-        ease: 'none',
-      }, 0);
-
+      if (scrollIndicatorRef.current) {
+        scrollTl.to(scrollIndicatorRef.current, {
+          opacity: 0,
+          y: 15,
+          duration: 0.15,
+          ease: 'none',
+        }, 0);
+      }
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full">
+    <section ref={containerRef} className="relative w-full border-none outline-none">
       <div
         ref={pinTargetRef}
-        className="relative w-full h-screen overflow-hidden bg-[#06070B]"
+        className="relative w-full h-screen overflow-hidden bg-[#06070B] flex flex-col justify-between border-none outline-none"
       >
         {/* =========================================================================
             LAYER 1: CAMPUS BACKGROUND IMAGE
-            - 16:9 composition
-            - Preserves building illumination, night sky and surrounding hills
             ========================================================================= */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
           <img
             ref={imageRef}
             src="/assets/campus-hero.png"
@@ -195,11 +222,9 @@ const Hero = () => {
 
         {/* =========================================================================
             LAYER 2: AMBIENT VIGNETTE & DUSK ATMOSPHERE
-            - Warm window lights stay visible
-            - Top & bottom gradients ensure ultra-crisp text contrast
             ========================================================================= */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none z-[1]"
           style={{
             background: `
               radial-gradient(ellipse 95% 75% at 50% 50%, rgba(6, 7, 11, 0.25) 0%, rgba(6, 7, 11, 0.75) 100%),
@@ -208,17 +233,17 @@ const Hero = () => {
           }}
         />
 
-        {/* Atmospheric violet glow in the sky (matches reference artwork) */}
+        {/* Atmospheric violet glow in the sky */}
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[40vh] rounded-full pointer-events-none blur-[90px] opacity-45"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[40vh] rounded-full pointer-events-none blur-[90px] opacity-45 z-[1]"
           style={{
             background: 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.4) 0%, rgba(56, 189, 248, 0.12) 60%, transparent 80%)',
           }}
         />
 
-        {/* Translucent purple pillar accents in sky (reference aesthetic) */}
-        <div className="absolute top-8 left-[15vw] w-24 md:w-36 h-48 md:h-64 bg-gradient-to-b from-purple-500/15 to-transparent border-t border-purple-400/25 pointer-events-none blur-[1px] hidden sm:block" />
-        <div className="absolute top-6 right-[18vw] w-28 md:w-44 h-56 md:h-72 bg-gradient-to-b from-purple-600/15 to-transparent border-t border-purple-400/25 pointer-events-none blur-[1px] hidden sm:block" />
+        {/* Translucent purple pillar accents in sky */}
+        <div className="absolute top-8 left-[15vw] w-24 md:w-36 h-48 md:h-64 bg-gradient-to-b from-purple-500/15 to-transparent border-t border-purple-400/25 pointer-events-none blur-[1px] hidden sm:block z-[1]" />
+        <div className="absolute top-6 right-[18vw] w-28 md:w-44 h-56 md:h-72 bg-gradient-to-b from-purple-600/15 to-transparent border-t border-purple-400/25 pointer-events-none blur-[1px] hidden sm:block z-[1]" />
 
         {/* =========================================================================
             LAYER 3: TECHNICAL GRID & SIGNATURE ORBITAL ARC
@@ -235,7 +260,7 @@ const Hero = () => {
             }}
           />
 
-          {/* Orbital Trajectory Arc in Sky (matching reference) */}
+          {/* Orbital Trajectory Arc in Sky */}
           <div
             ref={arcRef}
             className="absolute -top-[28vw] left-1/2 -translate-x-1/2 w-[85vw] h-[85vw] max-w-[1250px] max-h-[1250px] rounded-full border border-purple-400/25 pointer-events-none"
@@ -282,10 +307,10 @@ const Hero = () => {
         {/* =========================================================================
             LAYER 5 & 6: EDITORIAL TYPOGRAPHY & INTERACTIVE CALLS
             ========================================================================= */}
-        <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 md:px-14 flex flex-col justify-between pt-20 sm:pt-24 md:pt-26 pb-6 sm:pb-8 md:pb-10">
+        <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 md:px-14 flex flex-col justify-between pt-20 sm:pt-24 md:pt-26 pb-8 sm:pb-10 md:pb-12 pointer-events-auto">
           {/* Top Eyebrow Row */}
           <div className="flex justify-between items-start w-full">
-            <div ref={eyebrowRef} className="flex flex-col gap-1">
+            <div ref={eyebrowRef} className="flex flex-col gap-1 will-change-transform">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <span className="font-mono text-xs md:text-sm font-bold tracking-[0.25em] text-white uppercase drop-shadow">
@@ -297,7 +322,7 @@ const Hero = () => {
               </span>
             </div>
 
-            <div ref={metaRightRef} className="hidden sm:flex flex-col items-end gap-1 font-mono text-[10px] tracking-widest text-white/60">
+            <div ref={metaRightRef} className="hidden sm:flex flex-col items-end gap-1 font-mono text-[10px] tracking-widest text-white/60 will-change-transform">
               <div className="flex items-center gap-2 text-primary font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 <span>SYS_ACTIVE // 2026 EDITION</span>
@@ -307,29 +332,23 @@ const Hero = () => {
           </div>
 
           {/* Central Display Headline: BUILD. CREATE. SHARE. */}
-          <div className="my-auto py-1">
-            <h1 className="flex flex-col font-editorial font-bold tracking-tight text-white uppercase leading-[0.85] select-none text-[16vw] sm:text-[13vw] md:text-[9.5vw] lg:text-[8vw] drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)]">
-              <div className="overflow-hidden">
-                <span ref={word1Ref} className="block will-change-transform text-white">
-                  BUILD<span className="text-primary">.</span>
-                </span>
-              </div>
-              <div className="overflow-hidden">
-                <span ref={word2Ref} className="block will-change-transform text-white pl-4 sm:pl-8 md:pl-12">
-                  CREATE<span className="text-purple-400">.</span>
-                </span>
-              </div>
-              <div className="overflow-hidden">
-                <span ref={word3Ref} className="block will-change-transform text-white pl-8 sm:pl-16 md:pl-24">
-                  SHARE<span className="text-sky-400">.</span>
-                </span>
-              </div>
+          <div className="my-auto py-2">
+            <h1 className="flex flex-col font-editorial font-black tracking-tight text-white uppercase leading-[0.88] select-none text-[15vw] sm:text-[13vw] md:text-[9.5vw] lg:text-[8vw] drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)]">
+              <span ref={word1Ref} className="block will-change-transform text-white">
+                BUILD<span className="text-primary">.</span>
+              </span>
+              <span ref={word2Ref} className="block will-change-transform text-white pl-3 sm:pl-8 md:pl-12">
+                CREATE<span className="text-purple-400">.</span>
+              </span>
+              <span ref={word3Ref} className="block will-change-transform text-white pl-6 sm:pl-16 md:pl-24">
+                SHARE<span className="text-sky-400">.</span>
+              </span>
             </h1>
           </div>
 
           {/* Bottom Supporting Info & Interactive CTAs */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 sm:gap-6 w-full">
-            <div ref={subtextRef} className="max-w-lg">
+            <div ref={subtextRef} className="max-w-lg will-change-transform">
               <p className="font-sans text-xs sm:text-sm md:text-base text-gray-200 leading-relaxed font-normal drop-shadow">
                 A student-led technology community where ideas become projects, skills become experience, and people build together.
               </p>
@@ -342,7 +361,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div ref={ctaRef} className="flex items-center gap-3 sm:gap-4">
+            <div ref={ctaRef} className="flex items-center gap-3 sm:gap-4 will-change-transform">
               <Link
                 to="/join"
                 data-cursor="button"
@@ -370,7 +389,7 @@ const Hero = () => {
             ========================================================================= */}
         <div
           ref={scrollIndicatorRef}
-          className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 pointer-events-none"
+          className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 pointer-events-none will-change-transform"
         >
           <span className="font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.3em] text-white/50 drop-shadow">
             SCROLL TO EXPLORE

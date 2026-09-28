@@ -3,6 +3,7 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-editorial: "Barlow Condensed", "Outfit", sans-serif;
   --color-background: #0a0a0a;
   --color-surface: #121212;
   --color-primary: #3b82f6;
@@ -212,9 +213,14 @@
   }
 }
 
-/* Custom Color-Changing Cursor utilities */
+/* Custom Optical Color-Accent Lens Cursor */
 .custom-cursor-lens {
-  mix-blend-mode: difference;
+  backdrop-filter: contrast(1.4) brightness(1.2) saturate(2.2);
+  -webkit-backdrop-filter: contrast(1.4) brightness(1.2) saturate(2.2);
+}
+
+.custom-cursor-dodge {
+  mix-blend-mode: color-dodge;
 }
 
 @keyframes cursorRipple {
@@ -223,7 +229,7 @@
     opacity: 0.85;
   }
   100% {
-    transform: scale(2.6);
+    transform: scale(2.4);
     opacity: 0;
   }
 }
@@ -241,8 +247,16 @@
   display: none;
 }
 
-/* Hide custom cursor on pure touch devices (phones/tablets without mouse) */
-@media (hover: none) and (pointer: coarse) {
+/* Ensure GSAP pin-spacer has zero borders or outlines on reverse scroll */
+.pin-spacer {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Hide custom cursor on non-fine-pointer devices */
+@media not all and (hover: hover) and (pointer: fine) {
   .custom-cursor-container {
     display: none !important;
   }
