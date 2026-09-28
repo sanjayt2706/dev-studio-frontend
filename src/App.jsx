@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import audioManager from './audio/AudioManager';
 
 // Layouts
 import MainLayout from './layouts/MainLayout';
@@ -35,9 +36,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
+  const isFirstMount = useRef(true);
+
   useEffect(() => {
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+    audioManager.play('page-transition');
     window.scrollTo(0, 0);
   }, [pathname]);
+
   return null;
 };
 

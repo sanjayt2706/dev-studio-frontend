@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import audioManager from '../../audio/AudioManager';
 
 const BASE_SIZE = 20; // 20px base diameter matching 2021.refokus.com reference
 
@@ -14,7 +15,7 @@ const BASE_SIZE = 20; // 20px base diameter matching 2021.refokus.com reference
  * - Outlined colors (e.g. purple/cyan) invert to high-contrast neon complements.
  * - Sleek, precise scale transitions (20px base, ~30px for nav links, ~44px for big editorial headlines).
  * - Smooth lerp interpolation via requestAnimationFrame (zero React state updates on mousemove).
- * - Hides default cursor dynamically via html.has-custom-cursor once mouse moves.
+ * - Integrated subtle SFX: plays one soft tick only when entering an interactive element.
  */
 export const CustomCursor = () => {
   const cursorRef = useRef(null);
@@ -37,6 +38,7 @@ export const CustomCursor = () => {
     let isVisible = false;
     let isMouseDown = false;
     let rafId = null;
+    let lastInteractiveEl = null;
 
     const onMouseMove = (e) => {
       mouse.x = e.clientX;
@@ -57,26 +59,39 @@ export const CustomCursor = () => {
       if (!target) return;
 
       const isInput = Boolean(target.closest('input, textarea, select, [contenteditable="true"]'));
-      const isNav = Boolean(target.closest('nav a, [data-cursor="nav"], header a'));
-      const isButton = Boolean(
-        target.closest('button, [role="button"], [data-cursor="button"], input[type="submit"]')
-      );
-      const isCard = Boolean(target.closest('[data-cursor="card"], .group'));
-      const isImage = Boolean(target.closest('img, [data-cursor="image"]'));
-      const isHeading = Boolean(target.closest('h1, [data-cursor="text"], .font-editorial, .stroke-text'));
+      const navEl = target.closest('nav a, [data-cursor="nav"], header a');
+      const btnEl = target.closest('button, [role="button"], [data-cursor="button"], input[type="submit"]');
+      const cardEl = target.closest('[data-cursor="card"], .group');
+      const imageEl = target.closest('img, [data-cursor="image"]');
+      const headingEl = target.closest('h1, [data-cursor="text"], .font-editorial, .stroke-text');
 
       if (isInput) {
         targetScale = 0;
-      } else if (isNav) {
+      } else if (navEl) {
         targetScale = 1.5; // ~30px: sharp inverted lens over WORK, TEAM, etc.
-      } else if (isButton) {
+      } else if (btnEl) {
         targetScale = 1.7; // ~34px
-      } else if (isHeading) {
+      } else if (headingEl) {
         targetScale = 2.2; // ~44px: magnifying lens over BUILD, CREATE, SHARE
-      } else if (isCard || isImage) {
+      } else if (cardEl || imageEl) {
         targetScale = 1.8; // ~36px
       } else {
         targetScale = isMouseDown ? 0.8 : 1.0; // 20px base dot
+      }
+
+      // SFX Audio: Only play once when cursor enters a NEW interactive element
+      const currentInteractive = navEl || btnEl || cardEl || null;
+      if (currentInteractive !== lastInteractiveEl) {
+        if (currentInteractive) {
+          if (navEl) {
+            audioManager.play('nav-hover');
+          } else if (btnEl) {
+            audioManager.play('button-hover');
+          } else if (cardEl) {
+            audioManager.play('card-hover');
+          }
+        }
+        lastInteractiveEl = currentInteractive;
       }
     };
 
@@ -91,6 +106,7 @@ export const CustomCursor = () => {
 
     const onMouseLeave = () => {
       isVisible = false;
+      lastInteractiveEl = null;
       if (cursorRef.current) cursorRef.current.style.opacity = '0';
     };
 
@@ -99,9 +115,20 @@ export const CustomCursor = () => {
       if (cursorRef.current) cursorRef.current.style.opacity = '1';
     };
 
+    // Global tactile click sound for all interactive controls
+    const onGlobalClick = (e) => {
+      const isClickable = Boolean(
+        e.target && e.target.closest && e.target.closest('button, a, [role="button"], input[type="submit"]')
+      );
+      if (isClickable) {
+        audioManager.play('button-click');
+      }
+    };
+
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('mousedown', onMouseDown, { passive: true });
     window.addEventListener('mouseup', onMouseUp, { passive: true });
+    window.addEventListener('click', onGlobalClick, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave, { passive: true });
     document.addEventListener('mouseenter', onMouseEnter, { passive: true });
 
@@ -131,6 +158,7 @@ export const CustomCursor = () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('click', onGlobalClick);
       document.removeEventListener('mouseleave', onMouseLeave);
       document.removeEventListener('mouseenter', onMouseEnter);
       document.documentElement.classList.remove('has-custom-cursor');

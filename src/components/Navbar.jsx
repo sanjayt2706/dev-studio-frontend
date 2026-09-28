@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { PLACEHOLDERS } from '../utils/images';
+import audioManager from '../audio/AudioManager';
+import SoundToggle from './common/SoundToggle';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -120,17 +122,25 @@ const Navbar = () => {
             >
               Join Us
             </Link>
+            <SoundToggle className="ml-1" />
           </div>
 
-          {/* Mobile Toggle */}
-          <button
-            className="md:hidden z-[9001] text-white w-10 h-10 flex items-center justify-center rounded-lg active:bg-white/10 transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={mobileMenuOpen}
-          >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile Right Controls: Sound Toggle + Hamburger */}
+          <div className="md:hidden z-[9001] flex items-center gap-2">
+            <SoundToggle />
+            <button
+              className="text-white w-10 h-10 flex items-center justify-center rounded-lg active:bg-white/10 transition-colors"
+              onClick={() => {
+                const nextState = !mobileMenuOpen;
+                setMobileMenuOpen(nextState);
+                audioManager.play(nextState ? 'menu-open' : 'menu-close');
+              }}
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </nav>
 

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ArrowRight, CheckCircle2, Sparkles, Terminal, Code2, Cpu, Smartphone, Palette, Shield } from 'lucide-react';
 import { gsap } from 'gsap';
+import audioManager from '../audio/AudioManager';
 
 const DOMAINS = [
   { id: 'web', name: 'Web Development', icon: Code2, desc: 'Frontend, backend, real-time distributed web systems' },
@@ -120,6 +121,7 @@ const Join = () => {
     setTimeout(() => {
       setSubmitting(false);
       setSubmitted(true);
+      audioManager.play('success');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 900);
   };

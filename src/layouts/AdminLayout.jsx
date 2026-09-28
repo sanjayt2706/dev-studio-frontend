@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import authService from '../services/auth';
 import { PLACEHOLDERS } from '../utils/images';
+import audioManager from '../audio/AudioManager';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const AdminLayout = () => {
   }
 
   const handleLogout = () => {
+    audioManager.play('menu-close');
     authService.logout();
     navigate('/admin/login', { replace: true });
   };
@@ -160,7 +162,11 @@ const AdminLayout = () => {
           </div>
         </div>
         <button
-          onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+          onClick={() => {
+            const next = !mobileSidebarOpen;
+            setMobileSidebarOpen(next);
+            audioManager.play(next ? 'menu-open' : 'menu-close');
+          }}
           className="text-white p-2 rounded-lg bg-white/5 hover:bg-white/10 active:bg-white/15 transition-colors"
           aria-label="Toggle navigation"
         >

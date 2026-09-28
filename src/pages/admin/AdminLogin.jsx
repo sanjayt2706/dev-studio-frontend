@@ -3,6 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Lock, Mail, Eye, EyeOff, AlertCircle, ArrowLeft, Shield } from 'lucide-react';
 import authService from '../../services/auth';
 import { PLACEHOLDERS } from '../../utils/images';
+import audioManager from '../../audio/AudioManager';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const AdminLogin = () => {
 
     try {
       await authService.login(email.trim(), password);
+      audioManager.play('success');
       navigate(from, { replace: true });
     } catch (err) {
       console.error('Login error:', err);
