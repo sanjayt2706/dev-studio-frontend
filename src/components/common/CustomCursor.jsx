@@ -18,18 +18,15 @@ export const CustomCursor = () => {
   const labelRef = useRef(null);
 
   useEffect(() => {
-    // 1. Accessibility & Device Detection
-    const isTouch =
-      window.matchMedia('(pointer: coarse)').matches ||
-      window.matchMedia('(hover: none)').matches ||
-      'ontouchstart' in window;
-
-    const prefersReducedMotion =
+    // Device & Pointer detection
+    // Only pure touch-only devices without any fine pointer should be initially ignored
+    const isPureTouchOnly =
       window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.matchMedia('(hover: none) and (pointer: coarse)').matches &&
+      !window.matchMedia('(any-pointer: fine)').matches;
 
-    if (isTouch || prefersReducedMotion) {
-      return; // Do not activate custom cursor on touch/mobile or reduced-motion
+    if (isPureTouchOnly) {
+      return;
     }
 
     const lensEl = lensRef.current;
@@ -151,9 +148,16 @@ export const CustomCursor = () => {
       ringEl.style.opacity = '1';
     };
 
+    const onTouchStart = () => {
+      isVisible = false;
+      if (lensEl) lensEl.style.opacity = '0';
+      if (ringEl) ringEl.style.opacity = '0';
+    };
+
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('mousedown', onMouseDown, { passive: true });
     window.addEventListener('mouseup', onMouseUp, { passive: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
 
@@ -193,6 +197,7 @@ export const CustomCursor = () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('touchstart', onTouchStart);
       document.removeEventListener('mouseleave', onMouseLeave);
       document.removeEventListener('mouseenter', onMouseEnter);
     };

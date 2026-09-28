@@ -1,22 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
-const SESSION_KEY = 'devstudio_initial_loader_completed';
+// Module-level flag: ensures it runs on initial launch / full page reload,
+// but never re-triggers during client-side SPA navigation between pages.
+let hasInitialLoaderPlayed = false;
 
 /**
  * InitialLoader - Award-winning full-screen cinematic intro
- * Runs strictly ONCE when the site first opens in a browser session.
+ * Runs on website launch / full refresh.
  * Never runs again during in-app navigation or API calls.
  */
 export const InitialLoader = ({ onComplete }) => {
-  const [shouldRender, setShouldRender] = useState(() => {
-    try {
-      return !sessionStorage.getItem(SESSION_KEY);
-    } catch {
-      return false;
-    }
-  });
-
+  const [shouldRender, setShouldRender] = useState(() => !hasInitialLoaderPlayed);
   const [progress, setProgress] = useState(0);
 
   const containerRef = useRef(null);
@@ -32,34 +27,23 @@ export const InitialLoader = ({ onComplete }) => {
   useEffect(() => {
     if (!shouldRender) return;
 
-    // Check for reduced motion preference
-    const prefersReducedMotion =
-      window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (prefersReducedMotion) {
-      try {
-        sessionStorage.setItem(SESSION_KEY, 'true');
-      } catch (e) {
-        console.warn(e);
-      }
-      setShouldRender(false);
-      if (onComplete) onComplete();
-      return;
-    }
-
     // Lock body scroll while intro is playing
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
+    // Watchdog fallback: ensure page is never locked
+    const watchdogTimer = setTimeout(() => {
+      hasInitialLoaderPlayed = true;
+      document.body.style.overflow = originalOverflow;
+      setShouldRender(false);
+      if (onComplete) onComplete();
+    }, 4500);
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         onComplete: () => {
-          try {
-            sessionStorage.setItem(SESSION_KEY, 'true');
-          } catch (e) {
-            console.warn(e);
-          }
+          clearTimeout(watchdogTimer);
+          hasInitialLoaderPlayed = true;
           document.body.style.overflow = originalOverflow;
           setShouldRender(false);
           if (onComplete) onComplete();
