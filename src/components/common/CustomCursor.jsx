@@ -1,22 +1,28 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-const BASE_SIZE = 42; // Base diameter matching Refokus 2021 reference
+const BASE_SIZE = 20; // 20px base diameter matching 2021.refokus.com reference
 
 /**
- * CustomCursor - Award-Winning Refokus-Style Inverted Difference Cursor
+ * CustomCursor - Authentic Refokus 2021 Inverted Difference Cursor
  *
  * Implements the exact technique seen on https://2021.refokus.com/:
+ * - Directly mounted to document.body with createPortal (zero parent stacking context isolation).
  * - Pure white circular lens with mix-blend-mode: difference.
  * - Outside the circle: website content remains normal (white text / dark background).
  * - Inside the circle: text and outline strokes invert to jet black on white.
- * - Smooth lerp interpolation via requestAnimationFrame (zero React state updates).
- * - Contextual expansion when hovering navigation, buttons, cards, and editorial typography.
- * - Automatically disabled on touchscreens / mobile devices.
+ * - Outlined colors (e.g. purple/cyan) invert to high-contrast neon complements.
+ * - Sleek, precise scale transitions (20px base, ~30px for nav links, ~44px for big editorial headlines).
+ * - Smooth lerp interpolation via requestAnimationFrame (zero React state updates on mousemove).
+ * - Automatically hidden on form inputs (restoring text cursor) and on mobile/touch screens.
  */
 export const CustomCursor = () => {
   const cursorRef = useRef(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+
     // Only desktop devices with fine hover pointer
     const isFinePointer =
       typeof window !== 'undefined' &&
@@ -53,6 +59,7 @@ export const CustomCursor = () => {
       const target = e.target;
       if (!target) return;
 
+      const isInput = Boolean(target.closest('input, textarea, select, [contenteditable="true"]'));
       const isNav = Boolean(target.closest('nav a, [data-cursor="nav"], header a'));
       const isButton = Boolean(
         target.closest('button, [role="button"], [data-cursor="button"], input[type="submit"]')
@@ -61,16 +68,23 @@ export const CustomCursor = () => {
       const isImage = Boolean(target.closest('img, [data-cursor="image"]'));
       const isHeading = Boolean(target.closest('h1, [data-cursor="text"], .font-editorial, .stroke-text'));
 
-      if (isNav) {
-        targetScale = 1.5; // ~63px
+      if (isInput) {
+        // Form input: shrink away so native text beam cursor is crisp
+        targetScale = 0;
+      } else if (isNav) {
+        // Nav link (e.g. WORK, TEAM, ABOUT): 30px lens creates clean letter inversion
+        targetScale = 1.5;
       } else if (isButton) {
-        targetScale = 1.6; // ~67px
-      } else if (isCard) {
-        targetScale = 1.75; // ~73px
-      } else if (isImage) {
-        targetScale = 1.65; // ~69px
+        // Button pill (e.g. JOIN US): 34px lens
+        targetScale = 1.7;
       } else if (isHeading) {
-        targetScale = 1.7; // ~71px
+        // Large editorial headlines (BUILD. CREATE. SHARE.): 44px lens
+        targetScale = 2.2;
+      } else if (isCard) {
+        // Project / team cards
+        targetScale = 1.8;
+      } else if (isImage) {
+        targetScale = 1.8;
       } else {
         targetScale = isMouseDown ? 0.8 : 1.0;
       }
@@ -105,10 +119,10 @@ export const CustomCursor = () => {
     const render = () => {
       if (isVisible && cursorEl) {
         // Smooth responsive interpolation
-        cursorPos.x += (mouse.x - cursorPos.x) * 0.24;
-        cursorPos.y += (mouse.y - cursorPos.y) * 0.24;
+        cursorPos.x += (mouse.x - cursorPos.x) * 0.3;
+        cursorPos.y += (mouse.y - cursorPos.y) * 0.3;
 
-        currentScale += (targetScale - currentScale) * 0.18;
+        currentScale += (targetScale - currentScale) * 0.22;
 
         const x = cursorPos.x - BASE_SIZE / 2;
         const y = cursorPos.y - BASE_SIZE / 2;
@@ -131,26 +145,30 @@ export const CustomCursor = () => {
     };
   }, []);
 
-  return (
+  if (!mounted || typeof document === 'undefined') return null;
+
+  return createPortal(
     <div
+      ref={cursorRef}
       aria-hidden="true"
-      className="custom-cursor-container fixed inset-0 pointer-events-none z-[999999] overflow-hidden select-none"
-    >
-      {/* =====================================================================
-          REFOKUS TRUE INVERTED CURSOR
-          - Pure white disc with mix-blend-mode: difference
-          - Letters inside invert to jet-black; letters outside stay white
-          ===================================================================== */}
-      <div
-        ref={cursorRef}
-        className="refokus-cursor fixed top-0 left-0 rounded-full pointer-events-none opacity-0 will-change-transform"
-        style={{
-          width: `${BASE_SIZE}px`,
-          height: `${BASE_SIZE}px`,
-          transition: 'opacity 0.2s ease',
-        }}
-      />
-    </div>
+      className="refokus-cursor pointer-events-none select-none"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: `${BASE_SIZE}px`,
+        height: `${BASE_SIZE}px`,
+        borderRadius: '50%',
+        backgroundColor: '#ffffff',
+        mixBlendMode: 'difference',
+        pointerEvents: 'none',
+        zIndex: 999999,
+        willChange: 'transform',
+        opacity: 0,
+        transition: 'opacity 0.2s ease',
+      }}
+    />,
+    document.body
   );
 };
 

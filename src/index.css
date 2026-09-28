@@ -213,13 +213,23 @@
   }
 }
 
-/* Outlined / Stroked Editorial Typography (Refokus Style) */
+/* Outlined / Stroked Editorial Typography (Refokus 2021 Style) */
 .stroke-text {
   color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
   -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.88);
   text-stroke: 1.5px rgba(255, 255, 255, 0.88);
-  transition: -webkit-text-stroke 0.3s ease;
+  paint-order: stroke fill;
+  transition: -webkit-text-stroke 0.3s ease, text-stroke 0.3s ease;
 }
+
+@media (max-width: 640px) {
+  .stroke-text {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.88);
+    text-stroke: 1px rgba(255, 255, 255, 0.88);
+  }
+}
+
 .stroke-text:hover {
   -webkit-text-stroke: 1.5px #c084fc;
   text-stroke: 1.5px #c084fc;
@@ -227,8 +237,31 @@
 
 /* Refokus True Inverted Cursor (mix-blend-mode: difference) */
 .refokus-cursor {
-  mix-blend-mode: difference !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  border-radius: 9999px !important;
   background-color: #ffffff !important;
+  mix-blend-mode: difference !important;
+  pointer-events: none !important;
+  z-index: 999999 !important;
+  will-change: transform;
+}
+
+/* Hide default cursor on desktop when Refokus cursor is active */
+@media (hover: hover) and (pointer: fine) {
+  html, body, a, button, [role="button"], .cursor-pointer {
+    cursor: none !important;
+  }
+  input, textarea, select {
+    cursor: text !important;
+  }
+}
+
+@media not all and (hover: hover) and (pointer: fine) {
+  .refokus-cursor {
+    display: none !important;
+  }
 }
 
 @keyframes cursorRipple {

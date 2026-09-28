@@ -68,7 +68,7 @@ const Navbar = () => {
           isVisible || mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
         } ${
           isScrolled || mobileMenuOpen
-            ? 'bg-[#090A0F]/95 backdrop-blur-md border-b border-white/[0.03] py-3 shadow-xl shadow-black/70'
+            ? 'bg-[#090A0F]/95 border-b border-white/[0.03] py-3 shadow-xl shadow-black/70'
             : 'bg-transparent py-4 md:py-6 border-b border-transparent'
         }`}
       >
@@ -100,7 +100,7 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   data-cursor="nav"
-                  className={`group/nav relative text-xs font-mono uppercase tracking-widest py-1 flex items-center transition-all duration-300 hover:text-cyan-300 hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] hover:-translate-y-0.5 ${
+                  className={`group/nav relative text-xs font-mono uppercase tracking-widest py-1 flex items-center transition-colors duration-300 hover:text-white ${
                     isActive ? 'text-white font-bold' : 'text-gray-400'
                   }`}
                 >
