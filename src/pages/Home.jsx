@@ -1,6 +1,7 @@
 import Hero from '../components/home/Hero';
 import OurStory from '../components/home/OurStory';
 import SelectedWork from '../components/home/SelectedWork';
+import HomeAnnouncements from '../components/home/HomeAnnouncements';
 import Stats from '../components/home/Stats';
 import OurPeople from '../components/home/OurPeople';
 import JoinUs from '../components/home/JoinUs';
@@ -11,6 +12,7 @@ const Home = () => {
       <Hero />
       <OurStory />
       <SelectedWork />
+      <HomeAnnouncements />
       <Stats />
       <OurPeople />
       <JoinUs />

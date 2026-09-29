@@ -318,8 +318,12 @@ const Team = () => {
 
         {!loading && !error && filteredMembers.length === 0 && (
           <EmptyState
-            title="No members match your criteria"
-            description="Try changing your search terms or resetting the team and year filters."
+            title={members.length === 0 ? "Team directory will be uploaded soon" : "No members match your criteria"}
+            description={
+              members.length === 0
+                ? "Member profiles, domain leads, and leadership rosters are currently being updated. Check back soon."
+                : "Try changing your search terms or resetting the team and year filters."
+            }
           />
         )}
 

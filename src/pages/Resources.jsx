@@ -122,8 +122,12 @@ const Resources = () => {
 
         {!loading && !error && filteredResources.length === 0 && (
           <EmptyState
-            title="No resources found"
-            description="Try adjusting your keyword search or category filter."
+            title={resources.length === 0 ? "Resources will be uploaded soon" : "No resources found in this category"}
+            description={
+              resources.length === 0
+                ? "Curated engineering roadmaps, system design guides, and workshop toolkits are currently being compiled."
+                : "Try adjusting your keyword search or category filter."
+            }
           />
         )}
 

@@ -158,8 +158,8 @@ const Announcements = () => {
 
         {!loading && !error && activeAnnouncements.length === 0 && (
           <EmptyState
-            title="No announcements at this time"
-            description="Official club notices and project calls will be posted here."
+            title="No announcements for now"
+            description="All channels are quiet. Official studio notices, recruitment calls, and community updates will be posted here soon."
           />
         )}
 

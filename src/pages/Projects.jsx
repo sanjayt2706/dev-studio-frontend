@@ -94,8 +94,12 @@ const Projects = () => {
 
         {!loading && !error && filteredProjects.length === 0 && (
           <EmptyState
-            title="No projects found"
-            description="There are currently no projects in this category."
+            title={projects.length === 0 ? "Projects will be uploaded soon" : "No projects in this category"}
+            description={
+              projects.length === 0
+                ? "Our engineering squads are currently developing next-generation production platforms in stealth. New repositories, live demos, and case studies will be uploaded here soon."
+                : "Try switching categories or selecting 'All' to view all archived repositories."
+            }
           />
         )}
 

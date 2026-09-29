@@ -186,8 +186,8 @@ const Events = () => {
 
         {!loading && !error && events.length === 0 && (
           <EmptyState
-            title="No events scheduled"
-            description="Stay tuned for upcoming hackathons, bootcamps, and workshops."
+            title="Events will be announced soon"
+            description="Upcoming hackathons, developer bootcamps, and technical workshops are currently being finalized. Check back soon for registrations."
           />
         )}
 
@@ -195,7 +195,7 @@ const Events = () => {
         {!loading && !error && events.length > 0 && (
           <div className="flex flex-col gap-24">
             {/* Upcoming */}
-            {upcoming.length > 0 && (
+            {upcoming.length > 0 ? (
               <section>
                 <div className="flex items-center gap-4 mb-10 pb-4 border-b border-white/10">
                   <span className="text-xs font-mono tracking-widest uppercase text-white font-bold">Upcoming Events</span>
@@ -206,6 +206,12 @@ const Events = () => {
                   {upcoming.map((event, i) => renderEventCard(event, i === 0 && event.featured))}
                 </div>
               </section>
+            ) : (
+              <div className="p-8 rounded-xl bg-surface/30 border border-white/5 text-center">
+                <span className="text-xs font-mono text-primary uppercase tracking-widest block mb-1">Schedule Notice</span>
+                <p className="text-white font-display font-bold text-lg uppercase mb-1">No Upcoming Events Scheduled</p>
+                <p className="text-gray-400 text-xs font-sans">Our next hackathon and speaker sessions are being planned. Browse our past event archives below.</p>
+              </div>
             )}
 
             {/* Past */}

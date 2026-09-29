@@ -68,10 +68,10 @@ const SelectedWork = () => {
             id: 'workHorizontal',
             trigger: containerRef.current,
             start: 'top top',
-            end: () => `+=${Math.max(1000, getScrollDistance() * 1.05)}`,
+            end: () => `+=${Math.max(600, getScrollDistance())}`,
             pin: pinTargetRef.current,
             pinSpacing: true,
-            scrub: 0.8,
+            scrub: 0.6,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
               if (progressBarRef.current) {
@@ -112,7 +112,7 @@ const SelectedWork = () => {
           />
         </div>
 
-        {/* Top Header - Compact and positioned without huge empty gap */}
+        {/* Top Header */}
         <div className="px-4 sm:px-6 md:px-14 w-full max-w-[1500px] mx-auto z-10 mb-6 md:mb-0">
           <div ref={headerRef} className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-white/10">
             <div>
@@ -148,16 +148,39 @@ const SelectedWork = () => {
           </div>
         </div>
 
-        {/* Cards Track (Two-column landscape cards that fit 100% within the screen height) */}
-        <div className="w-full my-auto py-2 overflow-hidden z-10">
-          <div
-            ref={trackRef}
-            className="flex gap-4 sm:gap-6 md:gap-8 pl-4 sm:pl-6 md:pl-14 pr-6 sm:pr-10 md:pr-[25vw] items-center overflow-x-auto md:overflow-visible scrollbar-none snap-x snap-mandatory md:snap-none"
-            style={{ width: 'max-content' }}
-          >
-            {featured.map((project, i) => (
-              <div
-                key={project.id}
+        {/* Content: Cards Track OR Empty State */}
+        {featured.length === 0 ? (
+          <div className="w-full max-w-xl mx-auto px-6 py-16 text-center z-10 my-auto">
+            <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-primary mx-auto mb-4">
+              <GitBranch size={24} className="opacity-80" />
+            </div>
+            <span className="text-[10px] font-mono tracking-widest text-primary uppercase block mb-2">
+              SPRINT STATUS: STEALTH BUILDS
+            </span>
+            <h3 className="text-2xl md:text-3xl font-display font-bold text-white uppercase tracking-wider mb-2">
+              Projects Will Be Uploaded Soon
+            </h3>
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-6 font-sans">
+              Our engineering squads are currently deploying production-grade systems in stealth. Production repositories, live demos, and case studies will be published here soon.
+            </p>
+            <Link
+              to="/join"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary hover:bg-blue-600 text-white font-mono text-xs uppercase tracking-wider transition-all"
+            >
+              <Sparkles size={14} />
+              <span>Join a Project Sprint</span>
+            </Link>
+          </div>
+        ) : (
+          <div className="w-full my-auto py-2 overflow-hidden z-10">
+            <div
+              ref={trackRef}
+              className="flex gap-4 sm:gap-6 md:gap-8 pl-4 sm:pl-6 md:pl-14 pr-6 sm:pr-10 md:pr-[25vw] items-center overflow-x-auto md:overflow-visible scrollbar-none snap-x snap-mandatory md:snap-none"
+              style={{ width: 'max-content' }}
+            >
+              {featured.map((project, i) => (
+                <div
+                  key={project.id}
                 data-cursor="card"
                 className="group flex-shrink-0 snap-center w-[92vw] sm:w-[620px] md:w-[720px] lg:w-[800px] h-auto min-h-0 md:h-[58vh] md:max-h-[410px] md:min-h-[330px] rounded-2xl bg-[#0D0F18]/95 border border-white/10 hover:border-purple-500/50 hover:shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_35px_rgba(124,58,237,0.18)] transition-all duration-500 p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/80 relative overflow-hidden backdrop-blur-xl"
               >
@@ -272,8 +295,10 @@ const SelectedWork = () => {
             ))}
           </div>
         </div>
+      )}
 
-        {/* Bottom Progress Bar & Counter (Desktop) - Compact footer */}
+      {/* Bottom Progress Bar & Counter (Desktop) - Compact footer */}
+      {featured.length > 0 && (
         <div className="px-6 md:px-14 w-full max-w-[1500px] mx-auto z-10 hidden md:flex items-center justify-between gap-6 pt-1">
           <div className="flex items-center gap-3 text-xs font-mono text-white/50">
             <span className="text-white font-bold tracking-widest">
@@ -296,7 +321,8 @@ const SelectedWork = () => {
             MITE DEV STUDIO PRODUCTION INITIATIVE
           </div>
         </div>
-      </div>
+      )}
+    </div>
     </section>
   );
 };

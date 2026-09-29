@@ -93,8 +93,12 @@ const Gallery = () => {
 
         {!loading && !error && filteredItems.length === 0 && (
           <EmptyState
-            title="No gallery moments yet"
-            description="Club photos and event highlights will be displayed here once posted."
+            title={items.length === 0 ? "Gallery photos will be uploaded soon" : "No moments in this category"}
+            description={
+              items.length === 0
+                ? "Event snapshots, hackathon highlights, and workshop memories are currently being processed."
+                : "Try selecting a different filter category to view more gallery moments."
+            }
           />
         )}
 
