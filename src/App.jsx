@@ -45,7 +45,11 @@ const ScrollToTop = () => {
       return;
     }
     audioManager.play('page-transition');
-    window.scrollTo(0, 0);
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   return null;
@@ -65,6 +69,8 @@ const SmoothScroll = ({ children }) => {
       touchMultiplier: 2,
     });
 
+    window.__lenis = lenis;
+
     lenis.on('scroll', ScrollTrigger.update);
 
     const tickerCallback = (time) => {
@@ -79,6 +85,7 @@ const SmoothScroll = ({ children }) => {
     }, 200);
 
     return () => {
+      window.__lenis = null;
       clearTimeout(refreshTimer);
       gsap.ticker.remove(tickerCallback);
       lenis.destroy();

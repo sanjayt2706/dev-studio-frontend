@@ -62,6 +62,20 @@ const Navbar = () => {
     { name: 'About', path: '/about' },
   ];
 
+  const handleNavClick = (e, targetPath) => {
+    audioManager.play('button-click');
+    setMobileMenuOpen(false);
+
+    if (location.pathname === targetPath) {
+      e.preventDefault();
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { duration: 1.2, lock: false });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <>
       {/* Navbar bar */}
@@ -76,7 +90,11 @@ const Navbar = () => {
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="z-[9001] flex items-center gap-2.5 group flex-shrink-0">
+          <Link
+            to="/"
+            onClick={(e) => handleNavClick(e, '/')}
+            className="z-[9001] flex items-center gap-2.5 group flex-shrink-0 cursor-pointer"
+          >
             <img
               src={PLACEHOLDERS.logo}
               alt="Dev Studio"
@@ -102,6 +120,8 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   data-cursor="nav"
+                  onClick={(e) => handleNavClick(e, link.path)}
+                  onMouseEnter={() => audioManager.play('nav-hover')}
                   className={`group/nav relative text-xs font-mono uppercase tracking-widest py-1 flex items-center transition-colors duration-300 hover:text-white ${
                     isActive ? 'text-white font-bold' : 'text-gray-400'
                   }`}
@@ -118,7 +138,9 @@ const Navbar = () => {
             <Link
               to="/join"
               data-cursor="button"
-              className="ml-2 px-5 py-2.5 bg-white text-black text-xs font-mono font-bold uppercase tracking-widest rounded-full hover:bg-gradient-to-r hover:from-purple-600 hover:to-primary hover:text-white hover:shadow-[0_0_20px_rgba(124,58,237,0.45)] hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 shadow-sm"
+              onClick={(e) => handleNavClick(e, '/join')}
+              onMouseEnter={() => audioManager.play('button-hover')}
+              className="ml-2 px-5 py-2.5 bg-white text-black text-xs font-mono font-bold uppercase tracking-widest rounded-full hover:bg-gradient-to-r hover:from-purple-600 hover:to-primary hover:text-white hover:shadow-[0_0_20px_rgba(124,58,237,0.45)] hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 shadow-sm cursor-pointer"
             >
               Join Us
             </Link>
@@ -160,7 +182,7 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, link.path)}
                 className={`text-3xl sm:text-4xl font-display font-black uppercase tracking-tight py-3 border-b border-white/5 transition-all duration-200 active:text-primary ${
                   location.pathname === link.path ? 'text-primary' : 'text-white'
                 }`}
@@ -179,7 +201,7 @@ const Navbar = () => {
           <div className="flex flex-col gap-4 mt-8">
             <Link
               to="/join"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => handleNavClick(e, '/join')}
               className="w-full text-center py-4 bg-primary text-white text-sm font-mono font-bold uppercase tracking-widest rounded-full active:bg-blue-600 transition-colors shadow-lg shadow-primary/30"
             >
               Join Us

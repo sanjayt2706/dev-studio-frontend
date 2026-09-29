@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import audioManager from '../audio/AudioManager';
 
 const GithubIcon = ({ size = 16, className = "" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -32,8 +33,10 @@ const TwitterIcon = ({ size = 16, className = "" }) => (
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
 
   const links = [
+    { name: 'Home', path: '/' },
     { name: 'Work', path: '/work' },
     { name: 'Team', path: '/team' },
     { name: 'Events', path: '/events' },
@@ -41,6 +44,27 @@ const Footer = () => {
     { name: 'About', path: '/about' },
     { name: 'Join Us', path: '/join' },
   ];
+
+  const handleNavClick = (e, path) => {
+    audioManager.play('button-click');
+    if (location.pathname === path) {
+      e.preventDefault();
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
+  const scrollToTop = () => {
+    audioManager.play('button-click');
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { duration: 1.2 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const socials = [
     { name: 'GitHub', icon: GithubIcon, href: 'https://github.com' },
@@ -73,7 +97,8 @@ const Footer = () => {
                   <Link
                     to={link.path}
                     data-cursor="nav"
-                    className="text-sm text-gray-400 hover:text-cyan-300 transition-colors duration-200 font-sans inline-block"
+                    onClick={(e) => handleNavClick(e, link.path)}
+                    className="text-sm text-gray-400 hover:text-cyan-300 transition-colors duration-200 font-sans inline-block cursor-pointer"
                   >
                     {link.name}
                   </Link>
@@ -106,9 +131,20 @@ const Footer = () => {
           <p className="text-xs font-mono text-gray-500 tracking-widest uppercase">
             &copy; {currentYear} Dev Studio MITE. All rights reserved.
           </p>
-          <Link to="/admin" className="text-xs font-mono text-gray-600 hover:text-gray-400 transition-colors tracking-widest uppercase">
-            Admin
-          </Link>
+
+          <div className="flex items-center gap-6">
+            <button
+              onClick={scrollToTop}
+              data-cursor="button"
+              className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+            >
+              <span>Back to Top</span>
+              <span className="text-primary font-bold">↑</span>
+            </button>
+            <Link to="/admin" className="text-xs font-mono text-gray-600 hover:text-gray-400 transition-colors tracking-widest uppercase">
+              Admin
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
