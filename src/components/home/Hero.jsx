@@ -270,40 +270,43 @@ const Hero = () => {
         {/* =========================================================================
             LAYER 4: EDITORIAL TYPOGRAPHY & INTERACTIVE CALLS (FITS 100% IN VIEWPORT)
             ========================================================================= */}
-        <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 md:px-14 flex flex-col justify-between pt-16 sm:pt-20 md:pt-24 pb-6 sm:pb-8 md:pb-10 pointer-events-auto">
-          {/* Top Minimal Alignment Row */}
-          <div className="flex justify-between items-center w-full border-b border-white/10 pb-2 sm:pb-3 flex-shrink-0">
-            <div ref={eyebrowRef} className="flex items-center gap-3 will-change-transform">
-              <span className="font-mono text-[10px] sm:text-xs tracking-[0.25em] text-white/80 uppercase">
-                STUDENT TECHNOLOGY COMMUNITY
-              </span>
+        <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 md:px-14 flex flex-col justify-between pt-16 sm:pt-20 md:pt-22 pb-5 sm:pb-7 md:pb-8 pointer-events-auto">
+          {/* Upper Block: Top Alignment Bar + Headline (Zero unnatural gap, bold and commanding) */}
+          <div className="w-full flex flex-col flex-shrink-0">
+            {/* Top Minimal Alignment Row */}
+            <div className="flex justify-between items-center w-full border-b border-white/10 pb-2.5 sm:pb-3">
+              <div ref={eyebrowRef} className="flex items-center gap-3 will-change-transform">
+                <span className="font-mono text-[10px] sm:text-xs tracking-[0.25em] text-white/80 uppercase">
+                  STUDENT TECHNOLOGY COMMUNITY
+                </span>
+              </div>
+
+              <div ref={metaRightRef} className="hidden sm:flex items-center gap-2 font-mono text-[10px] sm:text-[11px] tracking-[0.25em] text-white/40 uppercase will-change-transform">
+                <span>MITE</span>
+                <span>·</span>
+                <span>MANGALORE</span>
+              </div>
             </div>
 
-            <div ref={metaRightRef} className="hidden sm:flex items-center gap-2 font-mono text-[10px] sm:text-[11px] tracking-[0.25em] text-white/40 uppercase will-change-transform">
-              <span>MITE</span>
-              <span>·</span>
-              <span>MANGALORE</span>
+            {/* Central Display Headline: BUILD. CREATE. SHARE. (Restored to bold, massive, iconic typography) */}
+            <div className="pt-3 sm:pt-4 md:pt-5">
+              <h1 className="flex flex-col font-editorial font-bold tracking-tight text-white uppercase leading-[0.88] select-none text-[15vw] sm:text-[13vw] md:text-[9.5vw] lg:text-[8vw] drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)]">
+                <span ref={word1Ref} className="block will-change-transform text-white">
+                  BUILD<span className="text-primary">.</span>
+                </span>
+                <span ref={word2Ref} className="block will-change-transform stroke-text pl-2 sm:pl-6 md:pl-10">
+                  CREATE<span className="text-purple-400">.</span>
+                </span>
+                <span ref={word3Ref} className="block will-change-transform text-white pl-4 sm:pl-12 md:pl-20">
+                  SHARE<span className="text-sky-400">.</span>
+                </span>
+              </h1>
             </div>
           </div>
 
-          {/* Central Display Headline: BUILD. CREATE. SHARE. (Scaled to viewport height) */}
-          <div className="my-auto py-2 sm:py-3 flex-shrink-0">
-            <h1 className="flex flex-col font-editorial font-bold tracking-tight text-white uppercase leading-[0.88] select-none text-[12vw] sm:text-[10vw] md:text-[clamp(2.8rem,7.5vh,6rem)] lg:text-[clamp(3.5rem,9vh,7.2rem)] drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)]">
-              <span ref={word1Ref} className="block will-change-transform text-white">
-                BUILD<span className="text-primary">.</span>
-              </span>
-              <span ref={word2Ref} className="block will-change-transform stroke-text pl-2 sm:pl-6 md:pl-10">
-                CREATE<span className="text-purple-400">.</span>
-              </span>
-              <span ref={word3Ref} className="block will-change-transform text-white pl-4 sm:pl-12 md:pl-20">
-                SHARE<span className="text-sky-400">.</span>
-              </span>
-            </h1>
-          </div>
-
-          {/* Bottom Supporting Info & Interactive CTAs (Guaranteed above fold) */}
+          {/* Lower Block: Supporting Info & Interactive CTAs (Aligned together in one window) */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-6 w-full flex-shrink-0">
-            <div ref={subtextRef} className="max-w-md will-change-transform">
+            <div ref={subtextRef} className="max-w-md sm:max-w-lg will-change-transform">
               <p className="font-sans text-xs sm:text-sm text-gray-200 leading-snug sm:leading-relaxed font-normal drop-shadow">
                 A student-led technology community where ideas become projects, skills become experience, and people build together.
               </p>
@@ -316,11 +319,11 @@ const Hero = () => {
               </div>
             </div>
 
-            <div ref={ctaRef} className="flex items-center gap-2.5 sm:gap-4 will-change-transform flex-shrink-0">
+            <div ref={ctaRef} className="flex items-center gap-3 sm:gap-4 will-change-transform flex-shrink-0">
               <Link
                 to="/join"
                 data-cursor="button"
-                className="group relative inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white text-black font-mono text-[11px] sm:text-xs uppercase tracking-[0.16em] font-bold hover:bg-gradient-to-r hover:from-purple-600 hover:to-primary hover:text-white hover:shadow-[0_0_20px_rgba(124,58,237,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-xl shadow-black/60 touch-manipulation"
+                className="group relative inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white text-black font-mono text-xs uppercase tracking-[0.18em] font-bold hover:bg-gradient-to-r hover:from-purple-600 hover:to-primary hover:text-white hover:shadow-[0_0_20px_rgba(124,58,237,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-xl shadow-black/60 touch-manipulation"
               >
                 <span>Join Studio</span>
                 <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-black/10 group-hover:bg-white/20 flex items-center justify-center transition-colors">
@@ -331,7 +334,7 @@ const Hero = () => {
               <Link
                 to="/work"
                 data-cursor="button"
-                className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full border border-white/20 hover:border-cyan-400/80 hover:text-cyan-200 hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:scale-[1.02] active:scale-[0.98] text-white font-mono text-[11px] sm:text-xs uppercase tracking-[0.16em] transition-all duration-300 bg-black/40 backdrop-blur-md touch-manipulation"
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-white/20 hover:border-cyan-400/80 hover:text-cyan-200 hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:scale-[1.02] active:scale-[0.98] text-white font-mono text-xs uppercase tracking-[0.18em] transition-all duration-300 bg-black/40 backdrop-blur-md touch-manipulation"
               >
                 <span>Explore Work</span>
               </Link>
