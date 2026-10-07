@@ -17,7 +17,11 @@ class AudioManager {
     this.audioCtx = null;
     this.masterGain = null;
     this.isUnlocked = false;
-    this.isTouchDevice = false;
+    this.isTouchDevice = typeof window !== 'undefined' && (
+      window.matchMedia('(pointer: coarse)').matches ||
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0
+    );
     this.masterVolume = 1.0;
 
     // Load persisted mute preference (default: unmuted once user interacts)

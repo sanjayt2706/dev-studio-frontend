@@ -59,14 +59,41 @@ const SmoothScroll = ({ children }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    // Detect mobile touch devices — use native hardware-accelerated 120Hz/60Hz scrolling for silky smooth mobile performance
+    const isTouch = typeof window !== 'undefined' && (
+      window.matchMedia('(pointer: coarse)').matches ||
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0
+    );
+
+    if (isTouch) {
+      // On mobile: native scrolling + standard ScrollTrigger updates (zero lag)
+      const onScroll = () => {
+        ScrollTrigger.update();
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      gsap.ticker.lagSmoothing(500, 33);
+
+      const refreshTimer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 200);
+
+      return () => {
+        window.removeEventListener('scroll', onScroll);
+        clearTimeout(refreshTimer);
+      };
+    }
+
+    // On desktop: Lenis smooth mousewheel scrolling
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      touchMultiplier: 0, // Disable touch interception
+      syncTouch: false,
     });
 
     window.__lenis = lenis;
@@ -78,7 +105,7 @@ const SmoothScroll = ({ children }) => {
     };
 
     gsap.ticker.add(tickerCallback);
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
 
     const refreshTimer = setTimeout(() => {
       ScrollTrigger.refresh();
@@ -109,7 +136,6 @@ function App() {
       <CustomCursor />
       <ScrollToTop />
       <SmoothScroll>
-        <div className="noise"></div>
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<MainLayout />}>

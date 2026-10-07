@@ -122,24 +122,12 @@ const JoinUs = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 bg-primary overflow-hidden"
+      className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center px-4 sm:px-6 bg-primary overflow-hidden"
     >
-      {/* Decorative grid pattern */}
-      <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-        }}
-      />
-
       {/* Large watermark with mouse parallax */}
       <div
         ref={watermarkRef}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[50vw] font-display font-black text-white leading-none pointer-events-none select-none will-change-transform"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[45vw] font-display font-black text-white/10 leading-none pointer-events-none select-none will-change-transform"
       >
         DS
       </div>

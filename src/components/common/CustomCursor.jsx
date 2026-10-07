@@ -21,7 +21,20 @@ export const CustomCursor = () => {
   const cursorRef = useRef(null);
 
   useEffect(() => {
-    // If user interacts via touch, hide custom cursor and restore standard UI
+    // If on a touch-first device (phones, tablets), completely skip custom cursor rendering & RAF
+    const isTouchDevice = typeof window !== 'undefined' && (
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.matchMedia('(hover: none)').matches ||
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0
+    );
+
+    if (isTouchDevice) {
+      document.documentElement.classList.remove('has-custom-cursor');
+      return;
+    }
+
+    // If user interacts via touch later, hide custom cursor
     const onTouchStart = () => {
       document.documentElement.classList.remove('has-custom-cursor');
       if (cursorRef.current) {

@@ -96,20 +96,25 @@ const HomeAnnouncements = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-36 bg-[#08090D] border-t border-white/5 px-6 md:px-12 overflow-hidden">
+    <section ref={sectionRef} className="relative py-24 md:py-36 bg-[#08090D] border-t border-white/5 px-4 sm:px-6 md:px-12 overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 right-10 w-[450px] h-[450px] bg-purple-600/5 rounded-full blur-[140px] pointer-events-none" />
+      <div
+        className="absolute top-1/3 right-10 w-[450px] h-[450px] rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.06) 0%, transparent 70%)',
+        }}
+      />
 
       <div className="max-w-[1400px] mx-auto w-full relative z-10">
         {/* Header */}
-        <div ref={headerRef} className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16 md:mb-20 pb-6 border-b border-white/10">
+        <div ref={headerRef} className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-14 md:mb-20 pb-6 border-b border-white/10">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <span className="text-xs font-mono tracking-[0.25em] text-primary uppercase font-semibold">
                 [ 03 / DISPATCHES ]
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest hidden sm:inline">
+              <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
                 OFFICIAL STUDIO BULLETINS
               </span>
             </div>
@@ -120,7 +125,7 @@ const HomeAnnouncements = () => {
 
           <Link
             to="/announcements"
-            className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-white/70 hover:text-white transition-all duration-300"
+            className="group inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-zinc-300 hover:text-white transition-all duration-300"
           >
             <span>All Bulletins</span>
             <span className="w-7 h-7 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/20 group-hover:shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-all duration-300">
@@ -131,7 +136,7 @@ const HomeAnnouncements = () => {
 
         {/* Announcements Content or Empty State */}
         {activeAnnouncements.length === 0 ? (
-          <div className="w-full bg-surface/30 border border-white/10 rounded-xl p-12 md:p-16 text-center relative overflow-hidden backdrop-blur-sm">
+          <div className="w-full bg-[#10121A] border border-white/10 rounded-xl p-12 md:p-16 text-center relative overflow-hidden">
             <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-primary mx-auto mb-4">
               <Bell size={24} className="opacity-80" />
             </div>
@@ -141,7 +146,7 @@ const HomeAnnouncements = () => {
             <h3 className="text-xl md:text-2xl font-display font-bold text-white uppercase tracking-wider mb-2">
               No Announcements For Now
             </h3>
-            <p className="text-gray-400 text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-6 font-sans">
+            <p className="text-zinc-400 text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-6 font-sans">
               All frequencies are clear. Official recruitment schedules, hackathon calls, and tech workshops will be broadcasted here soon.
             </p>
             <Link
@@ -159,9 +164,9 @@ const HomeAnnouncements = () => {
                 key={announcement._id || announcement.id || idx}
                 ref={el => cardsRef.current[idx] = el}
                 data-cursor="card"
-                className={`group relative bg-surface/40 border rounded-xl p-6 md:p-8 flex flex-col justify-between backdrop-blur-sm transition-all duration-500 hover:-translate-y-1.5 ${
+                className={`group relative bg-[#0E1017] border rounded-xl p-6 md:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 ${
                   announcement.pinned
-                    ? 'border-primary/40 bg-primary/5 hover:border-primary hover:shadow-[0_10px_35px_rgba(59,130,246,0.18)]'
+                    ? 'border-primary/40 bg-[#121520] hover:border-primary hover:shadow-[0_10px_35px_rgba(59,130,246,0.18)]'
                     : 'border-white/10 hover:border-white/20 hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)]'
                 }`}
               >

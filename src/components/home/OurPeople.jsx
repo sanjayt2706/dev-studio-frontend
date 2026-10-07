@@ -88,21 +88,26 @@ const OurPeople = () => {
   }, [coreTeam.length]);
 
   return (
-    <section ref={sectionRef} className="relative py-32 lg:py-48 px-6 md:px-12 bg-background overflow-hidden">
+    <section ref={sectionRef} className="relative py-24 lg:py-36 px-4 sm:px-6 md:px-12 bg-background overflow-hidden border-t border-white/5">
       {/* Subtle background */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[200px] pointer-events-none"></div>
+      <div
+        className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%)',
+        }}
+      />
 
       <div className="max-w-[1400px] mx-auto">
         {/* Header */}
-        <div ref={headerRef} className="mb-20 md:mb-32">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+        <div ref={headerRef} className="mb-14 md:mb-20">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
             <div>
-              <span className="text-xs font-mono tracking-[0.25em] text-primary uppercase mb-6 block">[ 03 / People ]</span>
-              <h2 className="text-5xl md:text-7xl lg:text-[6vw] font-display font-black tracking-[-0.04em] text-white uppercase leading-[0.9]">
-                The<br/><span className="stroke-text">Minds</span>
+              <span className="text-xs font-mono tracking-[0.25em] text-primary uppercase mb-4 block font-semibold">[ 04 / People ]</span>
+              <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5vw] font-display font-black tracking-[-0.04em] text-white uppercase leading-[0.9]">
+                The<br/><span className="stroke-text">Minds</span><span className="text-primary">.</span>
               </h2>
             </div>
-            <p className="max-w-md text-gray-400 font-sans text-base leading-relaxed">
+            <p className="max-w-md text-zinc-300 font-sans text-sm md:text-base leading-relaxed font-normal">
               A diverse collective of passionate developers, designers, and innovators. Meet the people driving Dev Studio forward.
             </p>
           </div>

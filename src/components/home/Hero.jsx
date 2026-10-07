@@ -279,36 +279,22 @@ const Hero = () => {
         </div>
 
         {/* =========================================================================
-            LAYER 4: GEOMETRIC MARKERS & HUD DATA
+            LAYER 4: MINIMAL GEOMETRIC HUD DATA
             ========================================================================= */}
         <div ref={techMarkersRef} className="absolute inset-0 pointer-events-none z-[3]">
-          {/* Top-Left Dotted Matrix */}
-          <div className="absolute top-20 left-6 md:left-14 hidden sm:grid grid-cols-6 gap-2 opacity-40">
-            {Array.from({ length: 24 }).map((_, i) => (
-              <div key={`dot-l-${i}`} className="w-1 h-1 rounded-full bg-white/70" />
-            ))}
-          </div>
-
-          {/* Top-Right Dotted Matrix */}
-          <div className="absolute top-20 right-6 md:right-14 hidden sm:grid grid-cols-6 gap-2 opacity-40">
-            {Array.from({ length: 24 }).map((_, i) => (
-              <div key={`dot-r-${i}`} className="w-1 h-1 rounded-full bg-purple-300/70" />
-            ))}
-          </div>
-
           {/* Coordinates */}
-          <div className="absolute top-[26%] left-6 md:left-14 font-mono text-[10px] text-white/40 tracking-widest hidden md:block">
-            <span className="text-primary">+</span> 13.1250° N
+          <div className="absolute top-[22%] left-6 md:left-14 font-mono text-[10px] text-white/60 tracking-widest hidden md:block">
+            <span className="text-primary font-bold">+</span> 13.1250° N
           </div>
-          <div className="absolute top-[26%] right-6 md:right-14 font-mono text-[10px] text-white/40 tracking-widest hidden md:block text-right">
-            74.9820° E <span className="text-purple-400">+</span>
+          <div className="absolute top-[22%] right-6 md:right-14 font-mono text-[10px] text-white/60 tracking-widest hidden md:block text-right">
+            74.9820° E <span className="text-purple-400 font-bold">+</span>
           </div>
 
-          {/* Corner Brackets */}
-          <div className="absolute top-20 left-4 md:left-8 w-3 h-3 border-t-2 border-l-2 border-white/25" />
-          <div className="absolute top-20 right-4 md:right-8 w-3 h-3 border-t-2 border-r-2 border-white/25" />
-          <div className="absolute bottom-12 left-4 md:left-8 w-3 h-3 border-b-2 border-l-2 border-white/25" />
-          <div className="absolute bottom-12 right-4 md:right-8 w-3 h-3 border-b-2 border-r-2 border-white/25" />
+          {/* Clean Corner Brackets */}
+          <div className="absolute top-20 left-4 md:left-8 w-3 h-3 border-t border-l border-white/30" />
+          <div className="absolute top-20 right-4 md:right-8 w-3 h-3 border-t border-r border-white/30" />
+          <div className="absolute bottom-12 left-4 md:left-8 w-3 h-3 border-b border-l border-white/30" />
+          <div className="absolute bottom-12 right-4 md:right-8 w-3 h-3 border-b border-r border-white/30" />
         </div>
 
         {/* =========================================================================

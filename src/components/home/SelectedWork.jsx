@@ -95,17 +95,27 @@ const SelectedWork = () => {
         className="relative w-full min-h-0 md:h-screen md:max-h-screen overflow-hidden flex flex-col justify-start md:justify-between py-10 md:py-0 md:pt-6 sm:md:pt-8 md:pb-6"
       >
         {/* Ambient background glows */}
-        <div className="absolute top-1/4 right-0 w-[450px] h-[450px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-[350px] h-[350px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
+        <div
+          className="absolute top-1/4 right-0 w-[450px] h-[450px] rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)',
+          }}
+        />
+        <div
+          className="absolute bottom-10 left-10 w-[350px] h-[350px] rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%)',
+          }}
+        />
 
         {/* Technical HUD Grid */}
-        <div className="absolute inset-0 pointer-events-none opacity-15">
+        <div className="absolute inset-0 pointer-events-none opacity-10">
           <div
             className="w-full h-full"
             style={{
               backgroundImage: `
-                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
               `,
               backgroundSize: '100px 100px',
             }}
@@ -181,62 +191,62 @@ const SelectedWork = () => {
               {featured.map((project, i) => (
                 <div
                   key={project.id}
-                data-cursor="card"
-                className="group flex-shrink-0 snap-center w-[92vw] sm:w-[620px] md:w-[720px] lg:w-[800px] h-auto min-h-0 md:h-[58vh] md:max-h-[410px] md:min-h-[330px] rounded-2xl bg-[#0D0F18]/95 border border-white/10 hover:border-purple-500/50 hover:shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_35px_rgba(124,58,237,0.18)] transition-all duration-500 p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/80 relative overflow-hidden backdrop-blur-xl"
-              >
-                {/* Subtle top card glow */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  data-cursor="card"
+                  className="group flex-shrink-0 snap-center w-[92vw] sm:w-[620px] md:w-[720px] lg:w-[800px] h-auto min-h-0 md:h-[58vh] md:max-h-[410px] md:min-h-[330px] rounded-2xl bg-[#0D0F18] border border-white/10 hover:border-purple-500/50 hover:shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_35px_rgba(124,58,237,0.18)] transition-all duration-300 p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/80 relative overflow-hidden"
+                >
+                  {/* Subtle top card glow */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* Left Column: Visual Vector Mockup Preview */}
-                <div className="w-full sm:w-[48%] h-48 sm:h-full relative rounded-xl overflow-hidden bg-black/60 border border-white/10 group-hover:border-purple-400/30 transition-all duration-500 flex-shrink-0">
-                  <SmartImage
-                    src={project.coverImage}
-                    alt={project.title}
-                    type="project"
-                    className="w-full h-full"
-                    imgClassName="object-top opacity-95 contrast-[1.06] saturate-[1.08] group-hover:opacity-100 group-hover:saturate-[1.25] group-hover:contrast-[1.12] transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  {/* Tech badge on preview image */}
-                  <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/80 backdrop-blur-md border border-white/10 text-[9px] font-mono text-white/90 z-10">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    <span>{project.year} // {(Array.isArray(project.technologies) && project.technologies[0]) ? project.technologies[0] : (project.category || 'Tech')}</span>
-                  </div>
-                </div>
-
-                {/* Right Column: Project Meta, Title, Description & Actions */}
-                <div className="flex-1 flex flex-col justify-between py-0.5 overflow-hidden">
-                  <div>
-                    {/* Meta Bar */}
-                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/5 font-mono text-[10px]">
-                      <div className="flex items-center gap-2">
-                        <span className="text-primary font-bold tracking-wider">
-                          [ 0{i + 1} ]
-                        </span>
-                        <span className="text-white/30">/</span>
-                        <span className="text-white/60 uppercase tracking-widest">{project.category}</span>
-                      </div>
-                      {project.badge && (
-                        <span className="px-2 py-0.5 rounded text-[8px] font-mono tracking-wider bg-primary/10 text-primary border border-primary/20 font-medium">
-                          {project.badge}
-                        </span>
-                      )}
+                  {/* Left Column: Visual Vector Mockup Preview */}
+                  <div className="w-full sm:w-[48%] h-48 sm:h-full relative rounded-xl overflow-hidden bg-black/80 border border-white/10 group-hover:border-purple-400/30 transition-all duration-300 flex-shrink-0">
+                    <SmartImage
+                      src={project.coverImage}
+                      alt={project.title}
+                      type="project"
+                      className="w-full h-full"
+                      imgClassName="object-top opacity-95 contrast-[1.06] saturate-[1.08] group-hover:opacity-100 group-hover:saturate-[1.25] group-hover:contrast-[1.12] transition-transform duration-500 ease-out group-hover:scale-105"
+                    />
+                    {/* Tech badge on preview image */}
+                    <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/90 border border-white/15 text-[9px] font-mono text-white/90 z-10">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      <span>{project.year} // {(Array.isArray(project.technologies) && project.technologies[0]) ? project.technologies[0] : (project.category || 'Tech')}</span>
                     </div>
-
-                    {/* Title & Subtitle */}
-                    <h3 className="text-xl sm:text-2xl lg:text-[1.65rem] font-display font-bold text-white group-hover:text-primary transition-colors tracking-tight leading-snug">
-                      {project.title}
-                    </h3>
-                    {project.subtitle && (
-                      <p className="text-[10px] sm:text-[11px] font-mono text-primary/80 uppercase tracking-wider mt-0.5 mb-2 truncate">
-                        {project.subtitle}
-                      </p>
-                    )}
-
-                    {/* Description */}
-                    <p className="text-xs sm:text-[13px] text-gray-300/80 font-sans leading-relaxed line-clamp-3 mb-2">
-                      {project.description}
-                    </p>
                   </div>
+
+                  {/* Right Column: Project Meta, Title, Description & Actions */}
+                  <div className="flex-1 flex flex-col justify-between py-0.5 overflow-hidden">
+                    <div>
+                      {/* Meta Bar */}
+                      <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10 font-mono text-[10px]">
+                        <div className="flex items-center gap-2">
+                          <span className="text-primary font-bold tracking-wider">
+                            [ 0{i + 1} ]
+                          </span>
+                          <span className="text-white/30">/</span>
+                          <span className="text-white/70 uppercase tracking-widest">{project.category}</span>
+                        </div>
+                        {project.badge && (
+                          <span className="px-2 py-0.5 rounded text-[8px] font-mono tracking-wider bg-primary/10 text-primary border border-primary/20 font-medium">
+                            {project.badge}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Title & Subtitle */}
+                      <h3 className="text-xl sm:text-2xl lg:text-[1.65rem] font-display font-bold text-white group-hover:text-primary transition-colors tracking-tight leading-snug">
+                        {project.title}
+                      </h3>
+                      {project.subtitle && (
+                        <p className="text-[10px] sm:text-[11px] font-mono text-primary uppercase tracking-wider mt-0.5 mb-2 truncate">
+                          {project.subtitle}
+                        </p>
+                      )}
+
+                      {/* Description */}
+                      <p className="text-xs sm:text-[13px] text-zinc-300 font-sans leading-relaxed line-clamp-3 mb-2 font-normal">
+                        {project.description}
+                      </p>
+                    </div>
 
                   {/* Bottom: Tech Stack Pills & Action Links */}
                   <div className="pt-2.5 border-t border-white/5 flex flex-wrap items-center justify-between gap-2">

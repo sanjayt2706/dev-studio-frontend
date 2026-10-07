@@ -115,12 +115,17 @@ const Stats = () => {
       </div>
 
       {/* Ambient background glow */}
-      <div className="absolute top-1/2 left-1/3 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[160px] pointer-events-none" />
+      <div
+        className="absolute top-1/2 left-1/3 w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%)',
+        }}
+      />
 
       <div className="max-w-[1400px] mx-auto w-full relative z-10">
         {/* Heading */}
-        <div ref={headingRef} className="mb-16 md:mb-24">
-          <span className="text-xs font-mono tracking-[0.25em] text-primary uppercase mb-4 block">
+        <div ref={headingRef} className="mb-14 md:mb-20">
+          <span className="text-xs font-mono tracking-[0.25em] text-primary uppercase mb-4 block font-semibold">
             [ METRICS // IMPACT ]
           </span>
           <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.5vw] font-display font-black tracking-[-0.03em] text-white uppercase leading-tight">
@@ -129,20 +134,20 @@ const Stats = () => {
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
           {stats.map((stat, i) => (
             <div
               key={stat.label}
               ref={el => statsRef.current[i] = el}
-              className="border-t border-white/10 pt-6 md:pt-8 bg-surface/30 p-6 rounded-lg backdrop-blur-sm hover:border-primary/40 transition-colors"
+              className="border-t border-white/10 pt-6 md:pt-8 bg-[#10121A] p-6 rounded-xl border border-white/5 hover:border-primary/40 transition-colors"
             >
               <p
                 ref={el => numbersRef.current[i] = el}
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.5vw] font-display font-black text-white mb-2 tabular-nums tracking-tight"
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.2vw] font-display font-black text-white mb-2 tabular-nums tracking-tight"
               >
                 {stat.value}{stat.suffix}
               </p>
-              <p className="text-xs font-mono tracking-[0.2em] uppercase text-gray-400">
+              <p className="text-xs font-mono tracking-[0.2em] uppercase text-zinc-400 font-medium">
                 {stat.label}
               </p>
             </div>
