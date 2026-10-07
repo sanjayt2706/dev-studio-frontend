@@ -128,9 +128,17 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs font-mono text-gray-500 tracking-widest uppercase">
-            &copy; {currentYear} Dev Studio MITE. All rights reserved.
-          </p>
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4 text-xs font-mono text-gray-500 tracking-wider">
+            <span>&copy; {currentYear} Dev Studio MITE. All rights reserved.</span>
+            <span className="hidden sm:inline text-white/20">·</span>
+            <Link to="/privacy" className="hover:text-white transition-colors uppercase tracking-widest text-[11px]">
+              Privacy Policy
+            </Link>
+            <span className="text-white/20">·</span>
+            <Link to="/terms" className="hover:text-white transition-colors uppercase tracking-widest text-[11px]">
+              Terms
+            </Link>
+          </div>
 
           <div className="flex items-center gap-6">
             <button

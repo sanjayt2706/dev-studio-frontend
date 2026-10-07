@@ -35,10 +35,30 @@ const Stats = () => {
   }, []);
 
   const stats = [
-    { label: 'Members', value: counts.members, suffix: '+' },
-    { label: 'Projects', value: counts.projects, suffix: '+' },
-    { label: 'Events', value: counts.events, suffix: '+' },
-    { label: 'Years', value: 3, suffix: '' },
+    {
+      label: 'Active Members',
+      description: 'Student engineers, designers & researchers across engineering departments.',
+      value: counts.members,
+      suffix: '+',
+    },
+    {
+      label: 'Shipped Projects',
+      description: 'Production web applications, mobile platforms, and open-source lab tools.',
+      value: counts.projects,
+      suffix: '+',
+    },
+    {
+      label: 'Workshops & Events',
+      description: 'Hands-on bootcamps, campus hackathons, and technical symposiums hosted.',
+      value: counts.events,
+      suffix: '+',
+    },
+    {
+      label: 'Years Active',
+      description: 'Continuous student-led engineering, mentorship, and community at MITE.',
+      value: 3,
+      suffix: '',
+    },
   ];
 
   useEffect(() => {
@@ -46,11 +66,11 @@ const Stats = () => {
       // Heading reveal
       if (headingRef.current) {
         gsap.fromTo(headingRef.current,
-          { y: 40, opacity: 0 },
+          { y: 35, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: 0.9,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -69,12 +89,12 @@ const Stats = () => {
 
         // Container fade in and slide up
         gsap.fromTo(container,
-          { y: 50, opacity: 0 },
+          { y: 40, opacity: 0 },
           {
             y: 0,
             opacity: 1,
             duration: 0.8,
-            delay: i * 0.12,
+            delay: i * 0.1,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -108,47 +128,55 @@ const Stats = () => {
   }, [counts.members, counts.projects, counts.events]);
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-36 bg-[#0B0D13] border-t border-white/5 px-6 md:px-12 overflow-hidden">
-      {/* Background number watermark */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[35vw] font-display font-black text-white/[0.02] leading-none pointer-events-none select-none">
-        DS
-      </div>
-
-      {/* Ambient background glow */}
-      <div
-        className="absolute top-1/2 left-1/3 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%)',
-        }}
-      />
-
+    <section ref={sectionRef} className="relative py-24 sm:py-32 md:py-36 bg-[#08090F] border-t border-white/5 px-4 sm:px-6 md:px-14 overflow-hidden">
       <div className="max-w-[1400px] mx-auto w-full relative z-10">
         {/* Heading */}
-        <div ref={headingRef} className="mb-14 md:mb-20">
-          <span className="text-xs font-mono tracking-[0.25em] text-primary uppercase mb-4 block font-semibold">
-            [ METRICS // IMPACT ]
-          </span>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.5vw] font-display font-black tracking-[-0.03em] text-white uppercase leading-tight">
-            ENGINEERED IN <span className="stroke-text">NUMBERS</span><span className="text-primary">.</span>
-          </h2>
+        <div ref={headingRef} className="mb-12 md:mb-16 border-b border-white/10 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-white/70" />
+              <span className="text-xs font-mono tracking-[0.25em] text-white/70 uppercase font-semibold">
+                [ 03 / IMPACT ]
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-editorial font-bold tracking-tight text-white uppercase leading-none">
+              ENGINEERED IN <span className="stroke-text">NUMBERS</span><span className="text-primary">.</span>
+            </h2>
+          </div>
+          <p className="font-mono text-xs text-zinc-400 uppercase tracking-widest max-w-xs">
+            Tangible outcomes from our student engineering squads.
+          </p>
         </div>
 
-        {/* Stats grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+        {/* Stats grid with sharp architectural borders */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((stat, i) => (
             <div
               key={stat.label}
               ref={el => statsRef.current[i] = el}
-              className="border-t border-white/10 pt-6 md:pt-8 bg-[#10121A] p-6 rounded-xl border border-white/5 hover:border-primary/40 transition-colors"
+              className="relative p-6 sm:p-8 bg-[#0B0D14] border border-white/10 hover:border-white/30 transition-all duration-300 rounded-none flex flex-col justify-between min-h-[220px]"
             >
-              <p
-                ref={el => numbersRef.current[i] = el}
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.2vw] font-display font-black text-white mb-2 tabular-nums tracking-tight"
-              >
-                {stat.value}{stat.suffix}
-              </p>
-              <p className="text-xs font-mono tracking-[0.2em] uppercase text-zinc-400 font-medium">
-                {stat.label}
+              {/* Corner architectural light accent */}
+              <div className="absolute top-0 left-0 w-16 h-[2px] bg-gradient-to-r from-white/70 to-transparent pointer-events-none" />
+              <div className="absolute top-0 left-0 w-[2px] h-10 bg-gradient-to-b from-white/70 to-transparent pointer-events-none" />
+
+              <div>
+                <p className="font-mono text-[10px] text-white/40 tracking-widest uppercase mb-4">
+                  METRIC // 0{i + 1}
+                </p>
+                <p
+                  ref={el => numbersRef.current[i] = el}
+                  className="text-5xl sm:text-6xl lg:text-[4vw] font-display font-black text-white mb-3 tabular-nums tracking-tight leading-none"
+                >
+                  {stat.value}{stat.suffix}
+                </p>
+                <p className="text-xs font-mono tracking-[0.18em] uppercase text-white font-bold mb-2">
+                  {stat.label}
+                </p>
+              </div>
+
+              <p className="text-xs text-zinc-400 font-sans leading-relaxed pt-3 border-t border-white/5">
+                {stat.description}
               </p>
             </div>
           ))}

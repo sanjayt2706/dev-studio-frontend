@@ -94,17 +94,11 @@ const SelectedWork = () => {
         ref={pinTargetRef}
         className="relative w-full min-h-0 md:h-screen md:max-h-screen overflow-hidden flex flex-col justify-start md:justify-between py-10 md:py-0 md:pt-6 sm:md:pt-8 md:pb-6"
       >
-        {/* Ambient background glows */}
+        {/* Ambient background glows - subtle neutral depth */}
         <div
           className="absolute top-1/4 right-0 w-[450px] h-[450px] rounded-full pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)',
-          }}
-        />
-        <div
-          className="absolute bottom-10 left-10 w-[350px] h-[350px] rounded-full pointer-events-none"
-          style={{
-            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%)',
           }}
         />
 
@@ -192,23 +186,24 @@ const SelectedWork = () => {
                 <div
                   key={project.id}
                   data-cursor="card"
-                  className="group flex-shrink-0 snap-center w-[92vw] sm:w-[620px] md:w-[720px] lg:w-[800px] h-auto min-h-0 md:h-[58vh] md:max-h-[410px] md:min-h-[330px] rounded-2xl bg-[#0D0F18] border border-white/10 hover:border-purple-500/50 hover:shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_35px_rgba(124,58,237,0.18)] transition-all duration-300 p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/80 relative overflow-hidden"
+                  className="group flex-shrink-0 snap-center w-[92vw] sm:w-[620px] md:w-[720px] lg:w-[800px] h-auto min-h-0 md:h-[58vh] md:max-h-[410px] md:min-h-[330px] rounded-none bg-[#0B0D14] border border-white/10 hover:border-white/30 transition-all duration-300 p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/90 relative overflow-hidden"
                 >
-                  {/* Subtle top card glow */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {/* Top-corner architectural highlight: thick in the top of the corner, light on edges */}
+                  <div className="absolute top-0 left-0 w-28 h-[2px] bg-gradient-to-r from-white/80 via-white/40 to-transparent pointer-events-none z-20" />
+                  <div className="absolute top-0 left-0 w-[2px] h-16 bg-gradient-to-b from-white/80 via-white/30 to-transparent pointer-events-none z-20" />
 
-                  {/* Left Column: Visual Vector Mockup Preview */}
-                  <div className="w-full sm:w-[48%] h-48 sm:h-full relative rounded-xl overflow-hidden bg-black/80 border border-white/10 group-hover:border-purple-400/30 transition-all duration-300 flex-shrink-0">
+                  {/* Left Column: Visual Vector Mockup Preview with sharp edges */}
+                  <div className="w-full sm:w-[48%] h-48 sm:h-full relative rounded-none overflow-hidden bg-black border border-white/10 group-hover:border-white/20 transition-all duration-300 flex-shrink-0">
                     <SmartImage
                       src={project.coverImage}
                       alt={project.title}
                       type="project"
                       className="w-full h-full"
-                      imgClassName="object-top opacity-95 contrast-[1.06] saturate-[1.08] group-hover:opacity-100 group-hover:saturate-[1.25] group-hover:contrast-[1.12] transition-transform duration-500 ease-out group-hover:scale-105"
+                      imgClassName="object-top opacity-95 contrast-[1.04] saturate-[1.02] group-hover:opacity-100 group-hover:scale-105 transition-transform duration-500 ease-out"
                     />
                     {/* Tech badge on preview image */}
-                    <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/90 border border-white/15 text-[9px] font-mono text-white/90 z-10">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded-none bg-black/90 border border-white/20 text-[9px] font-mono text-white/90 z-10">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/70" />
                       <span>{project.year} // {(Array.isArray(project.technologies) && project.technologies[0]) ? project.technologies[0] : (project.category || 'Tech')}</span>
                     </div>
                   </div>
@@ -219,25 +214,25 @@ const SelectedWork = () => {
                       {/* Meta Bar */}
                       <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10 font-mono text-[10px]">
                         <div className="flex items-center gap-2">
-                          <span className="text-primary font-bold tracking-wider">
+                          <span className="text-white font-bold tracking-wider">
                             [ 0{i + 1} ]
                           </span>
                           <span className="text-white/30">/</span>
-                          <span className="text-white/70 uppercase tracking-widest">{project.category}</span>
+                          <span className="text-white/60 uppercase tracking-widest">{project.category}</span>
                         </div>
                         {project.badge && (
-                          <span className="px-2 py-0.5 rounded text-[8px] font-mono tracking-wider bg-primary/10 text-primary border border-primary/20 font-medium">
+                          <span className="px-2 py-0.5 rounded-none text-[8px] font-mono tracking-wider bg-white/5 text-white/80 border border-white/15 font-medium">
                             {project.badge}
                           </span>
                         )}
                       </div>
 
                       {/* Title & Subtitle */}
-                      <h3 className="text-xl sm:text-2xl lg:text-[1.65rem] font-display font-bold text-white group-hover:text-primary transition-colors tracking-tight leading-snug">
+                      <h3 className="text-xl sm:text-2xl lg:text-[1.65rem] font-display font-bold text-white group-hover:text-zinc-200 transition-colors tracking-tight leading-snug">
                         {project.title}
                       </h3>
                       {project.subtitle && (
-                        <p className="text-[10px] sm:text-[11px] font-mono text-primary uppercase tracking-wider mt-0.5 mb-2 truncate">
+                        <p className="text-[10px] sm:text-[11px] font-mono text-zinc-400 uppercase tracking-wider mt-0.5 mb-2 truncate">
                           {project.subtitle}
                         </p>
                       )}
@@ -254,7 +249,7 @@ const SelectedWork = () => {
                       {(Array.isArray(project.technologies) ? project.technologies : []).slice(0, 3).map((tech) => (
                         <span
                           key={tech}
-                          className="text-[9px] font-mono px-2 py-0.5 rounded bg-white/5 text-gray-300 border border-white/10"
+                          className="text-[9px] font-mono px-2 py-0.5 rounded-none bg-white/5 text-zinc-300 border border-white/10"
                         >
                           {tech}
                         </span>
@@ -273,7 +268,7 @@ const SelectedWork = () => {
                           href={project.github}
                           target="_blank"
                           rel="noreferrer"
-                          className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-white/70 hover:text-white transition-colors border border-white/10"
+                          className="p-1.5 rounded-none bg-white/5 hover:bg-white/15 text-white/70 hover:text-white transition-colors border border-white/10"
                           title="GitHub Repository"
                         >
                           <GitBranch size={13} />
@@ -284,7 +279,7 @@ const SelectedWork = () => {
                           href={project.liveDemo}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-primary/20 hover:bg-primary text-primary hover:text-white text-[11px] font-mono font-medium transition-colors border border-primary/30"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-none bg-white text-black hover:bg-zinc-200 text-[11px] font-mono font-bold uppercase tracking-wider transition-colors"
                         >
                           <span>Live</span>
                           <ExternalLink size={10} />
@@ -292,7 +287,7 @@ const SelectedWork = () => {
                       ) : (
                         <Link
                           to="/work"
-                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white text-white hover:text-black text-[11px] font-mono font-medium transition-colors"
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-none bg-white/10 hover:bg-white text-white hover:text-black text-[11px] font-mono font-medium transition-colors border border-white/15"
                         >
                           <span>Inspect</span>
                           <ArrowUpRight size={10} />

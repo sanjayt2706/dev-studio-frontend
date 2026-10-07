@@ -21,6 +21,8 @@ import Events from './pages/Events';
 import Resources from './pages/Resources';
 import Gallery from './pages/Gallery';
 import Join from './pages/Join';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 
 // Admin Pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -149,6 +151,8 @@ function App() {
             <Route path="resources" element={<Resources />} />
             <Route path="gallery" element={<Gallery />} />
             <Route path="join" element={<Join />} />
+            <Route path="privacy" element={<Privacy />} />
+            <Route path="terms" element={<Terms />} />
           </Route>
 
           {/* Admin Routes */}

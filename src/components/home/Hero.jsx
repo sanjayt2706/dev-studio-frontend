@@ -12,7 +12,6 @@ const Hero = () => {
   const imageRef = useRef(null);
   const gridRef = useRef(null);
   const arcRef = useRef(null);
-  const techMarkersRef = useRef(null);
   const eyebrowRef = useRef(null);
   const word1Ref = useRef(null);
   const word2Ref = useRef(null);
@@ -65,7 +64,7 @@ const Hero = () => {
         );
       }
 
-      const decor = [gridRef.current, arcRef.current, techMarkersRef.current].filter(Boolean);
+      const decor = [gridRef.current, arcRef.current].filter(Boolean);
       if (decor.length > 0) {
         entranceTl.fromTo(
           decor,
@@ -117,16 +116,6 @@ const Hero = () => {
           ease: 'none',
           duration: 1,
         }, 0);
-      }
-
-      // Layer 4: Tech markers parallax
-      if (techMarkersRef.current) {
-        scrollTl.to(techMarkersRef.current, {
-          y: '-25%',
-          opacity: 0.15,
-          ease: 'none',
-          duration: 0.8,
-        }, 0.1);
       }
 
       // Layer 5: Refokus Multi-Axis Kinetic Typography Drift
@@ -279,53 +268,26 @@ const Hero = () => {
         </div>
 
         {/* =========================================================================
-            LAYER 4: MINIMAL GEOMETRIC HUD DATA
+            LAYER 4: EDITORIAL TYPOGRAPHY & INTERACTIVE CALLS
             ========================================================================= */}
-        <div ref={techMarkersRef} className="absolute inset-0 pointer-events-none z-[3]">
-          {/* Coordinates */}
-          <div className="absolute top-[22%] left-6 md:left-14 font-mono text-[10px] text-white/60 tracking-widest hidden md:block">
-            <span className="text-primary font-bold">+</span> 13.1250° N
-          </div>
-          <div className="absolute top-[22%] right-6 md:right-14 font-mono text-[10px] text-white/60 tracking-widest hidden md:block text-right">
-            74.9820° E <span className="text-purple-400 font-bold">+</span>
-          </div>
-
-          {/* Clean Corner Brackets */}
-          <div className="absolute top-20 left-4 md:left-8 w-3 h-3 border-t border-l border-white/30" />
-          <div className="absolute top-20 right-4 md:right-8 w-3 h-3 border-t border-r border-white/30" />
-          <div className="absolute bottom-12 left-4 md:left-8 w-3 h-3 border-b border-l border-white/30" />
-          <div className="absolute bottom-12 right-4 md:right-8 w-3 h-3 border-b border-r border-white/30" />
-        </div>
-
-        {/* =========================================================================
-            LAYER 5 & 6: EDITORIAL TYPOGRAPHY & INTERACTIVE CALLS
-            ========================================================================= */}
-        <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 md:px-14 flex flex-col justify-between pt-20 sm:pt-24 md:pt-26 pb-8 sm:pb-10 md:pb-12 pointer-events-auto">
-          {/* Top Eyebrow Row */}
-          <div className="flex justify-between items-start w-full">
-            <div ref={eyebrowRef} className="flex flex-col gap-1 will-change-transform">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                <span className="font-mono text-xs md:text-sm font-bold tracking-[0.25em] text-white uppercase drop-shadow">
-                  DEV STUDIO
-                </span>
-              </div>
-              <span className="font-mono text-[10px] md:text-xs tracking-[0.18em] text-white/70 uppercase">
-                MITE • STUDENT TECHNOLOGY COMMUNITY
+        <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 md:px-14 flex flex-col justify-between pt-28 sm:pt-32 md:pt-36 pb-8 sm:pb-10 md:pb-12 pointer-events-auto">
+          {/* Top Minimal Alignment Row */}
+          <div className="flex justify-between items-center w-full border-b border-white/10 pb-3">
+            <div ref={eyebrowRef} className="flex items-center gap-3 will-change-transform">
+              <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] text-white/80 uppercase">
+                STUDENT TECHNOLOGY COMMUNITY
               </span>
             </div>
 
-            <div ref={metaRightRef} className="hidden sm:flex flex-col items-end gap-1 font-mono text-[10px] tracking-widest text-white/60 will-change-transform">
-              <div className="flex items-center gap-2 text-primary font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>SYS_ACTIVE // 2026 EDITION</span>
-              </div>
-              <span className="text-white/40 uppercase">[ 01 / LAB ] • MANGALORE</span>
+            <div ref={metaRightRef} className="hidden sm:flex items-center gap-2 font-mono text-[11px] tracking-[0.25em] text-white/40 uppercase will-change-transform">
+              <span>MITE</span>
+              <span>·</span>
+              <span>MANGALORE</span>
             </div>
           </div>
 
           {/* Central Display Headline: BUILD. CREATE. SHARE. */}
-          <div className="my-auto py-2">
+          <div className="my-auto py-4">
             <h1 className="flex flex-col font-editorial font-bold tracking-tight text-white uppercase leading-[0.88] select-none text-[15vw] sm:text-[13vw] md:text-[9.5vw] lg:text-[8vw] drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)]">
               <span ref={word1Ref} className="block will-change-transform text-white">
                 BUILD<span className="text-primary">.</span>
