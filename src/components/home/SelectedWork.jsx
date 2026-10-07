@@ -15,6 +15,7 @@ const SelectedWork = () => {
   const pinTargetRef = useRef(null);
   const headerRef = useRef(null);
   const trackRef = useRef(null);
+  const mobileScrollRef = useRef(null);
   const progressBarRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
   const [projects, setProjects] = useState(projectsData.map(normalizeProject));
@@ -32,11 +33,36 @@ const SelectedWork = () => {
     return list.length > 0 ? list : projects.slice(0, 4);
   }, [projects]);
 
+  const handleMobileScroll = (e) => {
+    if (window.innerWidth >= 768 || featured.length <= 1) return;
+    const container = e.currentTarget;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    if (maxScroll <= 0) return;
+    const progress = container.scrollLeft / maxScroll;
+    const newIndex = Math.min(
+      featured.length - 1,
+      Math.max(0, Math.round(progress * (featured.length - 1)))
+    );
+    setActiveIdx(newIndex);
+  };
+
+  const scrollToCard = (index) => {
+    if (!mobileScrollRef.current) return;
+    const cards = mobileScrollRef.current.querySelectorAll('[data-cursor="card"]');
+    if (cards[index]) {
+      cards[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  };
+
   useEffect(() => {
     if (featured.length === 0) return;
     const isDesktop = window.innerWidth >= 768;
 
     const ctx = gsap.context(() => {
+      if (!isDesktop && trackRef.current) {
+        gsap.set(trackRef.current, { clearProps: 'transform' });
+      }
+
       // Header entrance
       gsap.fromTo(headerRef.current,
         { y: 30, opacity: 0 },
@@ -176,17 +202,20 @@ const SelectedWork = () => {
             </Link>
           </div>
         ) : (
-          <div className="w-full my-auto py-2 overflow-hidden z-10">
+          <div
+            ref={mobileScrollRef}
+            onScroll={handleMobileScroll}
+            className="w-full my-auto py-2 z-10 overflow-x-auto md:overflow-hidden overscroll-x-contain touch-pan-x scrollbar-none snap-x snap-mandatory md:snap-none"
+          >
             <div
               ref={trackRef}
-              className="flex gap-4 sm:gap-6 md:gap-8 pl-4 sm:pl-6 md:pl-14 pr-6 sm:pr-10 md:pr-[25vw] items-center overflow-x-auto md:overflow-visible scrollbar-none snap-x snap-mandatory md:snap-none"
-              style={{ width: 'max-content' }}
+              className="flex gap-4 sm:gap-6 md:gap-8 pl-4 sm:pl-6 md:pl-14 pr-8 sm:pr-10 md:pr-[25vw] items-center w-max"
             >
               {featured.map((project, i) => (
                 <div
                   key={project.id}
                   data-cursor="card"
-                  className="group flex-shrink-0 snap-center w-[92vw] sm:w-[620px] md:w-[720px] lg:w-[800px] h-auto min-h-0 md:h-[58vh] md:max-h-[410px] md:min-h-[330px] rounded-none bg-[#0B0D14] border border-white/10 hover:border-white/30 transition-all duration-300 p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/90 relative overflow-hidden"
+                  className="group flex-shrink-0 snap-center w-[86vw] sm:w-[580px] md:w-[720px] lg:w-[800px] h-auto min-h-0 md:h-[58vh] md:max-h-[410px] md:min-h-[330px] rounded-none bg-[#0B0D14] border border-white/10 hover:border-white/30 transition-all duration-300 p-4 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-2xl shadow-black/90 relative overflow-hidden"
                 >
                   {/* Top-corner architectural highlight: thick in the top of the corner, light on edges */}
                   <div className="absolute top-0 left-0 w-28 h-[2px] bg-gradient-to-r from-white/80 via-white/40 to-transparent pointer-events-none z-20" />
@@ -298,6 +327,39 @@ const SelectedWork = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Swipe Indicators & Active Counter */}
+      {featured.length > 0 && (
+        <div className="px-4 w-full flex md:hidden items-center justify-between pt-3 pb-1 z-10">
+          <div className="flex items-center gap-2 text-[11px] font-mono text-white/50">
+            <span className="text-white font-bold tracking-widest">
+              0{activeIdx + 1}
+            </span>
+            <span className="text-white/20">/</span>
+            <span>0{featured.length}</span>
+          </div>
+
+          {/* Clickable Mobile Dots */}
+          <div className="flex items-center gap-1.5">
+            {featured.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => scrollToCard(idx)}
+                aria-label={`Go to project ${idx + 1}`}
+                className={`h-1.5 transition-all duration-300 rounded-full ${
+                  activeIdx === idx ? 'w-5 bg-white' : 'w-1.5 bg-white/20 hover:bg-white/40'
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="text-[10px] font-mono text-white/40 tracking-wider flex items-center gap-1">
+            <span>SWIPE</span>
+            <span className="text-white/70">→</span>
           </div>
         </div>
       )}

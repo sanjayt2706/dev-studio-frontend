@@ -201,7 +201,7 @@ const Hero = () => {
     <section ref={containerRef} className="relative w-full border-none outline-none">
       <div
         ref={pinTargetRef}
-        className="relative w-full h-screen overflow-hidden bg-[#06070B] flex flex-col justify-between border-none outline-none"
+        className="relative w-full h-[100dvh] max-h-[100dvh] overflow-hidden bg-[#06070B] flex flex-col justify-between border-none outline-none"
       >
         {/* =========================================================================
             LAYER 1: CAMPUS BACKGROUND IMAGE
@@ -268,46 +268,46 @@ const Hero = () => {
         </div>
 
         {/* =========================================================================
-            LAYER 4: EDITORIAL TYPOGRAPHY & INTERACTIVE CALLS
+            LAYER 4: EDITORIAL TYPOGRAPHY & INTERACTIVE CALLS (FITS 100% IN VIEWPORT)
             ========================================================================= */}
-        <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 md:px-14 flex flex-col justify-between pt-28 sm:pt-32 md:pt-36 pb-8 sm:pb-10 md:pb-12 pointer-events-auto">
+        <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 md:px-14 flex flex-col justify-between pt-16 sm:pt-20 md:pt-24 pb-6 sm:pb-8 md:pb-10 pointer-events-auto">
           {/* Top Minimal Alignment Row */}
-          <div className="flex justify-between items-center w-full border-b border-white/10 pb-3">
+          <div className="flex justify-between items-center w-full border-b border-white/10 pb-2 sm:pb-3 flex-shrink-0">
             <div ref={eyebrowRef} className="flex items-center gap-3 will-change-transform">
-              <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] text-white/80 uppercase">
+              <span className="font-mono text-[10px] sm:text-xs tracking-[0.25em] text-white/80 uppercase">
                 STUDENT TECHNOLOGY COMMUNITY
               </span>
             </div>
 
-            <div ref={metaRightRef} className="hidden sm:flex items-center gap-2 font-mono text-[11px] tracking-[0.25em] text-white/40 uppercase will-change-transform">
+            <div ref={metaRightRef} className="hidden sm:flex items-center gap-2 font-mono text-[10px] sm:text-[11px] tracking-[0.25em] text-white/40 uppercase will-change-transform">
               <span>MITE</span>
               <span>·</span>
               <span>MANGALORE</span>
             </div>
           </div>
 
-          {/* Central Display Headline: BUILD. CREATE. SHARE. */}
-          <div className="my-auto py-4">
-            <h1 className="flex flex-col font-editorial font-bold tracking-tight text-white uppercase leading-[0.88] select-none text-[15vw] sm:text-[13vw] md:text-[9.5vw] lg:text-[8vw] drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)]">
+          {/* Central Display Headline: BUILD. CREATE. SHARE. (Scaled to viewport height) */}
+          <div className="my-auto py-2 sm:py-3 flex-shrink-0">
+            <h1 className="flex flex-col font-editorial font-bold tracking-tight text-white uppercase leading-[0.88] select-none text-[12vw] sm:text-[10vw] md:text-[clamp(2.8rem,7.5vh,6rem)] lg:text-[clamp(3.5rem,9vh,7.2rem)] drop-shadow-[0_8px_32px_rgba(0,0,0,0.95)]">
               <span ref={word1Ref} className="block will-change-transform text-white">
                 BUILD<span className="text-primary">.</span>
               </span>
-              <span ref={word2Ref} className="block will-change-transform stroke-text pl-3 sm:pl-8 md:pl-12">
+              <span ref={word2Ref} className="block will-change-transform stroke-text pl-2 sm:pl-6 md:pl-10">
                 CREATE<span className="text-purple-400">.</span>
               </span>
-              <span ref={word3Ref} className="block will-change-transform text-white pl-6 sm:pl-16 md:pl-24">
+              <span ref={word3Ref} className="block will-change-transform text-white pl-4 sm:pl-12 md:pl-20">
                 SHARE<span className="text-sky-400">.</span>
               </span>
             </h1>
           </div>
 
-          {/* Bottom Supporting Info & Interactive CTAs */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 sm:gap-6 w-full">
-            <div ref={subtextRef} className="max-w-lg will-change-transform">
-              <p className="font-sans text-xs sm:text-sm md:text-base text-gray-200 leading-relaxed font-normal drop-shadow">
+          {/* Bottom Supporting Info & Interactive CTAs (Guaranteed above fold) */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-6 w-full flex-shrink-0">
+            <div ref={subtextRef} className="max-w-md will-change-transform">
+              <p className="font-sans text-xs sm:text-sm text-gray-200 leading-snug sm:leading-relaxed font-normal drop-shadow">
                 A student-led technology community where ideas become projects, skills become experience, and people build together.
               </p>
-              <div className="flex items-center gap-3 mt-2 font-mono text-[10px] text-white/50 uppercase tracking-widest">
+              <div className="flex items-center gap-2.5 mt-1.5 font-mono text-[9px] sm:text-[10px] text-white/50 uppercase tracking-widest">
                 <span>ENGINEERING</span>
                 <span>•</span>
                 <span>DESIGN</span>
@@ -316,22 +316,22 @@ const Hero = () => {
               </div>
             </div>
 
-            <div ref={ctaRef} className="flex items-center gap-3 sm:gap-4 will-change-transform">
+            <div ref={ctaRef} className="flex items-center gap-2.5 sm:gap-4 will-change-transform flex-shrink-0">
               <Link
                 to="/join"
                 data-cursor="button"
-                className="group relative inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white text-black font-mono text-xs uppercase tracking-[0.18em] font-bold hover:bg-gradient-to-r hover:from-purple-600 hover:to-primary hover:text-white hover:shadow-[0_0_25px_rgba(124,58,237,0.5)] hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 shadow-xl shadow-black/60 touch-manipulation"
+                className="group relative inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white text-black font-mono text-[11px] sm:text-xs uppercase tracking-[0.16em] font-bold hover:bg-gradient-to-r hover:from-purple-600 hover:to-primary hover:text-white hover:shadow-[0_0_20px_rgba(124,58,237,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-xl shadow-black/60 touch-manipulation"
               >
                 <span>Join Studio</span>
-                <span className="w-5 h-5 rounded-full bg-black/10 group-hover:bg-white/20 flex items-center justify-center transition-colors">
-                  <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-black/10 group-hover:bg-white/20 flex items-center justify-center transition-colors">
+                  <ArrowUpRight size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </span>
               </Link>
 
               <Link
                 to="/work"
                 data-cursor="button"
-                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-white/20 hover:border-cyan-400/80 hover:text-cyan-200 hover:shadow-[0_0_20px_rgba(56,189,248,0.35)] hover:scale-[1.03] active:scale-[0.97] text-white font-mono text-xs uppercase tracking-[0.18em] transition-all duration-300 bg-black/40 backdrop-blur-md touch-manipulation"
+                className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full border border-white/20 hover:border-cyan-400/80 hover:text-cyan-200 hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] hover:scale-[1.02] active:scale-[0.98] text-white font-mono text-[11px] sm:text-xs uppercase tracking-[0.16em] transition-all duration-300 bg-black/40 backdrop-blur-md touch-manipulation"
               >
                 <span>Explore Work</span>
               </Link>
